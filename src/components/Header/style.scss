@@ -1,0 +1,40 @@
+.language-buttons {
+  display: flex;
+  position: relative;
+  right: 35px;
+  top: 5px;
+  &--active {
+    font-weight: bold;
+  }
+  .ant-btn:hover {
+    color: var(--ultramarine);
+  }
+  button {
+    border: none;
+    box-shadow: none;
+    font-size: 20px;
+  }
+  li {
+    height: fit-content;
+  }
+}
+
+.logo {
+  width: 250px;
+}
+
+.header {
+  margin: 35px;
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  color: var(--dark-grey);
+  max-height: 300px;
+  justify-content: space-between;
+  a {
+    color: var(--dark-grey)
+  }
+}
+
+
