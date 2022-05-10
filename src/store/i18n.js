@@ -1,25 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    // navbar: {
-    //     donate: "",
-    //     home: "",
-    //     blog: "",
-    //     faq: "",
-    //     about: ""
-    // },
+    activeLanguage: localStorage.getItem("lang") || "en",
     navbar: [],
     heroMessage: "",
     sterilizationText: "",
+    donateButton: "",
 }
 
 export const i18nSlice = createSlice({
     name: 'i18n',
     initialState,
     reducers: {
+        setActiveLanguage: (state, action) => {
+            state.activeLanguage = action.payload;
+        },
         setNavigationButtons: (state, action) => {
-            console.log(action)
             state.navbar = action.payload;
+        },
+        setDonateButton: (state, action) => {
+            state.donateButton = action.payload;
         },
         setHeroMessage: (state, action) => {
             state.heroMessage = action.payload;
@@ -30,6 +30,6 @@ export const i18nSlice = createSlice({
     },
 })
 
-export const { setNavigationButtons, setHeroMessage, setSterilizationText } = i18nSlice.actions
+export const { setActiveLanguage, setNavigationButtons, setDonateButton, setHeroMessage, setSterilizationText } = i18nSlice.actions
 
 export default i18nSlice.reducer

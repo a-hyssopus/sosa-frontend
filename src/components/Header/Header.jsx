@@ -1,15 +1,21 @@
-import React, {Suspense, useState} from 'react'
+import React, {Suspense, useEffect} from 'react'
+import {setActiveLanguage} from "../../store/i18n"
 import {Button} from "antd";
 import {Link} from "react-router-dom";
 
 
 import "./style.scss"
 import logo from "../../assets/logo.png"
+import {useDispatch, useSelector} from "react-redux";
 
 const Header = () => {
+    const activeLanguage = useSelector((state) => state.i18n.language)
+    const dispatch = useDispatch()
+
     const languages = ['Ro', 'En', 'Ru'];
 
     const setUILanguage = (lang) => {
+        dispatch(setActiveLanguage(lang));
         localStorage.setItem("lang", lang);
     }
 
@@ -27,6 +33,7 @@ const Header = () => {
                         <li key={language}><Button
                             onClick={() => setUILanguage(language.toLowerCase())}
                             // className={language === activeLanguage ? "language-buttons--active" : ""}
+                            // TODO change CSS class logic
                             type="default">{language}</Button></li>
                     ))}
                 </ul>
