@@ -15,7 +15,9 @@ const Navbar = () => {
     const donateButton = useSelector(state => state.i18n.donateButton)
     const dispatch = useDispatch()
 
-    const routes = ["home", "blog", "faq", "reports", "about"];
+    const routes = ["home", "our-stories", "faq", "reports", "about"];
+    const facebookPageURL = "https://www.facebook.com/sosanimalsmd/";
+    const instagramPageURL = "https://www.instagram.com/sosanimals.md/";
     const [activeTab, setActiveTab] = useState("Home");
 
     useEffect(() => {
@@ -36,11 +38,12 @@ const Navbar = () => {
                 {navbarValues.map((element, index) => <li key={element}><Link to={`/${routes[index]}`}
                                                                               className={element === activeTab ? "navigation-tab--active" : ""}
                                                                               onClick={() => setActiveTab(element)}>{element}</Link>
+                    {/*TODO fix style bug on changing language*/}
                 </li>)}
             </ul>
             <div className="navigation-icons">
-                <li><img src={facebook} alt="Facebook Logo"/></li>
-                <li><img src={instagram} alt="Instagram Logo"/></li>
+                <li><a href={facebookPageURL} target="_blank" rel="noreferrer"><img src={facebook} alt="Facebook Logo"/></a></li>
+                <li><a href={instagramPageURL} target="_blank" rel="noreferrer"><img src={instagram} alt="Instagram Logo"/></a></li>
             </div>
         </div>
     )

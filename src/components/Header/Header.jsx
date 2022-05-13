@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect} from 'react'
+import React, {Suspense} from 'react'
 import {setActiveLanguage} from "../../store/i18n"
 import {Button} from "antd";
 import {Link} from "react-router-dom";
@@ -6,10 +6,10 @@ import {Link} from "react-router-dom";
 
 import "./style.scss"
 import logo from "../../assets/logo.png"
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch } from "react-redux";
 
 const Header = () => {
-    const activeLanguage = useSelector((state) => state.i18n.language)
+    // const activeLanguage = useSelector((state) => state.i18n.language)
     const dispatch = useDispatch()
 
     const languages = ['Ro', 'En', 'Ru'];

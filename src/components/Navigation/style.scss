@@ -27,10 +27,10 @@
     margin-right: 70px;
     & > li {
       list-style: none;
-      & > img {
-        width: 55px;
-        margin-inline: 10px;
-      }
+    }
+    img {
+      width: 55px;
+      margin-inline: 10px;
     }
   }
   .navigation-button-donate {

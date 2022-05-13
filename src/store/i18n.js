@@ -12,20 +12,20 @@ export const i18nSlice = createSlice({
     name: 'i18n',
     initialState,
     reducers: {
-        setActiveLanguage: (state, action) => {
-            state.activeLanguage = action.payload;
+        setActiveLanguage: (state, {payload}) => {
+            state.activeLanguage = payload;
         },
-        setNavigationButtons: (state, action) => {
-            state.navbar = action.payload;
+        setNavigationButtons: (state, {payload}) => {
+            state.navbar = payload;
         },
-        setDonateButton: (state, action) => {
-            state.donateButton = action.payload;
+        setDonateButton: (state, {payload}) => {
+            state.donateButton = payload;
         },
-        setHeroMessage: (state, action) => {
-            state.heroMessage = action.payload;
+        setHeroMessage: (state, {payload}) => {
+            state.heroMessage = payload;
         },
-        setSterilizationText: (state, action) => {
-            state.sterilizationText = action.payload;
+        setSterilizationText: (state, {payload}) => {
+            state.sterilizationText = payload;
         }
     },
 })

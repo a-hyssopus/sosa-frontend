@@ -16,7 +16,7 @@ const Content = () => {
             .then(res => {
                 dispatch(setHeroMessage(res[activeLanguage]["hero-message"]))
             })
-    })
+    }, [activeLanguage])
 
     return (
         <div className="main-page-content-container">

@@ -1,15 +1,12 @@
 import React from "react";
-import Counter from "../Counter/Counter";
-import Content from "../Content/Content";
+import Counter from "./Counter/Counter";
+import Content from "./Content/Content";
 
-const MainPage = () => {
-
-    return (
+const MainPage = () => (
         <div>
             <Counter/>
             <Content/>
         </div>
     )
-}
 
 export default MainPage;
