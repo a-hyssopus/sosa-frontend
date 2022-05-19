@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {setNavigationButtons, setDonateButton} from "../../store/i18n"
+import {
+    setNavigationButtons,
+    setDonateButton,
+    setSaveButton,
+    setEditButton,
+    setSterilizationText,
+    setDeleteButton,
+    setAddPostButton
+} from "../../store/i18n"
 
 import instagram from "../../assets/instagramWhite.png"
 import facebook from "../../assets/facebook-logo.png"
@@ -8,6 +16,7 @@ import heart from "../../assets/heart.png"
 
 import {Link} from "react-router-dom";
 import "./style.scss";
+import {getRequest} from "../../utils/getRequest";
 
 const Navbar = () => {
     const navbarValues = useSelector(state => state.i18n.navbar)
@@ -21,11 +30,15 @@ const Navbar = () => {
     const [activeTab, setActiveTab] = useState("Home");
 
     useEffect(() => {
-        fetch(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => res.json())
+        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setNavigationButtons(res[activeLanguage].navbar))
                 dispatch(setDonateButton(res[activeLanguage]["donate-button"]))
+                dispatch(setSaveButton(res[activeLanguage]["save-button"]))
+                dispatch(setEditButton(res[activeLanguage]["edit-button"]))
+                dispatch(setDeleteButton(res[activeLanguage]["delete-button"]))
+                dispatch(setAddPostButton(res[activeLanguage]["add-post-button"]))
+                dispatch(setSterilizationText(res[activeLanguage]["sterilization-text"]))
             })
     }, [activeLanguage])
 

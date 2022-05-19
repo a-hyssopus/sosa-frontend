@@ -1,30 +1,38 @@
 import React, {useEffect} from "react";
-import StoryCard from "./Card";
 import {useDispatch, useSelector} from "react-redux";
-import {setStories} from "../../store/ourStories/ourStories";
+
+import {setCreatePostMode, setStories} from "../../store/ourStories/ourStories";
+import {getRequest} from "../../utils/getRequest";
+import TextEditor from "./TextEditor";
+import StoryCard from "./Card";
 
 const OurStories = () => {
     const dispatch = useDispatch();
-    const activeLanguage = useSelector((state) => state.i18n.language)
+    const activeLanguage = useSelector((state) => state.i18n.activeLanguage)
+    const addPostButton = useSelector((state) => state.i18n.addPostButton)
     const stories = useSelector(state => state.ourStories.stories);
+    const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode);
+
+    const handleAddPostButtonClick = () => {
+        dispatch(setCreatePostMode(true));
+    }
 
     useEffect(() => {
-        fetch('http://localhost:3001/blog-posts')
-            .then(res => res.json())
+        getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStories(res)))
-    }, [activeLanguage])
+    }, [activeLanguage, isCreatePostMode])
 
     return (
         <div>
+            {isCreatePostMode ? <TextEditor/> : (stories.length ? (<><button onClick={handleAddPostButtonClick}>{addPostButton}</button>
             {stories.map(el =>
-                    <StoryCard
-                        date={el.date}
-                        key={el._id}
-                        id={el._id}
-                        title={el.title}
-                        text={el.text}
-                        src={el["image-src"]}
-                        author={el.author}/>)}
+                <StoryCard
+                date={el.date}
+                key={el._id}
+                id={el._id}
+                title={el[activeLanguage].title}
+                text={el[activeLanguage].text}
+                src={el["image-src"]}/>)}</>) : null)}
         </div>
     )
 }

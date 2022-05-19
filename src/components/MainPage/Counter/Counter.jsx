@@ -2,14 +2,14 @@ import React, {useEffect} from "react";
 import "./style.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {setSterilizationCounter} from "../../../store/sterilizationCounter";
+import {getRequest} from "../../../utils/getRequest";
 
 const Counter = () => {
     const sterilizationCounter = useSelector(state => state.sterilizationCounter.counter)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('http://localhost:3001/shared-ui-elements')
-            .then(res => res.json())
+        getRequest('http://localhost:3001/shared-ui-elements')
             .then(res => dispatch(setSterilizationCounter(res[0]["sterilization-counter"])))
     }, [sterilizationCounter])
 

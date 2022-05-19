@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     stories: [],
-    story: {}
+    story: {},
+    isEditPostMode: false,
+    isCreatePostMode: false,
 }
 
 export const outStoriesSlice = createSlice({
@@ -14,10 +16,16 @@ export const outStoriesSlice = createSlice({
         },
         setStory(state, {payload}) {
             state.story = payload;
+        },
+        setEditMode(state, {payload}) {
+            state.isEditPostMode = payload;
+        },
+        setCreatePostMode(state, {payload}) {
+            state.isCreatePostMode = payload;
         }
     },
 })
 
-export const { setStories, setStory } = outStoriesSlice.actions
+export const { setStories, setStory, setEditMode, setCreatePostMode } = outStoriesSlice.actions
 
 export default outStoriesSlice.reducer

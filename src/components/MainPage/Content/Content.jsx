@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import CustomCarousel from "../Carousel/CustomCarousel";
 import "./style.scss"
 import {setHeroMessage} from "../../../store/i18n";
+import {getRequest} from "../../../utils/getRequest";
 
 const Content = () => {
     const activeLanguage = useSelector(state => state.i18n.activeLanguage)
@@ -11,8 +12,7 @@ const Content = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => res.json())
+        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setHeroMessage(res[activeLanguage]["hero-message"]))
             })

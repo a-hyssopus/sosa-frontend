@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
     activeLanguage: localStorage.getItem("lang") || "en",
@@ -6,6 +6,10 @@ const initialState = {
     heroMessage: "",
     sterilizationText: "",
     donateButton: "",
+    saveButton: "",
+    editButton: "",
+    deleteButton: "",
+    addPostButton: ""
 }
 
 export const i18nSlice = createSlice({
@@ -26,10 +30,32 @@ export const i18nSlice = createSlice({
         },
         setSterilizationText: (state, {payload}) => {
             state.sterilizationText = payload;
+        },
+        setSaveButton: (state, {payload}) => {
+            state.saveButton = payload;
+        },
+        setEditButton: (state, {payload}) => {
+            state.editButton = payload;
+        },
+        setDeleteButton: (state, {payload}) => {
+            state.deleteButton = payload;
+        },
+        setAddPostButton: (state, {payload}) => {
+            state.addPostButton = payload;
         }
     },
 })
 
-export const { setActiveLanguage, setNavigationButtons, setDonateButton, setHeroMessage, setSterilizationText } = i18nSlice.actions
+export const {
+    setActiveLanguage,
+    setNavigationButtons,
+    setDonateButton,
+    setHeroMessage,
+    setSterilizationText,
+    setSaveButton,
+    setEditButton,
+    setDeleteButton,
+    setAddPostButton
+} = i18nSlice.actions
 
 export default i18nSlice.reducer
