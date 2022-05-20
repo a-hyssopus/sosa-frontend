@@ -24,17 +24,23 @@ const OurStories = () => {
 
     return (
         <div>
-            {isCreatePostMode ? <TextEditor/> : (stories.length ? (<><button onClick={handleAddPostButtonClick}>{addPostButton}</button>
-            {stories.map(el =>
-                <StoryCard
-                date={el.date}
-                key={el._id}
-                id={el._id}
-                title={el[activeLanguage].title}
-                text={el[activeLanguage].text}
-                src={el["image-src"]}/>)}</>) : null)}
-        </div>
-    )
+            {isCreatePostMode ? <TextEditor/> : (
+                <>
+                    <button onClick={handleAddPostButtonClick}>{addPostButton}</button>
+                    {stories.length && (
+                        stories.map(el => (
+                            <StoryCard
+                                date={el.date}
+                                key={el._id}
+                                id={el._id}
+                                title={el?.[activeLanguage]?.title}
+                                text={el?.[activeLanguage]?.text}
+                                src={el["image-src"]}/>)
+                        )
+                    )}
+                </>)
+            }
+        </div>)
 }
 
 export default OurStories;

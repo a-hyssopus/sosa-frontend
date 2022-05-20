@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     stories: [],
     story: {},
+    // storyToAddLanguage: "",
     isEditPostMode: false,
     isCreatePostMode: false,
 }
@@ -22,10 +23,10 @@ export const outStoriesSlice = createSlice({
         },
         setCreatePostMode(state, {payload}) {
             state.isCreatePostMode = payload;
-        }
+        },
     },
 })
 
-export const { setStories, setStory, setEditMode, setCreatePostMode } = outStoriesSlice.actions
+export const { setStories, setStory, setEditMode, setCreatePostMode, setStoryToAddLanguage } = outStoriesSlice.actions
 
 export default outStoriesSlice.reducer

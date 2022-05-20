@@ -19,8 +19,8 @@ const StoryCard = ({title, text, src, id, date}) => {
 
     const history = useNavigate();
 
-    const formattedDate = date.slice(0, 10);
-    const formattedText = text.substring(0, text.indexOf('.'));
+    const formattedDate = date?.slice(0, 10);
+    const formattedText = text?.substring(0, text.indexOf('.'));
 
     const handleStoryOnClick = () => {
         getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
@@ -28,13 +28,15 @@ const StoryCard = ({title, text, src, id, date}) => {
     }
 
     const handleEdit = () => {
-        dispatch(setEditMode(true));
-        history(`/our-stories/${id}`);
+        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then(res => dispatch(setStory(res)))
+            .then(() => dispatch(setEditMode(true)))
+            .then(() => history(`/our-stories/${id}`));
     }
 
     const handleDelete = () => {
         deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then((res) => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setStories(res))));
     }
 

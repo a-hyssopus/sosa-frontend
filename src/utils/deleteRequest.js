@@ -1,9 +1,10 @@
 export function deleteRequest(url) {
-    fetch(url, {
+    const response = fetch(url, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
     })
+    return response;
 }
