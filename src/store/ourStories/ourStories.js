@@ -27,6 +27,6 @@ export const outStoriesSlice = createSlice({
     },
 })
 
-export const { setStories, setStory, setEditMode, setCreatePostMode, setStoryToAddLanguage } = outStoriesSlice.actions
+export const { setStories, setStory, setEditMode, setCreatePostMode } = outStoriesSlice.actions
 
 export default outStoriesSlice.reducer

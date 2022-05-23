@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import "./style.scss"
 import {useDispatch, useSelector} from "react-redux";
-import {setSterilizationCounter} from "../../../store/sterilizationCounter";
+import {setSterilizationCounter} from "../../../store/shared-ui-elements/sterilizationCounter"
 import {getRequest} from "../../../utils/getRequest";
 
 const Counter = () => {
@@ -10,7 +10,7 @@ const Counter = () => {
 
     useEffect(() => {
         getRequest('http://localhost:3001/shared-ui-elements')
-            .then(res => dispatch(setSterilizationCounter(res[0]["sterilization-counter"])))
+            .then(res => dispatch(setSterilizationCounter(res["sterilization-counter"])))
     }, [sterilizationCounter])
 
     return (

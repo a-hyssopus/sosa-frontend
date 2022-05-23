@@ -9,7 +9,11 @@ const initialState = {
     saveButton: "",
     editButton: "",
     deleteButton: "",
-    addPostButton: ""
+    addPostButton: "",
+    cardsText: "",
+    paypalUSText: "",
+    paypalMDText: "",
+    inPersonText: "",
 }
 
 export const i18nSlice = createSlice({
@@ -42,6 +46,18 @@ export const i18nSlice = createSlice({
         },
         setAddPostButton: (state, {payload}) => {
             state.addPostButton = payload;
+        },
+        setCardsText: (state, {payload}) => {
+            state.cardsText = payload;
+        },
+        setPaypalUSText: (state, {payload}) => {
+            state.paypalUSText = payload;
+        },
+        setPaypalMDText: (state, {payload}) => {
+            state.paypalMDText = payload;
+        },
+        setInPersonText: (state, {payload}) => {
+            state.inPersonText = payload;
         }
     },
 })
@@ -55,7 +71,11 @@ export const {
     setSaveButton,
     setEditButton,
     setDeleteButton,
-    setAddPostButton
+    setAddPostButton,
+    setCardsText,
+    setPaypalUSText,
+    setPaypalMDText,
+    setInPersonText
 } = i18nSlice.actions
 
 export default i18nSlice.reducer

@@ -44,9 +44,10 @@ const Navbar = () => {
 
     return (
         <div className="navigation-container">
+            <Link to={"/donate"}>
             <button className="navigation-button-donate">
                 {donateButton}<img src={heart} alt="Heart"/>
-            </button>
+            </button></Link>
             <ul>
                 {navbarValues.map((element, index) => <li key={element}><Link to={`/${routes[index]}`}
                                                                               className={element === activeTab ? "navigation-tab--active" : ""}

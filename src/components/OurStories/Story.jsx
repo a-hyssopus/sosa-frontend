@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 import {Markup} from 'interweave';
@@ -16,7 +16,6 @@ const Story = () => {
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
     const editButton = useSelector(state => state.i18n.editButton);
     const deleteButton = useSelector(state => state.i18n.deleteButton);
-    const history = useNavigate();
 
     const {id} = useParams();
 
@@ -41,7 +40,7 @@ const Story = () => {
     useEffect(() => {
         getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStory(res)));
-    }, [activeLanguage]);
+    }, []);
 
     return (
         <>
