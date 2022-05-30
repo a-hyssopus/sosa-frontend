@@ -1,35 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    currency: "",
-    "MAIB": [],
-    "MICB": [],
-    "inPerson": [],
-    "paypalEmails": {}
+    banks: [],
+    PayPal: [],
+    inPerson: [],
+    isEdit: false,
+    isCreate: false,
 }
 
 export const donateSlice = createSlice({
     name: 'donate',
     initialState,
     reducers: {
-        setCurrency(state, action) {
-            state.currency = action.payload;
+        setBanks: (state, {payload}) => {
+            state.banks = payload;
         },
-        setMAIB(state, action) {
-            state.MAIB = action.payload;
+        setInPerson: (state, {payload}) => {
+            state.inPerson = payload;
         },
-        setMICB(state, action) {
-            state.MICB = action.payload;
+        setPaypal: (state, {payload}) => {
+            state.PayPal = payload;
         },
-        setInPerson(state, action) {
-            state.inPerson = action.payload;
+        setEdit: (state, {payload}) => {
+            state.isEdit = payload;
         },
-        setPaypalEmails(state, action) {
-            state.paypalEmails = action.payload;
-        }
+        setCreate: (state, {payload}) => {
+            state.isCreate = payload;
+        },
     },
 })
 
-export const { setCurrency, setMAIB, setMICB, setInPerson, setPaypalEmails } = donateSlice.actions
+export const {
+    setBanks,
+    setInPerson,
+    setPaypal,
+    setEdit,
+    setCreate,
+} = donateSlice.actions
 
 export default donateSlice.reducer

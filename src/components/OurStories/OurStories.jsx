@@ -8,12 +8,14 @@ import StoryCard from "./Card";
 
 const OurStories = () => {
     const dispatch = useDispatch();
+
     const activeLanguage = useSelector((state) => state.i18n.activeLanguage)
-    const addPostButton = useSelector((state) => state.i18n.addPostButton)
+    const saveEntryButton = useSelector((state) => state.i18n.buttons.saveEntryButton)
     const stories = useSelector(state => state.ourStories.stories);
     const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode);
+    const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
-    const handleAddPostButtonClick = () => {
+    const handleSaveEntryButtonClick = () => {
         dispatch(setCreatePostMode(true));
     }
 
@@ -26,7 +28,7 @@ const OurStories = () => {
         <div>
             {isCreatePostMode ? <TextEditor/> : (
                 <>
-                    <button onClick={handleAddPostButtonClick}>{addPostButton}</button>
+                    {isLoggedIn && <button onClick={handleSaveEntryButtonClick}>{saveEntryButton}</button>}
                     {stories.length && (
                         stories.map(el => (
                             <StoryCard

@@ -11,17 +11,21 @@ import {deleteRequest} from "../../utils/deleteRequest";
 
 const Story = () => {
     const dispatch = useDispatch();
+
     const story = useSelector(state => state.ourStories.story);
     const isEditPostMode = useSelector(state => state.ourStories.isEditPostMode);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
-    const editButton = useSelector(state => state.i18n.editButton);
-    const deleteButton = useSelector(state => state.i18n.deleteButton);
+    const editButton = useSelector(state => state.i18n.buttons.editButton);
+    const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
+
+    // TODO при удалении поста непосредственно из самой истории перенаправлять на страницу историй и делать гет
 
     const {id} = useParams();
 
     const {"image-src": src, date} = story;
 
     const {[activeLanguage]: { title, text } = {} } = story;
+
 
     const formattedDate = date?.slice(0, 10);
 
@@ -33,7 +37,7 @@ const Story = () => {
 
     const handleDelete = () => {
         deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then((res) => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setStories(res))));
     }
 

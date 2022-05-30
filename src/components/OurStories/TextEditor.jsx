@@ -17,7 +17,8 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
     const story = useSelector(state => state.ourStories.story);
     const isEditPostMode = useSelector(state => state.ourStories.isEditPostMode)
     const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode)
-    const saveButton = useSelector(state => state.i18n.saveButton);
+    const saveButton = useSelector(state => state.i18n.buttons.saveButton);
+    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
 
     const [storyToAddLanguage, setStoryToAddLanguage] = useState(languagesAbbreviation[0])
@@ -50,10 +51,14 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
             postRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}, date: new Date().toISOString()
             }), 'POST')
-                .then(() => getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`))
-                .then(res => dispatch(setStory(res)))
+                .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`))
                 .then(() => dispatch(setCreatePostMode(false)));
         }
+    }
+
+    const  cancelButtonHandler = () => {
+        dispatch(setEditMode(false));
+        dispatch(setCreatePostMode(false));
     }
 
     return (<>
@@ -73,6 +78,7 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
                     value={richTextValue}
                     onChange={handleRichEditorOnChange}/>
         <button onClick={saveButtonHandler}>{saveButton}</button>
+        <button onClick={cancelButtonHandler}>{cancelButton}</button>
         {/*TODO change visibility of buttons depending on user's rights*/}
     </>)
 }

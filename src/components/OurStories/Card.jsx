@@ -13,9 +13,10 @@ const {Meta} = Card;
 
 const StoryCard = ({title, text, src, id, date}) => {
     const dispatch = useDispatch();
-    const editButton = useSelector(state => state.i18n.editButton);
-    const deleteButton = useSelector(state => state.i18n.deleteButton);
+    const editButton = useSelector(state => state.i18n.buttons.editButton);
+    const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
+    const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     const history = useNavigate();
 
@@ -36,7 +37,7 @@ const StoryCard = ({title, text, src, id, date}) => {
 
     const handleDelete = () => {
         deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then((res) => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setStories(res))));
     }
 
@@ -54,8 +55,10 @@ const StoryCard = ({title, text, src, id, date}) => {
                     <p>{formattedDate}</p>
                 </Card>
             </Link>
-            <button onClick={handleEdit}>{editButton}</button>
-            <button onClick={handleDelete}>{deleteButton}</button>
+            {isLoggedIn && <>
+                <button onClick={handleEdit}>{editButton}</button>
+                <button onClick={handleDelete}>{deleteButton}</button>
+            </>}
         </>
     )
 }
