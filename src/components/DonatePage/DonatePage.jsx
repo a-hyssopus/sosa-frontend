@@ -7,14 +7,20 @@ import {setBanks, setInPerson, setPaypal} from "../../store/shared-ui-elements/d
 import {getRequest} from "../../utils/getRequest";
 
 import DonatePageInfo from "./DonatePageInfo";
-import CardForm from "./CardForm";
+import CardForm from "./Forms/CardForm";
+import PayPalForm from "./Forms/PayPalForm";
+import PersonForm from "./Forms/PersonForm";
 
 const DonatePage = () => {
     const dispatch = useDispatch();
 
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
-    const isEdit = useSelector(state => state.donate.isEdit);
-    const isCreate = useSelector(state => state.donate.isCreate);
+    const isEditCard = useSelector(state => state.donate.isEditCard);
+    const isCreateCard = useSelector(state => state.donate.isCreateCard);
+    const isEditPaypal = useSelector(state => state.donate.isEditPaypal)
+    const isCreatePaypal = useSelector(state => state.donate.isCreatePaypal)
+    const isEditPerson = useSelector(state => state.donate.isEditPerson)
+    const isCreatePerson = useSelector(state => state.donate.isCreatePerson)
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     useEffect(() => {
@@ -36,9 +42,13 @@ const DonatePage = () => {
 
     return (
         <div>
-            {!isEdit && !isCreate && <DonatePageInfo/>}
-            {isEdit && isLoggedIn && <CardForm toEdit/>}
-            {isCreate && isLoggedIn && <CardForm toCreate/>}
+            {!(isEditCard || isCreateCard || isEditPaypal || isCreatePaypal || isEditPerson || isCreatePerson) && <DonatePageInfo/>}
+            {isEditCard && isLoggedIn && <CardForm toEdit/>}
+            {isCreateCard && isLoggedIn && <CardForm toCreate/>}
+            {isEditPaypal && isLoggedIn && <PayPalForm toEdit/>}
+            {isCreatePaypal && isLoggedIn && <PayPalForm toCreate/>}
+            {isEditPerson && isLoggedIn && <PersonForm toEdit/>}
+            {isCreatePerson && isLoggedIn && <PersonForm toCreate/>}
         </div>
     )
 }

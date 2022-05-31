@@ -1,64 +1,79 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    name: '',
-    primaryColor: '',
-    secondaryColor: '',
-    textColor: '',
-    link: '',
-    count: '',
-    person: '',
-    currency: '',
-    id: ''
+    card: {
+        bankName: '',
+        primaryColor: '',
+        secondaryColor: '',
+        textColor: '',
+        link: '',
+        count: '',
+        person: '',
+        currency: '',
+        id: ''
+    }, paypal: {
+        email: '', country: '', id: ''
+    }, person: {
+        name: '', number: '', id: ''
+    }
 }
 
 export const donateInfoToUpdateSlice = createSlice({
-    name: 'donateInfoToUpdate',
-    initialState,
-    reducers: {
-        setName: (state, {payload}) => {
-            state.name = payload;
-        },
-        setPrimaryColor: (state, {payload}) => {
-            state.primaryColor = payload;
-        },
-        setSecondaryColor: (state, {payload}) => {
-            state.secondaryColor = payload;
-        },
-        setTextColor: (state, {payload}) => {
-            state.textColor = payload;
-        },
-        setLink: (state, {payload}) => {
-            state.link = payload;
-        },
-        setCount: (state, {payload}) => {
-            state.count = payload;
-        },
-        setPerson: (state, {payload}) => {
-            state.person = payload;
-        },
-        setCurrency: (state, {payload}) => {
-            state.currency = payload;
-        },
-        setId: (state, {payload}) => {
-            state.id = payload;
-        },
-        setEmptyInfo: (state) => {
-            state.name = '';
-            state.primaryColor = '';
-            state.secondaryColor = '';
-            state.textColor = '';
-            state.link = '';
-            state.count = '';
-            state.person = '';
-            state.currency = '';
-            state.id = '';
+    name: 'donateInfoToUpdate', initialState, reducers: {
+        setBankName: (state, {payload}) => {
+            state.card.bankName = payload;
+        }, setPrimaryColor: (state, {payload}) => {
+            state.card.primaryColor = payload;
+        }, setSecondaryColor: (state, {payload}) => {
+            state.card.secondaryColor = payload;
+        }, setTextColor: (state, {payload}) => {
+            state.card.textColor = payload;
+        }, setLink: (state, {payload}) => {
+            state.card.link = payload;
+        }, setCount: (state, {payload}) => {
+            state.card.count = payload;
+        }, setPerson: (state, {payload}) => {
+            state.card.person = payload;
+        }, setCurrency: (state, {payload}) => {
+            state.card.currency = payload;
+        }, setId: (state, {payload}) => {
+            state.card.id = payload;
+        }, setEmptyCardInfo: (state) => {
+            state.card.name = '';
+            state.card.primaryColor = '';
+            state.card.secondaryColor = '';
+            state.card.textColor = '';
+            state.card.link = '';
+            state.card.count = '';
+            state.card.person = '';
+            state.card.currency = '';
+            state.card.id = '';
+        }, setEmail: (state, {payload}) => {
+            state.paypal.email = payload
+        }, setCountry: (state, {payload}) => {
+            state.paypal.country = payload
+        }, setPaypalId: (state, {payload}) => {
+            state.paypal.id = payload;
+        }, setEmptyPaypalInfo: (state) => {
+            state.paypal.email = '';
+            state.paypal.country = '';
+            state.paypal.id = '';
+        }, setPersonName: (state, {payload}) => {
+            state.person.name = payload;
+        }, setPersonNumber: (state, {payload}) => {
+            state.person.number = payload;
+        }, setPersonId: (state, {payload}) => {
+            state.person.id = payload;
+        }, setEmptyPersonInfo: (state) => {
+            state.person.name = '';
+            state.person.number = '';
+            state.person.id = '';
         }
     },
 })
 
 export const {
-    setName,
+    setBankName,
     setPrimaryColor,
     setSecondaryColor,
     setTextColor,
@@ -67,7 +82,15 @@ export const {
     setPerson,
     setCurrency,
     setId,
-    setEmptyInfo
+    setEmptyCardInfo,
+    setEmail,
+    setCountry,
+    setPaypalId,
+    setEmptyPaypalInfo,
+    setPersonName,
+    setPersonNumber,
+    setPersonId,
+    setEmptyPersonInfo
 } = donateInfoToUpdateSlice.actions;
 
 export default donateInfoToUpdateSlice.reducer

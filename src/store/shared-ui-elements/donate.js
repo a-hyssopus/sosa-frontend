@@ -4,8 +4,12 @@ const initialState = {
     banks: [],
     PayPal: [],
     inPerson: [],
-    isEdit: false,
-    isCreate: false,
+    isEditCard: false,
+    isCreateCard: false,
+    isEditPaypal: false,
+    isCreatePaypal: false,
+    isEditPerson: false,
+    isCreatePerson: false
 }
 
 export const donateSlice = createSlice({
@@ -21,11 +25,23 @@ export const donateSlice = createSlice({
         setPaypal: (state, {payload}) => {
             state.PayPal = payload;
         },
-        setEdit: (state, {payload}) => {
-            state.isEdit = payload;
+        setEditCard: (state, {payload}) => {
+            state.isEditCard = payload;
         },
-        setCreate: (state, {payload}) => {
-            state.isCreate = payload;
+        setCreateCard: (state, {payload}) => {
+            state.isCreateCard = payload;
+        },
+        setEditPaypal: (state, {payload}) => {
+            state.isEditPaypal = payload;
+        },
+        setCreatePaypal: (state, {payload}) => {
+            state.isCreatePaypal = payload;
+        },
+        setEditPerson: (state, {payload}) => {
+            state.isEditPerson = payload;
+        },
+        setCreatePerson: (state, {payload}) => {
+            state.isCreatePerson = payload;
         },
     },
 })
@@ -34,8 +50,12 @@ export const {
     setBanks,
     setInPerson,
     setPaypal,
-    setEdit,
-    setCreate,
+    setEditCard,
+    setCreateCard,
+    setEditPaypal,
+    setCreatePaypal,
+    setEditPerson,
+    setCreatePerson
 } = donateSlice.actions
 
 export default donateSlice.reducer

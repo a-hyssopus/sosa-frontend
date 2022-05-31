@@ -16,7 +16,7 @@ const initialState = {
     donate: {
         cardsText: "",
         inPersonText: "",
-        formLabels: {
+        cardFormLabels: {
             "bank-name": "",
             "primary-color": "",
             "secondary-color": "",
@@ -26,8 +26,16 @@ const initialState = {
             "card-holder": "",
             "card-currency": "",
         },
-        formInfo: {
+        cardFormInfo: {
             "attention-text": ""
+        },
+        paypalFormLabels: {
+            "email-label": "",
+            "country-label": ""
+        },
+        personFormLabels: {
+            "person-label": "",
+            "number-label": ""
         }
     },
     login: {
@@ -80,32 +88,44 @@ export const i18nSlice = createSlice({
         setInPersonText: (state, {payload}) => {
             state.donate.inPersonText = payload;
         },
-        setBankName: (state, {payload}) => {
-            state.donate.formLabels["bank-name"] = payload
+        setBankNamei18n: (state, {payload}) => {
+            state.donate.cardFormLabels["bank-name"] = payload
         },
         setPrimaryColori18n: (state, {payload}) => {
-            state.donate.formLabels["primary-color"] = payload
+            state.donate.cardFormLabels["primary-color"] = payload
         },
         setSecondaryColori18n: (state, {payload}) => {
-            state.donate.formLabels["secondary-color"] = payload
+            state.donate.cardFormLabels["secondary-color"] = payload
         },
         setTextColori18n: (state, {payload}) => {
-            state.donate.formLabels["text-color"] = payload
+            state.donate.cardFormLabels["text-color"] = payload
         },
         setLinki18n: (state, {payload}) => {
-            state.donate.formLabels.link = payload
+            state.donate.cardFormLabels.link = payload
         },
         setCardNumber: (state, {payload}) => {
-            state.donate.formLabels["card-number"] = payload;
+            state.donate.cardFormLabels["card-number"] = payload;
         },
         setCardHolder: (state, {payload}) => {
-            state.donate.formLabels["card-holder"] = payload;
+            state.donate.cardFormLabels["card-holder"] = payload;
         },
         setCardCurrency: (state, {payload}) => {
-            state.donate.formLabels["card-currency"] = payload;
+            state.donate.cardFormLabels["card-currency"] = payload;
         },
         setAttentionText: (state, {payload}) => {
-            state.donate.formInfo["attention-text"] = payload;
+            state.donate.cardFormInfo["attention-text"] = payload;
+        },
+        setPaypalEmailLabel: (state, {payload}) => {
+            state.donate.paypalFormLabels["email-label"] = payload;
+        },
+        setPaypalCountryLabel: (state, {payload}) => {
+            state.donate.paypalFormLabels["country-label"] = payload;
+        },
+        setPersonNameLabel: (state, {payload}) => {
+            state.donate.personFormLabels["person-label"] = payload;
+        },
+        setPersonNumberLabel: (state, {payload}) => {
+            state.donate.personFormLabels["number-label"] = payload;
         },
         setUsernameText: (state, {payload}) => {
             state.login["username-text"] = payload;
@@ -124,7 +144,8 @@ export const i18nSlice = createSlice({
         },
         setLogoutText: (state, {payload}) => {
             state.login["logout-text"] = payload;
-        }
+        },
+
     },
 })
 
@@ -143,7 +164,7 @@ export const {
     setSaveEntryButton,
     setCardsText,
     setInPersonText,
-    setBankName,
+    setBankNamei18n,
     setPrimaryColori18n,
     setSecondaryColori18n,
     setTextColori18n,
@@ -152,6 +173,10 @@ export const {
     setCardNumber,
     setCardCurrency,
     setAttentionText,
+    setPaypalCountryLabel,
+    setPaypalEmailLabel,
+    setPersonNameLabel,
+    setPersonNumberLabel,
     setUsernameText,
     setPasswordText,
     setLoginText,
