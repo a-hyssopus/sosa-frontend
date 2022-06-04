@@ -1,15 +1,20 @@
 import React, {useState} from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import {useDispatch, useSelector} from "react-redux";
+
+import ReactQuill from 'react-quill';
+import {formats, modules} from "../../utils/textEditorConfig";
+import {languagesAbbreviation} from "../../utils/languages";
 
 import {postRequest} from "../../utils/postRequest";
 import {setCreatePostMode, setEditMode, setStory} from "../../store/ourStories/ourStories";
-import {formats, modules} from "../../utils/textEditorConfig";
-import {languages, languagesAbbreviation} from "../../utils/languages";
 import {getRequest} from "../../utils/getRequest";
 
-const TextEditor = ({title = '', text = '', date = ''}) => {
+import 'react-quill/dist/quill.snow.css';
+import LanguageDropdown from "../LanguageDropdown";
+
+const TextEditor = ({ title = '', text = '', date = '' }) => {
+    // TODO remove props and use Redux
+
     const dispatch = useDispatch();
     const [richTextValue, setRichTextValue] = useState(text);
     const [titleValue, setTitleValue] = useState(title);
@@ -17,6 +22,7 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
     const story = useSelector(state => state.ourStories.story);
     const isEditPostMode = useSelector(state => state.ourStories.isEditPostMode)
     const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode)
+
     const saveButton = useSelector(state => state.i18n.buttons.saveButton);
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
@@ -56,31 +62,27 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
         }
     }
 
-    const  cancelButtonHandler = () => {
+    const cancelButtonHandler = () => {
         dispatch(setEditMode(false));
         dispatch(setCreatePostMode(false));
     }
 
-    return (<>
-        <input type="text"
-               placeholder="Title"
-               value={titleValue}
-               autoFocus
-               onChange={handleTitleValueChange}/>
-        <select onChange={handleLanguageChange}>
-            {languages.map((lang, index) => <option value={languagesAbbreviation[index]}
-                                                    key={lang}
-            >{lang}</option>)}
-        </select>
-        <ReactQuill theme="snow"
-                    modules={modules}
-                    formats={formats}
-                    value={richTextValue}
-                    onChange={handleRichEditorOnChange}/>
-        <button onClick={saveButtonHandler}>{saveButton}</button>
-        <button onClick={cancelButtonHandler}>{cancelButton}</button>
-        {/*TODO change visibility of buttons depending on user's rights*/}
-    </>)
+    return (
+        <>
+            <input type="text"
+                   placeholder="Title"
+                   value={titleValue}
+                   autoFocus
+                   onChange={handleTitleValueChange}/>
+            <LanguageDropdown handleLanguageChange={handleLanguageChange}/>
+            <ReactQuill theme="snow"
+                        modules={modules}
+                        formats={formats}
+                        value={richTextValue}
+                        onChange={handleRichEditorOnChange}/>
+            <button onClick={saveButtonHandler}>{saveButton}</button>
+            <button onClick={cancelButtonHandler}>{cancelButton}</button>
+        </>)
 }
 
 export default TextEditor;

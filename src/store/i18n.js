@@ -10,7 +10,7 @@ const initialState = {
         saveButton: "",
         editButton: "",
         deleteButton: "",
-        saveEntryButton: "",
+        saveEntryButton: "", // TODO rename to addEntryButton
         cancelButton: "",
     },
     donate: {
@@ -38,6 +38,11 @@ const initialState = {
             "number-label": ""
         }
     },
+    reports: {
+        "cats-label": "",
+        "dogs-label": "",
+        "period-label": ""
+    },
     login: {
         "username-text": "",
         "password-text": "",
@@ -45,7 +50,7 @@ const initialState = {
         "logout-text": "",
         "success-login-message": "",
         "fail-login-message": ""
-    }
+    },
 }
 
 export const i18nSlice = createSlice({
@@ -127,6 +132,15 @@ export const i18nSlice = createSlice({
         setPersonNumberLabel: (state, {payload}) => {
             state.donate.personFormLabels["number-label"] = payload;
         },
+        setCatsLabel: (state, {payload}) => {
+          state.reports["cats-label"] = payload;
+        },
+        setDogsLabel: (state, {payload}) => {
+          state.reports["dogs-label"] = payload;
+        },
+        setPeriodLabel: (state, {payload}) => {
+          state.reports["period-label"] = payload;
+        },
         setUsernameText: (state, {payload}) => {
             state.login["username-text"] = payload;
         },
@@ -145,7 +159,6 @@ export const i18nSlice = createSlice({
         setLogoutText: (state, {payload}) => {
             state.login["logout-text"] = payload;
         },
-
     },
 })
 
@@ -177,6 +190,9 @@ export const {
     setPaypalEmailLabel,
     setPersonNameLabel,
     setPersonNumberLabel,
+    setCatsLabel,
+    setDogsLabel,
+    setPeriodLabel,
     setUsernameText,
     setPasswordText,
     setLoginText,

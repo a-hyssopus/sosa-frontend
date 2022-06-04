@@ -10,6 +10,8 @@ import OurStories from "./components/OurStories/OurStories";
 import Story from "./components/OurStories/Story";
 import DonatePage from "./components/DonatePage/DonatePage";
 import LoginPage from "./components/LoginPage/LoginPage";
+import Reports from "./components/Reports/Reports";
+import Report from "./components/Reports/Report";
 
 const App = () => (
     <div className='App'>
@@ -21,7 +23,8 @@ const App = () => (
             <Route exact path={"/our-stories/:id"} element={<Story/>}/>
             {/*<Route exact path={"/about"} element={<AboutUs/>}/>*/}
             {/*<Route exact path={"/faq"} element={<FAQ/>}/>*/}
-            {/*<Route exact path={"/reports"} element={<Reports/>}/>*/}
+            <Route exact path={"/reports"} element={<Reports/>}/>
+            <Route exact path={"/reports/:id"} element={<Report/>}/>
             <Route exact path={"/login"} element={<LoginPage/>}/>
             <Route exact path={"/home"} element={<MainPage/>}/>
             <Route exact path={"/"} element={<MainPage/>}/>

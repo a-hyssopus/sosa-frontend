@@ -11,7 +11,7 @@ import {
 import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/shared-ui-elements/donate";
 import {postRequest} from "../../../utils/postRequest";
 
-const PayPalForm = ({toEdit, toCreate}) => {
+const PayPalForm = ({ toEdit, toCreate }) => {
     const dispatch = useDispatch();
 
     const email = useSelector(state => state.donateInfoToUpdate.paypal.email);

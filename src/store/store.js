@@ -4,6 +4,7 @@ import sterilizationCounterReducer from "./shared-ui-elements/sterilizationCount
 import donateReducer from "./shared-ui-elements/donate"
 import ourStoriesReducer from "./ourStories/ourStories";
 import donateInfoToUpdateReducer from "./shared-ui-elements/donateInfoToUpdate";
+import reportsReducer from "./reports/reports"
 import loginReducer from "./login";
 
 export const store = configureStore({
@@ -13,7 +14,8 @@ export const store = configureStore({
         donateInfoToUpdate: donateInfoToUpdateReducer,
         sterilizationCounter: sterilizationCounterReducer,
         ourStories: ourStoriesReducer,
-        login: loginReducer
+        login: loginReducer,
+        reports: reportsReducer,
     }
 })
 

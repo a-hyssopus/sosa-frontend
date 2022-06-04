@@ -22,12 +22,14 @@ const Story = () => {
 
     const {id} = useParams();
 
-    const {"image-src": src, date} = story;
-
-    const {[activeLanguage]: { title, text } = {} } = story;
-
-
+    const {[activeLanguage]: {title, text} = {}} = story;
+    const {date} = story;
     const formattedDate = date?.slice(0, 10);
+
+    useEffect(() => {
+        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then(res => dispatch(setStory(res)));
+    }, []);
 
     const handleEdit = () => {
         getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
@@ -41,26 +43,23 @@ const Story = () => {
                 .then(res => dispatch(setStories(res))));
     }
 
-    useEffect(() => {
-        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => dispatch(setStory(res)));
-    }, []);
+    const updatePostLayout = () => (
+        <TextEditor title={title} text={text} date={formattedDate}/>
+    );
+
+    const readPostLayout = () => (
+        <div>
+            <h1>{title}</h1>
+            <Markup content={text}/>
+            <p>{formattedDate}</p>
+            <button onClick={handleEdit}>{editButton}</button>
+            <button onClick={handleDelete}>{deleteButton}</button>
+        </div>
+    )
 
     return (
         <>
-            {isEditPostMode ?
-                (<div>
-                    <TextEditor title={title} text={text} date={formattedDate}/>
-                </div>) :
-                (<div>
-                    <h1>{title}</h1>
-                    <img src={src} alt="Article Image"/>
-                    <Markup content={text}/>
-                    <p>{formattedDate}</p>
-                    <button onClick={handleEdit}>{editButton}</button>
-                    <button onClick={handleDelete}>{deleteButton}</button>
-                </div>)
-            }
+            {isEditPostMode ? updatePostLayout() : readPostLayout()}
         </>
     )
 }

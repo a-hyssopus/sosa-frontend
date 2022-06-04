@@ -38,8 +38,10 @@ const InPerson = () => {
             {inPerson?.map(person =>
                 <React.Fragment key={person._id}>
                     <p key={person["mobile-number"]}>{person.person}, {person["mobile-number"]}</p>
-                    <button onClick={() => handlePersonEditClick(person)}>{editButton}</button>
-                    <button onClick={() => handlePersonDelete(person._id)}>{deleteEntryButton}</button>
+                    {isLoggedIn && <>
+                        <button onClick={() => handlePersonEditClick(person)}>{editButton}</button>
+                        <button onClick={() => handlePersonDelete(person._id)}>{deleteEntryButton}</button>
+                    </>}
                 </React.Fragment>)}
             {isLoggedIn && <button onClick={() => dispatch(setCreatePerson(true))}>{saveEntryButton}</button>}
         </div>

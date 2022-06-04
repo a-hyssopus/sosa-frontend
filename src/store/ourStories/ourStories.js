@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     stories: [],
     story: {},
-    // storyToAddLanguage: "",
     isEditPostMode: false,
     isCreatePostMode: false,
 }

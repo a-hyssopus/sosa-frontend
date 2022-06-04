@@ -9,39 +9,39 @@ import StoryCard from "./Card";
 const OurStories = () => {
     const dispatch = useDispatch();
 
+    const stories = useSelector(state => state.ourStories.stories);
+
     const activeLanguage = useSelector((state) => state.i18n.activeLanguage)
     const saveEntryButton = useSelector((state) => state.i18n.buttons.saveEntryButton)
-    const stories = useSelector(state => state.ourStories.stories);
     const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode);
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
+
+    useEffect(() => {
+        getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then(res => dispatch(setStories(res)))
+    }, [activeLanguage])
+    // }, [activeLanguage, isCreatePostMode])
 
     const handleSaveEntryButtonClick = () => {
         dispatch(setCreatePostMode(true));
     }
 
-    useEffect(() => {
-        getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => dispatch(setStories(res)))
-    }, [activeLanguage, isCreatePostMode])
+    const readStoriesLayout = () => (
+        <>
+            {isLoggedIn && <button onClick={handleSaveEntryButtonClick}>{saveEntryButton}</button>}
+            {stories.length && (
+                stories.map(el => (el[activeLanguage] && <StoryCard
+                    date={el.date}
+                    key={el._id}
+                    id={el._id}
+                    title={el?.[activeLanguage]?.title}
+                    text={el?.[activeLanguage]?.text}/>)))}
+        </>
+    )
 
     return (
         <div>
-            {isCreatePostMode ? <TextEditor/> : (
-                <>
-                    {isLoggedIn && <button onClick={handleSaveEntryButtonClick}>{saveEntryButton}</button>}
-                    {stories.length && (
-                        stories.map(el => (
-                            <StoryCard
-                                date={el.date}
-                                key={el._id}
-                                id={el._id}
-                                title={el?.[activeLanguage]?.title}
-                                text={el?.[activeLanguage]?.text}
-                                src={el["image-src"]}/>)
-                        )
-                    )}
-                </>)
-            }
+            {isCreatePostMode ? <TextEditor/> : readStoriesLayout()}
         </div>)
 }
 

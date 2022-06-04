@@ -1,5 +1,5 @@
 import React from "react"
-import {Card} from 'antd';
+import {Card} from "antd";
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -11,7 +11,7 @@ import {deleteRequest} from "../../utils/deleteRequest";
 
 const {Meta} = Card;
 
-const StoryCard = ({title, text, src, id, date}) => {
+const StoryCard = ({ title, text, id, date }) => {
     const dispatch = useDispatch();
     const editButton = useSelector(state => state.i18n.buttons.editButton);
     const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
@@ -22,6 +22,8 @@ const StoryCard = ({title, text, src, id, date}) => {
 
     const formattedDate = date?.slice(0, 10);
     const formattedText = text?.substring(0, text.indexOf('.'));
+
+    const src = text.match(/(?<=\<img src=")(.*?)(?="\>)/);
 
     const handleStoryOnClick = () => {
         getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
@@ -36,7 +38,7 @@ const StoryCard = ({title, text, src, id, date}) => {
     }
 
     const handleDelete = () => {
-        deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
             .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setStories(res))));
     }
@@ -48,7 +50,7 @@ const StoryCard = ({title, text, src, id, date}) => {
                     hoverable
                     onClick={handleStoryOnClick}
                     style={{width: 240}}
-                    cover={<img src={src}/>}
+                    cover={src && src.length && <img src={src[0]}/>}
                 >
                     <Meta title={title}/>
                     <Markup content={formattedText}/>

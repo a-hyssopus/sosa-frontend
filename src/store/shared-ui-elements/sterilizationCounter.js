@@ -2,21 +2,26 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     counter: 0,
+    documentId: '',
+    isEditCounter: false
 }
 
 export const sterilizationCounterSlice = createSlice({
     name: 'sterilizationCounter',
     initialState,
     reducers: {
-        setSterilizationCounter(state, action) {
-            state.counter = action.payload;
+        setSterilizationCounter: (state, {payload}) => {
+            state.counter = payload;
         },
-        addAmountToSterilizationCounter(state, action) {
-            state.counter = action.payload;
+        setDocumentId: (state, {payload}) => {
+            state.documentId = payload;
+        },
+        setIsEditCounter: (state, {payload}) => {
+            state.isEditCounter = payload;
         }
     },
 })
 
-export const { setSterilizationCounter, addAmountToSterilizationCounter } = sterilizationCounterSlice.actions
+export const { setSterilizationCounter, setIsEditCounter, setDocumentId } = sterilizationCounterSlice.actions
 
 export default sterilizationCounterSlice.reducer
