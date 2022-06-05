@@ -1,20 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Upload } from 'antd';
-import ImgCrop from 'antd-img-crop';
+import { useDispatch, useSelector } from "react-redux";
+import {  deleteReportImage, setReportImages } from "../../store/reports/reports";
 
 const UploadForm = () => {
-    const [fileList, setFileList] = useState([
-        {
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
-    ]);
+    const dispatch = useDispatch();
 
-    const onChange = ({ fileList: newFileList }) => {
-        setFileList(newFileList);
-    };
+    const images = useSelector(state => state.reports.report.images);
 
     const onPreview = async (file) => {
         let src = file.url;
@@ -23,7 +15,6 @@ const UploadForm = () => {
             src = await new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file.originFileObj);
-
                 reader.onload = () => resolve(reader.result);
             });
         }
@@ -34,19 +25,32 @@ const UploadForm = () => {
         imgWindow?.document.write(image.outerHTML);
     };
 
+    const beforeUploadHandler = (file) => {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            file.base64 = reader.result;
+            dispatch(setReportImages({uid: file.uid, name: file.name, url: file.base64}))
+        };
+        reader.readAsDataURL(file);
+        return false;
+    }
+
+    const onRemoveHandler = (file) => {
+        dispatch(deleteReportImage(file.uid))
+    }
+
     return (
-        <ImgCrop rotate>
-            <Upload
-                accept="image/png, image/jpeg"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                listType="picture-card"
-                fileList={fileList}
-                onChange={onChange}
-                onPreview={onPreview}
-            >
-                {fileList.length < 5 && '+ Upload'}
-            </Upload>
-        </ImgCrop>
+        <Upload
+            accept="image/png, image/jpeg"
+            listType="picture-card"
+            fileList={images}
+            onPreview={onPreview}
+            multiple={true}
+            onRemove={onRemoveHandler}
+            beforeUpload={beforeUploadHandler}
+        >
+            {'+ Upload'}
+        </Upload>
     );
 }
 

@@ -6,7 +6,7 @@ import {formats, modules} from "../../utils/textEditorConfig";
 import {languagesAbbreviation} from "../../utils/languages";
 
 import {postRequest} from "../../utils/postRequest";
-import {setCreatePostMode, setEditMode, setStory} from "../../store/ourStories/ourStories";
+import {setCreatePostMode, setEditMode, setStories, setStory} from "../../store/ourStories/ourStories";
 import {getRequest} from "../../utils/getRequest";
 
 import 'react-quill/dist/quill.snow.css';
@@ -58,6 +58,7 @@ const TextEditor = ({ title = '', text = '', date = '' }) => {
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}, date: new Date().toISOString()
             }), 'POST')
                 .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`))
+                .then(res => dispatch(setStories(res)))
                 .then(() => dispatch(setCreatePostMode(false)));
         }
     }

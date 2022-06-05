@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setCreateReportMode, setReports} from "../../store/reports/reports";
+import {setCreateReportMode, setReport, setReports} from "../../store/reports/reports";
 import ReportCard from "./Card";
 import {getRequest} from "../../utils/getRequest";
 import Editor from "./Editor";
@@ -21,20 +21,29 @@ const Reports = () => {
     }, [activeLanguage])
 
     const handleSaveEntryButtonClick = () => {
+        dispatch(setReport({
+            images: [],
+            period: [],
+            sterilized: {
+                cats: 0,
+                dogs: 0
+            }
+        }))
         dispatch(setCreateReportMode(true));
     };
 
     const readReportsLayout = () => (
-                <>
-                    {isLoggedIn && <button onClick={handleSaveEntryButtonClick}>{saveEntryButton}</button>}
-                    {reports.length && (
-                        reports.map(report => (report[activeLanguage] && <ReportCard
-                            key={report._id}
-                            id={report._id}
-                            title={report[activeLanguage].title}/>))
-                    )}
-                </>
-        )
+        <>
+            {isLoggedIn && <button onClick={handleSaveEntryButtonClick}>{saveEntryButton}</button>}
+            {reports.length && (
+                reports.map(report => (report[activeLanguage] && <ReportCard
+                    key={report._id}
+                    id={report._id}
+                    src={report.images[0].url}
+                    title={report[activeLanguage].title}/>))
+            )}
+        </>
+    )
 
     return (
         <div>

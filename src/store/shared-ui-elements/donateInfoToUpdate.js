@@ -48,6 +48,7 @@ export const donateInfoToUpdateSlice = createSlice({
             state.card.person = '';
             state.card.currency = '';
             state.card.id = '';
+            // state.card = {} ???
         }, setEmail: (state, {payload}) => {
             state.paypal.email = payload
         }, setCountry: (state, {payload}) => {

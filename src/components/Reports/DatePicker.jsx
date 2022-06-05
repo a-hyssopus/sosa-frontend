@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 
 import { DatePicker } from 'antd';
 import moment from "moment";
 
-import { setPeriod } from "../../store/reports/reports"
 import {useDispatch, useSelector} from "react-redux";
 
+import { setPeriod } from "../../store/reports/reports";
+import {dateFormat} from "../../utils/dateFormat";
+
 const { RangePicker } = DatePicker;
-const dateFormat = 'DD-MM-YYYY';
 
 const ReportDatePicker = () => {
     const dispatch = useDispatch();

@@ -11,6 +11,7 @@ const {Meta} = Card;
 
 const ReportCard = ({ title = '', src = '', id = '' }) => {
     const dispatch = useDispatch();
+    const history = useNavigate();
 
     const editButton = useSelector(state => state.i18n.buttons.editButton);
     const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
@@ -23,11 +24,8 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
             .then(res => dispatch(setReport(res)))
     }
 
-    const history = useNavigate();
-
     const handleEdit = () => {
         getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-            // .then(res => dispatch(setReport(res)))
             .then(() => dispatch(setEditReportMode(true)))
             .then(() => history(`/reports/${id}`));
     }
@@ -45,7 +43,7 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
                     hoverable
                     onClick={handleReportOnClick}
                     style={{width: 240}}
-                    cover={src && src.length && <img src={src[0]}/>}
+                    cover={<img src={src}/>}
                 >
                     <Meta title={title}/>
                 </Card>

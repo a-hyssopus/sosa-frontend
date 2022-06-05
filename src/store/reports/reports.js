@@ -2,7 +2,14 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
     reports: [],
-    report: {},
+    report: {
+        images: [],
+        period: [],
+        sterilized: {
+            cats: 0,
+            dogs: 0
+        }
+    },
     isEditReportMode: false,
     isCreateReportMode: false,
 }
@@ -32,15 +39,18 @@ export const reportsSlice = createSlice({
         setPeriod: (state, {payload}) => {
             state.report.period = payload;
         },
+        setReportImages: (state, {payload}) => {
+            state.report.images = [...state.report.images, payload];
+        },
+        deleteReportImage: (state, {payload}) => {
+            state.report.images = state.report.images.filter(({uid}) => uid !== payload)
+        },
         setEditReportMode: (state, {payload}) => {
             state.isEditReportMode = payload;
         },
         setCreateReportMode: (state, {payload}) => {
             state.isCreateReportMode = payload;
-        },
-        // setEmptyReportInfo: (state) => {
-        //     state.report = {};
-        // }
+        }
     },
 })
 
@@ -54,7 +64,8 @@ export const {
     setCats,
     setDogs,
     setPeriod,
-    setEmptyReportInfo
+    setReportImages,
+    deleteReportImage,
 } = reportsSlice.actions
 
 export default reportsSlice.reducer
