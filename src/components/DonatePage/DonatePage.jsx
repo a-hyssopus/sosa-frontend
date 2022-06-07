@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {setCardsText, setInPersonText} from "../../store/i18n"
-import {setBanks, setInPerson, setPaypal} from "../../store/shared-ui-elements/donate"
+import {setCardsText, setInPersonText} from "../../store/i18n/i18n"
+import {setBanks, setInPerson, setPaypal} from "../../store/sharedUIElements/donate"
 
 import {getRequest} from "../../utils/getRequest";
 

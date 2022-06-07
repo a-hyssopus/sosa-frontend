@@ -11,8 +11,8 @@ import {
     setPasswordText,
     setSuccessLoginMessage,
     setUsernameText
-} from "../../store/i18n"
-import {setIsLoggedIn} from "../../store/login";
+} from "../../store/i18n/i18n"
+import {setIsLoggedIn} from "../../store/login/login";
 
 const LoginPage = () => {
     const dispatch = useDispatch();

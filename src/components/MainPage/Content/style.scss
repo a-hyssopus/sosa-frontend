@@ -1,12 +1,33 @@
 .main-page-content {
-  //&-container {
-  //  display: flex;
-  //  flex-direction: row;
-  //  justify-content: center;
-  //  align-items: center;
-  //}
+  &-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      max-width: 65%;
+      box-shadow: 0 4px 4px 0 #00000040;
+    }
+  }
+
   &-text {
+    font-weight: 700;
     background-color: var(--primary-blue);
     color: var(--white);
+    font-size: 2rem;
+    width: 30%;
+    text-align: center;
+    margin-right: 20px;
+
+    &--background {
+      width: 100%;
+      background-color: var(--primary-blue);
+      height: 450px;
+      position: absolute;
+      top: 55%;
+      z-index: -1;
+    }
   }
+
 }

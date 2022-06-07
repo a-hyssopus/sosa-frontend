@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react'
-import {setActiveLanguage} from "../../store/i18n"
+import {setActiveLanguage} from "../../store/i18n/i18n"
 import {Button} from "antd";
 import {Link} from "react-router-dom";
 

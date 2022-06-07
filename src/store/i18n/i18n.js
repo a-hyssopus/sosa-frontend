@@ -51,6 +51,11 @@ const initialState = {
         "success-login-message": "",
         "fail-login-message": ""
     },
+    deleteConfirm: {
+        confirm: '',
+        cancel: '',
+        "popup-title": ''
+    }
 }
 
 export const i18nSlice = createSlice({
@@ -159,6 +164,15 @@ export const i18nSlice = createSlice({
         setLogoutText: (state, {payload}) => {
             state.login["logout-text"] = payload;
         },
+        setDeleteConfirmLabel: (state, {payload}) => {
+            state.deleteConfirm.confirm = payload;
+        },
+        setDeleteCancelLabel: (state, {payload}) => {
+            state.deleteConfirm.cancel = payload;
+        },
+        setDeleteTitleLabel: (state, {payload}) => {
+            state.deleteConfirm["popup-title"] = payload;
+        },
     },
 })
 
@@ -198,5 +212,8 @@ export const {
     setLoginText,
     setSuccessLoginMessage,
     setFailLoginMessage,
-    setLogoutText
+    setLogoutText,
+    setDeleteCancelLabel,
+    setDeleteConfirmLabel,
+    setDeleteTitleLabel
 } = i18nSlice.actions

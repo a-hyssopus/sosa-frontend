@@ -8,7 +8,8 @@ import {setEditReportMode, setReport, setReports} from "../../store/reports/repo
 import {deleteRequest} from "../../utils/deleteRequest";
 import {dateFormat} from "../../utils/dateFormat";
 import moment from "moment";
-import {setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n";
+import {setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n/i18n";
+import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
 
 const Report = () => {
     const dispatch = useDispatch();
@@ -46,11 +47,11 @@ const Report = () => {
     const handleEdit = () => {
         // getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
         //     .then(() => dispatch(setEditReportMode(true)))
-            dispatch(setEditReportMode(true))
+        dispatch(setEditReportMode(true))
     };
 
-    const handleDelete = () => {
-        deleteRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+    const confirmDeleteHandler = () => {
+        deleteRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
             .then(() => getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setReports(res))));
     };
@@ -63,15 +64,17 @@ const Report = () => {
             {dogsLabel}: {dogs}
             {periodLabel}: {report.period?.length && report.period?.map(date => moment(date).format(dateFormat))}
             <p>{text}</p>
-            {report?.images?.length && report.images.map(image => <img key={image.uid} src={image.url}/>)}
+            {report?.images?.length && report?.images?.map(image => <img key={image.uid} src={image?.url}/>)}
             <button onClick={handleEdit}>{editButton}</button>
-            <button onClick={handleDelete}>{deleteButton}</button>
+            <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
+                <button>{deleteButton}</button>
+            </DeleteConfirmPopup>
         </>
     );
 
     return (
         <div>
-            { isEditReportMode ? <Editor toEdit/> : readReportLayout() }
+            {isEditReportMode ? <Editor toEdit/> : readReportLayout()}
         </div>
     )
 }

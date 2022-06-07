@@ -12,6 +12,8 @@ import DonatePage from "./components/DonatePage/DonatePage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Reports from "./components/Reports/Reports";
 import Report from "./components/Reports/Report";
+import AboutUs from "./components/AboutUs/AboutUs";
+import FAQ from "./components/FAQ/FAQ";
 
 const App = () => (
     <div className='App'>
@@ -21,8 +23,8 @@ const App = () => (
             <Route exact path={"/donate"} element={<DonatePage/>}/>
             <Route exact path={"/our-stories"} element={<OurStories/>}/>
             <Route exact path={"/our-stories/:id"} element={<Story/>}/>
-            {/*<Route exact path={"/about"} element={<AboutUs/>}/>*/}
-            {/*<Route exact path={"/faq"} element={<FAQ/>}/>*/}
+            <Route exact path={"/about"} element={<AboutUs/>}/>
+            <Route exact path={"/faq"} element={<FAQ/>}/>
             <Route exact path={"/reports"} element={<Reports/>}/>
             <Route exact path={"/reports/:id"} element={<Report/>}/>
             <Route exact path={"/login"} element={<LoginPage/>}/>

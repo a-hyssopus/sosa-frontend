@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setCountry, setEmail, setPaypalId} from "../../../store/shared-ui-elements/donateInfoToUpdate";
-import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/shared-ui-elements/donate";
+import {setCountry, setEmail, setPaypalId} from "../../../store/sharedUIElements/donateInfoToUpdate";
+import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/sharedUIElements/donate";
 import {deleteRequest} from "../../../utils/deleteRequest";
 import {getRequest} from "../../../utils/getRequest";
 

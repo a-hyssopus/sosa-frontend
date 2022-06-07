@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {setBanks, setCreateCard, setEditCard} from "../../../store/shared-ui-elements/donate";
+import {setBanks, setCreateCard, setEditCard} from "../../../store/sharedUIElements/donate";
 import {
     setBankName,
     setCount,
@@ -12,7 +12,7 @@ import {
     setPrimaryColor,
     setSecondaryColor,
     setTextColor
-} from "../../../store/shared-ui-elements/donateInfoToUpdate";
+} from "../../../store/sharedUIElements/donateInfoToUpdate";
 import {deleteRequest} from "../../../utils/deleteRequest";
 import {getRequest} from "../../../utils/getRequest";
 

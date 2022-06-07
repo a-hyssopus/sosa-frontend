@@ -2,13 +2,13 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getRequest} from "../../../utils/getRequest";
 
-import {setPaypalCountryLabel, setPaypalEmailLabel} from "../../../store/i18n";
+import {setPaypalCountryLabel, setPaypalEmailLabel} from "../../../store/i18n/i18n";
 import {
     setCountry,
     setEmail,
     setEmptyPaypalInfo
-} from "../../../store/shared-ui-elements/donateInfoToUpdate";
-import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/shared-ui-elements/donate";
+} from "../../../store/sharedUIElements/donateInfoToUpdate";
+import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/sharedUIElements/donate";
 import {postRequest} from "../../../utils/postRequest";
 
 const PayPalForm = ({ toEdit, toCreate }) => {

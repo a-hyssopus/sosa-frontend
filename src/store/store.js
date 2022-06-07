@@ -1,11 +1,12 @@
-import {configureStore} from '@reduxjs/toolkit'
-import i18nReducer from "./i18n.js"
-import sterilizationCounterReducer from "./shared-ui-elements/sterilizationCounter"
-import donateReducer from "./shared-ui-elements/donate"
+import {configureStore} from "@reduxjs/toolkit";
+import i18nReducer from "./i18n/i18n.js";
+import sterilizationCounterReducer from "./sharedUIElements/sterilizationCounter";
+import donateReducer from "./sharedUIElements/donate";
 import ourStoriesReducer from "./ourStories/ourStories";
-import donateInfoToUpdateReducer from "./shared-ui-elements/donateInfoToUpdate";
-import reportsReducer from "./reports/reports"
-import loginReducer from "./login";
+import donateInfoToUpdateReducer from "./sharedUIElements/donateInfoToUpdate";
+import reportsReducer from "./reports/reports";
+import loginReducer from "./login/login";
+import aboutUsReducer from "./aboutUs/aboutUs";
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
         ourStories: ourStoriesReducer,
         login: loginReducer,
         reports: reportsReducer,
+        aboutUs: aboutUsReducer,
     }
 })
 

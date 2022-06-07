@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-
-import CustomCarousel from "../Carousel/CustomCarousel";
 import "./style.scss"
-import {setHeroMessage} from "../../../store/i18n";
+import {setHeroMessage} from "../../../store/i18n/i18n";
 import {getRequest} from "../../../utils/getRequest";
+
+import dog from "../../../assets/dog.jpg"
 
 const Content = () => {
     const activeLanguage = useSelector(state => state.i18n.activeLanguage)
@@ -19,10 +19,13 @@ const Content = () => {
     }, [activeLanguage])
 
     return (
-        <div className="main-page-content-container">
-            <div className="main-page-content-text">{heroMessage}</div>
-            <CustomCarousel/>
-        </div>
+        <>
+            <div className="main-page-content-container">
+                <div className="main-page-content-text">{heroMessage}</div>
+                <img src={dog}/>
+            </div>
+            <div className="main-page-content-text--background"/>
+        </>
     )
 }
 

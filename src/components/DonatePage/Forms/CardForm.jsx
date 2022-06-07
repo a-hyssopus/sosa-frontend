@@ -11,7 +11,7 @@ import {
     setPrimaryColor,
     setSecondaryColor,
     setTextColor,
-} from "../../../store/shared-ui-elements/donateInfoToUpdate";
+} from "../../../store/sharedUIElements/donateInfoToUpdate";
 
 import {
     setAttentionText,
@@ -23,9 +23,9 @@ import {
     setPrimaryColori18n,
     setSecondaryColori18n,
     setTextColori18n
-} from "../../../store/i18n"
+} from "../../../store/i18n/i18n"
 
-import {setBanks, setCreateCard, setEditCard} from "../../../store/shared-ui-elements/donate";
+import {setBanks, setCreateCard, setEditCard} from "../../../store/sharedUIElements/donate";
 
 import {getRequest} from "../../../utils/getRequest";
 import {postRequest} from "../../../utils/postRequest";

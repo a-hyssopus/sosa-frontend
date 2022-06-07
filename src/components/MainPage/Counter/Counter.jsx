@@ -5,7 +5,7 @@ import {
     setDocumentId,
     setIsEditCounter,
     setSterilizationCounter
-} from "../../../store/shared-ui-elements/sterilizationCounter"
+} from "../../../store/sharedUIElements/sterilizationCounter"
 import {getRequest} from "../../../utils/getRequest";
 import {postRequest} from "../../../utils/postRequest";
 
@@ -66,8 +66,7 @@ const Counter = () => {
     return (
         <div className="main-page-counter">
             <span className="main-page-counter-text">
-                {isEditCounter ? updateCounterLayout() : readCounterLayout()}
-                sterilizations were performed this year due to your donations</span>
+                {isEditCounter ? updateCounterLayout() : readCounterLayout()} sterilizations were performed this year due to your donations</span>
         </div>
     )
 }

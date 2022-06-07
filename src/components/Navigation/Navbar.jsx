@@ -8,7 +8,7 @@ import {
     setNavigationButtons,
     setSaveButton,
     setSterilizationText, setCancelButton
-} from "../../store/i18n"
+} from "../../store/i18n/i18n"
 
 import instagram from "../../assets/instagramWhite.png"
 import facebook from "../../assets/facebook-logo.png"

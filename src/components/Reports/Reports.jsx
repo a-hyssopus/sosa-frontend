@@ -39,7 +39,7 @@ const Reports = () => {
                 reports.map(report => (report[activeLanguage] && <ReportCard
                     key={report._id}
                     id={report._id}
-                    src={report.images[0].url}
+                    src={report?.images[0]?.url}
                     title={report[activeLanguage].title}/>))
             )}
         </>

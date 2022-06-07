@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setPersonId, setPersonName, setPersonNumber,} from "../../../store/shared-ui-elements/donateInfoToUpdate";
-import {setCreatePerson, setEditPerson, setInPerson} from "../../../store/shared-ui-elements/donate";
+import {setPersonId, setPersonName, setPersonNumber,} from "../../../store/sharedUIElements/donateInfoToUpdate";
+import {setCreatePerson, setEditPerson, setInPerson} from "../../../store/sharedUIElements/donate";
 import {deleteRequest} from "../../../utils/deleteRequest";
 import {getRequest} from "../../../utils/getRequest";
 

@@ -7,6 +7,7 @@ import {setEditReportMode, setReport, setReports} from "../../store/reports/repo
 
 import {Card} from "antd";
 import {deleteRequest} from "../../utils/deleteRequest";
+import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
 const {Meta} = Card;
 
 const ReportCard = ({ title = '', src = '', id = '' }) => {
@@ -30,7 +31,7 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
             .then(() => history(`/reports/${id}`));
     }
 
-    const handleDelete = () => {
+    const confirmDeleteHandler = () => {
         deleteRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
             .then(() => getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setReports(res))));
@@ -50,7 +51,9 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
             </Link>
             {isLoggedIn && <>
                 <button onClick={handleEdit}>{editButton}</button>
-                <button onClick={handleDelete}>{deleteButton}</button>
+                <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
+                    <button>{deleteButton}</button>
+                </DeleteConfirmPopup>
             </>}
         </>
     )

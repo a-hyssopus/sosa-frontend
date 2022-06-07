@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getRequest} from "../../../utils/getRequest";
-import {setPersonNameLabel, setPersonNumberLabel} from "../../../store/i18n";
-import {setCreateCard, setCreatePerson, setEditPerson, setInPerson} from "../../../store/shared-ui-elements/donate";
+import {setPersonNameLabel, setPersonNumberLabel} from "../../../store/i18n/i18n";
+import {setCreateCard, setCreatePerson, setEditPerson, setInPerson} from "../../../store/sharedUIElements/donate";
 import {
     setEmptyCardInfo,
     setEmptyPersonInfo,
     setPersonName,
     setPersonNumber
-} from "../../../store/shared-ui-elements/donateInfoToUpdate";
+} from "../../../store/sharedUIElements/donateInfoToUpdate";
 import {postRequest} from "../../../utils/postRequest";
 
 const PersonForm = ({ toEdit, toCreate }) => {

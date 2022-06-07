@@ -4,14 +4,15 @@ import {languagesAbbreviation} from "../../utils/languages";
 
 import ReportDatePicker from "./DatePicker"
 import {getRequest} from "../../utils/getRequest";
-import {setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n";
+import {setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n/i18n";
 import {postRequest} from "../../utils/postRequest";
 import {
     setCats,
     setCreateReportMode,
     setDogs,
     setEditReportMode,
-    setReport, setReports,
+    setReport,
+    setReports,
     setReportText,
     setReportTitle
 } from "../../store/reports/reports";
@@ -47,7 +48,12 @@ const Editor = ({toEdit, toCreate}) => {
                 dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
                 dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
                 dispatch(setPeriodLabel(res[activeLanguage].reports["period-label"]))
-            })
+            });
+        return () => {
+            dispatch(setCatsLabel(""))
+            dispatch(setDogsLabel(""))
+            dispatch(setPeriodLabel(""))
+        }
     }, [activeLanguage])
 
     const handleLanguageChange = event => {
@@ -107,10 +113,12 @@ const Editor = ({toEdit, toCreate}) => {
             <label>{catsLabel}</label>
             <input
                 type="number"
+                min="0"
                 value={toEdit ? report.sterilized?.cats : cats}
                 onChange={toEdit ? event => dispatch(setCats(event.target.value)) : event => setCatsLocal(event.target.value)}/>
             <label>{dogsLabel}</label>
             <input type="number"
+                   min="0"
                    value={toEdit ? report.sterilized?.dogs : dogs}
                    onChange={toEdit ? event => dispatch(setDogs(event.target.value)) : event => setDogsLocal(event.target.value)}/>
             <label>{periodLabel}</label>
