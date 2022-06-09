@@ -15,6 +15,8 @@ import {
 } from "../../../store/sharedUIElements/donateInfoToUpdate";
 import {deleteRequest} from "../../../utils/deleteRequest";
 import {getRequest} from "../../../utils/getRequest";
+import {Button} from "antd";
+import DeleteConfirmPopup from "../../SharedElements/DeleteConfirmPopup";
 
 const Cards = () => {
     const dispatch = useDispatch();
@@ -23,7 +25,6 @@ const Cards = () => {
     const cardsText = useSelector(state => state.i18n.donate.cardsText);
     const deleteEntryButton = useSelector(state => state.i18n.buttons.deleteButton);
     const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveEntryButton);
 
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
@@ -35,7 +36,7 @@ const Cards = () => {
             "text-color": textColor,
             link = ''
         } = bank;
-        const {count, person, currency, _id: id} = card;
+        const {person, count, currency, _id: id} = card;
 
         dispatch(setBankName(name));
         dispatch(setPrimaryColor(primaryColor));
@@ -63,17 +64,18 @@ const Cards = () => {
 
     return (
         <div className="donate-cards-container">
-            {cardsText}
+            <p className="donate-page--method-name">{cardsText}</p>
             {banks?.map(bank => bank?.cards?.map(card =>
                 <React.Fragment key={card._id}>
-                    <p>{bank.name} ({card.currency}): {card.count} {card.person}</p>
+                    <p>{bank.name} ({card.currency}): {card.count} - {card.person}</p>
                     {isLoggedIn && <>
-                        <button onClick={() => handleCardEditClick(bank, card)}>{editButton}</button>
-                        <button onClick={() => handleCardDelete(bank, card)}>{deleteEntryButton}</button>
+                        <Button style={{margin: "5px"}} onClick={() => handleCardEditClick(bank, card)}>{editButton}</Button>
+                        <DeleteConfirmPopup confirmDeleteHandler={() => handleCardDelete(bank, card)}><Button  style={{margin: "5px"}} danger>{deleteEntryButton}</Button></DeleteConfirmPopup>
                     </>}
                 </React.Fragment>
             ))}
-            {isLoggedIn && <button onClick={() => dispatch(setCreateCard(true))}>{saveEntryButton}</button>}
+            <br/>
+            {isLoggedIn && <Button shape="circle" onClick={() => dispatch(setCreateCard(true))}>+</Button>}
         </div>
     )
 }

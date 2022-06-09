@@ -1,5 +1,5 @@
 import React from "react"
-import {Card} from "antd";
+import {Button, Card} from "antd";
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -8,6 +8,9 @@ import {Markup} from 'interweave';
 import {setEditMode, setStories, setStory} from "../../store/ourStories/ourStories";
 import {getRequest} from "../../utils/getRequest";
 import {deleteRequest} from "../../utils/deleteRequest";
+
+import "./style.scss"
+import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
 
 const {Meta} = Card;
 
@@ -21,7 +24,6 @@ const StoryCard = ({ title, text, id, date }) => {
     const history = useNavigate();
 
     const formattedDate = date?.slice(0, 10);
-    const formattedText = text?.substring(0, text.indexOf('.'));
 
     const src = text.match(/(?<=\<img src=")(.*?)(?="\>)/);
 
@@ -44,24 +46,22 @@ const StoryCard = ({ title, text, id, date }) => {
     }
 
     return (
-        <>
+        <div className="story-card">
             <Link to={`/our-stories/${id}`}>
                 <Card
                     hoverable
                     onClick={handleStoryOnClick}
-                    style={{width: 240}}
-                    cover={src && src.length && <img src={src[0]}/>}
+                    style={{width: 300}}
+                    cover={src && src.length && <img src={src[0]} style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}/>}
                 >
-                    <Meta title={title}/>
-                    <Markup content={formattedText}/>
-                    <p>{formattedDate}</p>
+                    <Meta title={title} style={{fontWeight: "700"}} description={formattedDate}/>
                 </Card>
             </Link>
             {isLoggedIn && <>
-                <button onClick={handleEdit}>{editButton}</button>
-                <button onClick={handleDelete}>{deleteButton}</button>
+                <Button onClick={handleEdit}>{editButton}</Button>
+                <DeleteConfirmPopup confirmDeleteHandler={handleDelete}><Button danger>{deleteButton}</Button></DeleteConfirmPopup>
             </>}
-        </>
+        </div>
     )
 }
 

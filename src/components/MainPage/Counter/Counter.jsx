@@ -8,13 +8,17 @@ import {
 } from "../../../store/sharedUIElements/sterilizationCounter"
 import {getRequest} from "../../../utils/getRequest";
 import {postRequest} from "../../../utils/postRequest";
+import {setSterilizationText} from "../../../store/i18n/i18n";
+import {Button, InputNumber} from "antd";
 
 const Counter = () => {
     const dispatch = useDispatch();
 
+    const activeLanguage = useSelector(state => state.i18n.activeLanguage);
     const sterilizationCounter = useSelector(state => state.sterilizationCounter.counter);
     const isEditCounter = useSelector(state => state.sterilizationCounter.isEditCounter);
     const documentId = useSelector(state => state.sterilizationCounter.documentId);
+    const sterilizationText = useSelector(state => state.i18n.sterilizationText);
 
     const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
@@ -29,6 +33,12 @@ const Counter = () => {
             })
     }, []);
 
+    useEffect(() => {
+        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+            .then(res => {
+                dispatch(setSterilizationText(res[activeLanguage]["sterilization-text"]))
+            })
+    }, [activeLanguage]);
 
     const saveCounterHandler = () => {
         postRequest(`http://localhost:3001/shared-ui-elements/${documentId}`,
@@ -52,21 +62,21 @@ const Counter = () => {
 
     const updateCounterLayout = () => (
         <>
-            <input type="number" value={sterilizationCounter}
-                   onChange={event => dispatch(setSterilizationCounter(event.target.value))}/>
-            <button onClick={saveCounterHandler}>{saveEntryButton}</button>
-            <button onClick={counterCancelHandler}>{cancelButton}</button>
+            <InputNumber value={sterilizationCounter}
+                   onChange={value => dispatch(setSterilizationCounter(value))}/>
+            <Button onClick={saveCounterHandler}>{saveEntryButton}</Button>
+            <Button onClick={counterCancelHandler}>{cancelButton}</Button>
         </>
     )
 
-    const readCounterLayout = () => <span className="counter"
+    const readCounterLayout = () => <span   style={{cursor: isLoggedIn ? "pointer" : ""}} className="counter"
                                           onClick={isLoggedIn ? counterClickHandler : undefined}>{sterilizationCounter}</span>
 
 
     return (
         <div className="main-page-counter">
             <span className="main-page-counter-text">
-                {isEditCounter ? updateCounterLayout() : readCounterLayout()} sterilizations were performed this year due to your donations</span>
+                {isEditCounter ? updateCounterLayout() : readCounterLayout()} {sterilizationText}</span>
         </div>
     )
 }

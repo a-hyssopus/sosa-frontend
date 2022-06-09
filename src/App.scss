@@ -1,9 +1,32 @@
 :root {
-    --white: #FFFFFF;
-    --light-orange: #F4C6A5;
-    --light-blue: #F4F8FB;
-    --ultramarine: #0236D4;
-    --primary-blue: #122658;
-    --dark-grey: #303030;
+  --white: #FFFFFF;
+  --light-orange: #F4C6A5;
+  --light-blue: #F4F8FB;
+  --ultramarine: #0236D4;
+  --primary-blue: #122658;
+  --dark-grey: #303030;
+  height: 100vh;
+}
+
+.App {
+  height: 100vh;
+  overflow: auto;
+
+  & > .link {
+    margin: 25px;
+
+    a {
+      color: #303030;
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+    }
+  }
+
+  .ant-btn {
+    &-primary {
+      background-color: #0236D4;
+    }
+  }
 }
 

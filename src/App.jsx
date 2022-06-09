@@ -31,7 +31,10 @@ const App = () => (
             <Route exact path={"/home"} element={<MainPage/>}/>
             <Route exact path={"/"} element={<MainPage/>}/>
         </Routes>
-        <Link to={"/login"}>Log In</Link>
+        <div className="link" >
+            <Link to={"/login"}>Log In</Link>
+        </div>
+        {/*TODO change i18n for login*/}
     </div>
 )
 

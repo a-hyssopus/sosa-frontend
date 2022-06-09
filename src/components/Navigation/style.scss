@@ -4,52 +4,127 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+
   > ul {
     display: flex;
     flex-direction: row;
-    font-size: 30px;
+    align-items: center;
     margin: 0;
+
     & > li {
       margin-inline: 55px;
+      font-size: 30px;
+      transition: all 0.5s ease;
+
+      &:hover {
+        font-size: 35px;
+      }
+
       & > a {
         color: var(--white)
       }
     }
   }
+
   .navigation-tab--active {
     font-weight: bold;
     border-bottom: 3px solid var(--white);
     padding-inline: 10px;
   }
+
   .navigation-icons {
     display: flex;
     flex-direction: row;
     margin-right: 70px;
+
     & > li {
       list-style: none;
     }
+
     img {
       width: 55px;
       margin-inline: 10px;
+      transition: width 0.5s ease;
+
+      &:hover {
+        width: 65px;
+      }
     }
   }
+
   .navigation-button-donate {
     cursor: pointer;
-    background-color: var(--light-blue);
-    color: var(--dark-grey);
     border: none;
     border-radius: 40px;
     padding: 0 40px;
     font-size: 35px;
     font-weight: bold;
-    box-shadow: 60px 0 #F4F8FB80;
     margin-left: 45px;
-    &>img {
+
+    & > img {
       width: 80px;
     }
   }
 }
 
+@media(max-width: 1440px) {
+  .navigation-container {
+    > ul {
+      font-size: 30px;
 
+      & > li {
+        margin-inline: 35px;
+      }
+    }
+  }
+}
 
+@media(max-width: 1024px) {
+  .navigation-container {
+    > ul {
+      font-size: 20px;
+
+      & > li {
+        margin-inline: 18px;
+      }
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .navigation-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > ul {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 0;
+
+      & > li {
+        margin-inline: 18px;
+        padding: 10px;
+        font-size: 25px;
+      }
+    }
+
+    .navigation-icons {
+      display: flex;
+      flex-direction: column;
+      margin-right: 0;
+
+      & > li {
+        list-style: none;
+      }
+
+      img {
+        width: 55px;
+        margin-inline: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
 

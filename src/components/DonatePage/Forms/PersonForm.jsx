@@ -2,16 +2,12 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getRequest} from "../../../utils/getRequest";
 import {setPersonNameLabel, setPersonNumberLabel} from "../../../store/i18n/i18n";
-import {setCreateCard, setCreatePerson, setEditPerson, setInPerson} from "../../../store/sharedUIElements/donate";
-import {
-    setEmptyCardInfo,
-    setEmptyPersonInfo,
-    setPersonName,
-    setPersonNumber
-} from "../../../store/sharedUIElements/donateInfoToUpdate";
+import {setCreatePerson, setEditPerson, setInPerson} from "../../../store/sharedUIElements/donate";
+import {setEmptyPersonInfo, setPersonName, setPersonNumber} from "../../../store/sharedUIElements/donateInfoToUpdate";
 import {postRequest} from "../../../utils/postRequest";
+import {Button, Input} from "antd";
 
-const PersonForm = ({ toEdit, toCreate }) => {
+const PersonForm = ({toEdit, toCreate}) => {
     const dispatch = useDispatch();
 
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
@@ -70,14 +66,24 @@ const PersonForm = ({ toEdit, toCreate }) => {
     }
 
     return (
-        <div>
-            <label>{nameLabel}</label>
-            <input type="text" value={personName} onChange={event => dispatch(setPersonName(event.target.value))}/>
-            <label>{nubmerLabel}</label>
-            <input type="text" value={personNumber} onChange={event => dispatch(setPersonNumber(event.target.value))}/>
-            {toEdit && <button onClick={handleSaveEditButton}>{saveEntryButton}</button>}
-            {toCreate && <button onClick={handleSaveCreateButton}>{saveEntryButton}</button>}
-            <button onClick={handleCancelButton}>{cancelButton}</button>
+        <div className="donate-page--in-person-form">
+            <div className="donate-page--in-person-form--form">
+                <div className="label-input-container">
+                    <label>{nameLabel}</label>
+                    <Input type="text" value={personName} autoFocus
+                           onChange={event => dispatch(setPersonName(event.target.value))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{nubmerLabel}</label>
+                    <Input type="text" value={personNumber}
+                           onChange={event => dispatch(setPersonNumber(event.target.value))}/>
+                </div>
+            </div>
+            <div className="donate-page--buttons-container">
+                <Button onClick={handleCancelButton}>{cancelButton}</Button>
+                {<Button type="primary"
+                         onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>}
+            </div>
         </div>
     )
 }

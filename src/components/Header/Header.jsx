@@ -9,7 +9,6 @@ import logo from "../../assets/logo.png"
 import {useDispatch } from "react-redux";
 
 const Header = () => {
-    // const activeLanguage = useSelector((state) => state.i18n.language)
     const dispatch = useDispatch()
 
     const languages = ['Ro', 'En', 'Ru'];
@@ -25,7 +24,6 @@ const Header = () => {
                 <div className="logo-text">
                     <Link to="/">
                         <img className="logo" src={logo} alt="SOSA Logo"/>
-                        <span></span>
                     </Link>
                 </div>
                 <ul className="language-buttons">

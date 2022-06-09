@@ -1,0 +1,45 @@
+.donate-page {
+  &--parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block: 5%;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 25px;
+    width: 50%;
+  }
+
+  &--cards-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+
+    p {
+      margin: 5px;
+    }
+  }
+
+  &--banks-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--method-name {
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &--paypal-container {
+    width: 100%;
+  }
+
+  &--in-person-container {
+    width: 100%;
+  }
+}

@@ -1,3 +1,49 @@
-img {
-  width: 1000px;
+.carousel-container {
+  position: relative;
+
+  .carousel-item {
+    max-width: 100%;
+    box-shadow: 0 4px 4px 0 #00000040;
+    object-fit: cover;
+    height: 575px;
+    opacity: 0;
+    transition: all 0.4s linear;
+
+    &-active {
+      opacity: 100%;
+    }
+
+    &-background {
+      opacity: 100%;
+      background: rgb(211, 211, 211);
+    }
+  }
 }
+
+.carousel-control-arrow {
+  position: absolute;
+  width: 60px;
+  top: 45%;
+  right: 0;
+  transition: all 0.5s ease-in-out;
+
+  &--back {
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    left: 0;
+  }
+
+  &:hover {
+    width: 75px;
+  }
+}
+
+
+@media(max-width: 1440px) {
+  .carousel-container {
+    .carousel-item {
+      object-fit: cover;
+    }
+  }
+}
+

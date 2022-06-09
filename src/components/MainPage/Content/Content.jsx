@@ -4,7 +4,7 @@ import "./style.scss"
 import {setHeroMessage} from "../../../store/i18n/i18n";
 import {getRequest} from "../../../utils/getRequest";
 
-import dog from "../../../assets/dog.jpg"
+import CustomCarousel from "../Carousel/CustomCarousel";
 
 const Content = () => {
     const activeLanguage = useSelector(state => state.i18n.activeLanguage)
@@ -16,15 +16,22 @@ const Content = () => {
             .then(res => {
                 dispatch(setHeroMessage(res[activeLanguage]["hero-message"]))
             })
-    }, [activeLanguage])
+    }, [activeLanguage]);
+
+    const firstSentence = heroMessage.substring(0, heroMessage.indexOf('.'));
+    const secondSentence = heroMessage.substring(heroMessage.indexOf('.')+1)
 
     return (
         <>
             <div className="main-page-content-container">
-                <div className="main-page-content-text">{heroMessage}</div>
-                <img src={dog}/>
+                <div className="main-page-content-text">
+                    <span>{firstSentence}.</span>
+                    <br/>
+                    <span>{secondSentence}</span>
+                </div>
+                <div className="main-page-content-carousel-container"><CustomCarousel/></div>
             </div>
-            <div className="main-page-content-text--background"/>
+            <div className="main-page-content-text main-page-content-text--background"/>
         </>
     )
 }

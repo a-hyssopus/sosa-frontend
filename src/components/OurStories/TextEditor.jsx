@@ -10,9 +10,10 @@ import {setCreatePostMode, setEditMode, setStories, setStory} from "../../store/
 import {getRequest} from "../../utils/getRequest";
 
 import 'react-quill/dist/quill.snow.css';
-import LanguageDropdown from "../LanguageDropdown";
+import LanguageDropdown from "../SharedElements/LanguageDropdown";
+import {Button, Input} from "antd";
 
-const TextEditor = ({ title = '', text = '', date = '' }) => {
+const TextEditor = ({title = '', text = '', date = ''}) => {
     // TODO remove props and use Redux
 
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const TextEditor = ({ title = '', text = '', date = '' }) => {
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
 
-    const [storyToAddLanguage, setStoryToAddLanguage] = useState(languagesAbbreviation[0])
+    const [storyToAddLanguage, setStoryToAddLanguage] = useState(languagesAbbreviation[0]);
 
     const id = story._id;
 
@@ -39,8 +40,8 @@ const TextEditor = ({ title = '', text = '', date = '' }) => {
         setTitleValue(event.target.value);
     }
 
-    const handleLanguageChange = event => {
-        setStoryToAddLanguage(event.target.value);
+    const handleLanguageChange = value => {
+        setStoryToAddLanguage(value);
     }
 
     const saveButtonHandler = () => {
@@ -54,7 +55,7 @@ const TextEditor = ({ title = '', text = '', date = '' }) => {
         }
 
         if (isCreatePostMode) {
-            postRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({
+            postRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": storyToAddLanguage})}`, JSON.stringify({
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}, date: new Date().toISOString()
             }), 'POST')
                 .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`))
@@ -69,21 +70,25 @@ const TextEditor = ({ title = '', text = '', date = '' }) => {
     }
 
     return (
-        <>
-            <input type="text"
-                   placeholder="Title"
-                   value={titleValue}
-                   autoFocus
-                   onChange={handleTitleValueChange}/>
-            <LanguageDropdown handleLanguageChange={handleLanguageChange}/>
+        <div className="text-editor-container">
+            <div className="text-editor-container--inputs">
+                <Input type="text"
+                       placeholder="Title"
+                       value={titleValue}
+                       autoFocus
+                       onChange={handleTitleValueChange}/>
+                <LanguageDropdown activeLanguage={activeLanguage} handleLanguageChange={handleLanguageChange}/>
+            </div>
             <ReactQuill theme="snow"
                         modules={modules}
                         formats={formats}
                         value={richTextValue}
                         onChange={handleRichEditorOnChange}/>
-            <button onClick={saveButtonHandler}>{saveButton}</button>
-            <button onClick={cancelButtonHandler}>{cancelButton}</button>
-        </>)
+            <div className="text-editor--buttons">
+                <Button onClick={cancelButtonHandler}>{cancelButton}</Button>
+                <Button type="primary" onClick={saveButtonHandler}>{saveButton}</Button>
+            </div>
+        </div>)
 }
 
 export default TextEditor;

@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {getRequest} from "../../utils/getRequest";
 import {setEditReportMode, setReport, setReports} from "../../store/reports/reports";
 
-import {Card} from "antd";
+import {Button, Card} from "antd";
 import {deleteRequest} from "../../utils/deleteRequest";
 import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
 const {Meta} = Card;
@@ -38,24 +38,24 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
     }
 
     return (
-        <>
+        <div className="reports-container--card">
             <Link to={`/reports/${id}`}>
                 <Card
                     hoverable
                     onClick={handleReportOnClick}
-                    style={{width: 240}}
+                    style={{width: 300}}
                     cover={<img src={src}/>}
                 >
                     <Meta title={title}/>
                 </Card>
             </Link>
             {isLoggedIn && <>
-                <button onClick={handleEdit}>{editButton}</button>
+                <Button onClick={handleEdit}>{editButton}</Button>
                 <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
-                    <button>{deleteButton}</button>
+                    <Button danger>{deleteButton}</Button>
                 </DeleteConfirmPopup>
             </>}
-        </>
+        </div>
     )
 }
 

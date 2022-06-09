@@ -1,18 +1,49 @@
-.main-page {
-  &-counter {
-    display: flex;
-    margin: 20px 0 30px 100px;
-    &-text {
-      font-weight: bold;
-      font-size: 40px;
-      align-self: flex-start;
-    }
+.main-page-counter {
+  display: flex;
+  margin: 20px 0 10px 100px;
+
+  &-text {
+    font-weight: bold;
+    font-size: 40px;
+    align-self: flex-start;
   }
 }
 
+
 .counter {
-  font-size: 60px;
+  font-size: 70px;
   color: var(--ultramarine);
   font-weight: bolder;
   letter-spacing: -3px;
 }
+
+@media(max-width: 1440px) {
+  .main-page-counter {
+    &-text {
+      font-size: 35px;
+    }
+  }
+}
+
+
+@media(max-width: 1024px) {
+  .main-page-counter {
+    &-text {
+      font-size: 25px;
+    }
+  }
+}
+
+
+@media(max-width: 768px) {
+  .main-page-counter {
+    flex-direction: column;
+    margin: 20px 0 10px 50px;
+  }
+
+  .counter {
+    font-size: 50px;
+    letter-spacing: -3px;
+  }
+}
+

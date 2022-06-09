@@ -4,13 +4,14 @@ import {setPersonId, setPersonName, setPersonNumber,} from "../../../store/share
 import {setCreatePerson, setEditPerson, setInPerson} from "../../../store/sharedUIElements/donate";
 import {deleteRequest} from "../../../utils/deleteRequest";
 import {getRequest} from "../../../utils/getRequest";
+import {Button} from "antd";
+import DeleteConfirmPopup from "../../SharedElements/DeleteConfirmPopup";
 
 const InPerson = () => {
     const dispatch = useDispatch();
 
     const inPersonText = useSelector(state => state.i18n.donate.inPersonText);
     const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveEntryButton);
     const deleteEntryButton = useSelector(state => state.i18n.buttons.deleteButton);
 
     const inPerson = useSelector(state => state.donate.inPerson);
@@ -33,17 +34,18 @@ const InPerson = () => {
     }
 
     return (
-        <div className="in-person-container">
-            {inPersonText}:
+        <div className="donate-page--in-person-container">
+            <p className="donate-page--method-name">{inPersonText}:</p>
             {inPerson?.map(person =>
                 <React.Fragment key={person._id}>
                     <p key={person["mobile-number"]}>{person.person}, {person["mobile-number"]}</p>
                     {isLoggedIn && <>
-                        <button onClick={() => handlePersonEditClick(person)}>{editButton}</button>
-                        <button onClick={() => handlePersonDelete(person._id)}>{deleteEntryButton}</button>
+                        <Button style={{margin: "5px"}} onClick={() => handlePersonEditClick(person)}>{editButton}</Button>
+                        <DeleteConfirmPopup confirmDeleteHandler={() => handlePersonDelete(person._id)}><Button style={{margin: "5px"}} danger>{deleteEntryButton}</Button></DeleteConfirmPopup>
                     </>}
                 </React.Fragment>)}
-            {isLoggedIn && <button onClick={() => dispatch(setCreatePerson(true))}>{saveEntryButton}</button>}
+            <br/>
+            {isLoggedIn && <Button shape="circle" onClick={() => dispatch(setCreatePerson(true))}>+</Button>}
         </div>
     )
 }

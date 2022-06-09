@@ -1,0 +1,43 @@
+.reports-container {
+  &--card {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 40px;
+  }
+
+  &--buttons {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+    & > button {
+      margin: 10px;
+    }
+  }
+
+  .ant-card-body {
+    height: revert;
+  }
+
+  &--form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &--inputs {
+      display: flex;
+      flex-direction: row;
+      width: 50%;
+      margin: 20px 0 10px 0;
+    }
+
+    .ant-upload-list-picture-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+}
+
+

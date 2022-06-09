@@ -21,9 +21,9 @@ const DeleteConfirmPopup = (props) => {
             })
     })
 
-    const confirm = (e) => {
+    const confirm = (id = '', bank = '') => {
         message.success(confirmLabel);
-        props.confirmDeleteHandler();
+        props.confirmDeleteHandler(id, bank);
     };
 
     const cancel = (e) => {

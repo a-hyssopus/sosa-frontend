@@ -16,8 +16,11 @@ import {
     setReportText,
     setReportTitle
 } from "../../store/reports/reports";
-import LanguageDropdown from "../LanguageDropdown";
+import LanguageDropdown from "../SharedElements/LanguageDropdown";
 import UploadForm from "./UploadForm";
+import {Input} from "antd";
+
+import "./style.scss"
 
 const Editor = ({toEdit, toCreate}) => {
     const dispatch = useDispatch();
@@ -56,8 +59,8 @@ const Editor = ({toEdit, toCreate}) => {
         }
     }, [activeLanguage])
 
-    const handleLanguageChange = event => {
-        setReportToAddLanguage(event.target.value);
+    const handleLanguageChange = value => {
+        setReportToAddLanguage(value);
     }
 
     const saveButtonHandler = () => {
@@ -100,27 +103,34 @@ const Editor = ({toEdit, toCreate}) => {
     }
 
     return (
-        <div>
-            <input type="text"
-                   placeholder="Title"
-                   value={toEdit ? report[activeLanguage]?.title : title}
-                   autoFocus
-                   onChange={toEdit ? event => dispatch(setReportTitle({
-                       language: reportToAddLanguage,
-                       title: event.target.value
-                   })) : event => setTitle(event.target.value)}/>
-            <LanguageDropdown handleLanguageChange={handleLanguageChange}/>
+        <div className="reports-container--form-container">
+            <div className="reports-container--form-container--inputs">
+                <Input type="text"
+                       placeholder="Title"
+                       value={toEdit ? report[activeLanguage]?.title : title}
+                       autoFocus
+                       onChange={toEdit ? event => dispatch(setReportTitle({
+                           language: reportToAddLanguage,
+                           title: event.target.value
+                       })) : event => setTitle(event.target.value)}/>
+                <LanguageDropdown handleLanguageChange={handleLanguageChange} activeLanguage={activeLanguage}/>
+            </div>
+            <div className="reports-container--form-container--inputs">
+
             <label>{catsLabel}</label>
-            <input
+            <Input
                 type="number"
                 min="0"
                 value={toEdit ? report.sterilized?.cats : cats}
                 onChange={toEdit ? event => dispatch(setCats(event.target.value)) : event => setCatsLocal(event.target.value)}/>
+            </div>
+            <div className="reports-container--form-container--inputs">
             <label>{dogsLabel}</label>
-            <input type="number"
+            <Input type="number"
                    min="0"
                    value={toEdit ? report.sterilized?.dogs : dogs}
                    onChange={toEdit ? event => dispatch(setDogs(event.target.value)) : event => setDogsLocal(event.target.value)}/>
+            </div>
             <label>{periodLabel}</label>
             <ReportDatePicker/>
             <textarea value={toEdit ? report[activeLanguage]?.text : text} placeholder="Description"

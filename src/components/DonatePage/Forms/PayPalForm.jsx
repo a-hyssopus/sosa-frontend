@@ -3,15 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {getRequest} from "../../../utils/getRequest";
 
 import {setPaypalCountryLabel, setPaypalEmailLabel} from "../../../store/i18n/i18n";
-import {
-    setCountry,
-    setEmail,
-    setEmptyPaypalInfo
-} from "../../../store/sharedUIElements/donateInfoToUpdate";
+import {setCountry, setEmail, setEmptyPaypalInfo} from "../../../store/sharedUIElements/donateInfoToUpdate";
 import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/sharedUIElements/donate";
 import {postRequest} from "../../../utils/postRequest";
+import {Button, Input} from "antd";
 
-const PayPalForm = ({ toEdit, toCreate }) => {
+const PayPalForm = ({toEdit, toCreate}) => {
     const dispatch = useDispatch();
 
     const email = useSelector(state => state.donateInfoToUpdate.paypal.email);
@@ -64,14 +61,23 @@ const PayPalForm = ({ toEdit, toCreate }) => {
     }
 
     return (
-        <div>
-            <label>{emailLabel}</label>
-            <input type="text" value={email} onChange={event => dispatch(setEmail(event.target.value))} autoFocus/>
-            <label>{countryLabel}</label>
-            <input type="text" value={country} onChange={event => dispatch(setCountry(event.target.value))}/>
-            {toEdit && <button onClick={handleSaveEditButton}>{saveEntryButton}</button>}
-            {toCreate && <button onClick={handleSaveCreateButton}>{saveEntryButton}</button>}
-            <button onClick={handleCancelButton}>{cancelButton}</button>
+        <div className="donate-page--paypal-form">
+            <div className="donate-page--paypal-form--form">
+                <div className="label-input-container">
+                    <label>{emailLabel}</label>
+                    <Input type="email" value={email} onChange={event => dispatch(setEmail(event.target.value))}
+                           autoFocus/>
+                </div>
+                <div className="label-input-container">
+                    <label>{countryLabel}</label>
+                    <Input type="text" value={country} onChange={event => dispatch(setCountry(event.target.value))}/>
+                </div>
+            </div>
+            <div className="donate-page--buttons-container">
+                <Button onClick={handleCancelButton}>{cancelButton}</Button>
+                <Button type="primary"
+                        onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>
+            </div>
         </div>
     )
 }

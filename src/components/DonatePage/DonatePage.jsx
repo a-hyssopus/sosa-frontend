@@ -11,6 +11,8 @@ import CardForm from "./Forms/CardForm";
 import PayPalForm from "./Forms/PayPalForm";
 import PersonForm from "./Forms/PersonForm";
 
+
+
 const DonatePage = () => {
     const dispatch = useDispatch();
 
@@ -41,7 +43,7 @@ const DonatePage = () => {
     }, [activeLanguage]);
 
     return (
-        <div>
+        <>
             {!(isEditCard || isCreateCard || isEditPaypal || isCreatePaypal || isEditPerson || isCreatePerson) && <DonatePageInfo/>}
             {isEditCard && isLoggedIn && <CardForm toEdit/>}
             {isCreateCard && isLoggedIn && <CardForm toCreate/>}
@@ -49,7 +51,7 @@ const DonatePage = () => {
             {isCreatePaypal && isLoggedIn && <PayPalForm toCreate/>}
             {isEditPerson && isLoggedIn && <PersonForm toEdit/>}
             {isCreatePerson && isLoggedIn && <PersonForm toCreate/>}
-        </div>
+        </>
     )
 }
 

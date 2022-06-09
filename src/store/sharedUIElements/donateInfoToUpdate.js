@@ -1,11 +1,31 @@
 import {createSlice} from '@reduxjs/toolkit'
+const defaultPrimaryColor = {
+    r: '4',
+    g: '193',
+    b: '126',
+    a: '1'
+};
+
+const defaultSecondaryColor = {
+    r: '241',
+    g: '46',
+    b: '19',
+    a: '0.8'
+}
+
+const defaultTextColor = {
+    r: '39',
+    g: '37',
+    b: '37',
+    a: '1'
+}
 
 const initialState = {
     card: {
         bankName: '',
-        primaryColor: '',
-        secondaryColor: '',
-        textColor: '',
+        primaryColor: defaultPrimaryColor,
+        secondaryColor: defaultSecondaryColor,
+        textColor: defaultTextColor,
         link: '',
         count: '',
         person: '',
@@ -40,15 +60,14 @@ export const donateInfoToUpdateSlice = createSlice({
             state.card.id = payload;
         }, setEmptyCardInfo: (state) => {
             state.card.name = '';
-            state.card.primaryColor = '';
-            state.card.secondaryColor = '';
-            state.card.textColor = '';
+            state.card.primaryColor = defaultPrimaryColor;
+            state.card.secondaryColor = defaultSecondaryColor;
+            state.card.textColor = defaultTextColor;
             state.card.link = '';
             state.card.count = '';
             state.card.person = '';
             state.card.currency = '';
             state.card.id = '';
-            // state.card = {} ???
         }, setEmail: (state, {payload}) => {
             state.paypal.email = payload
         }, setCountry: (state, {payload}) => {

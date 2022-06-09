@@ -4,6 +4,8 @@ import {setCountry, setEmail, setPaypalId} from "../../../store/sharedUIElements
 import {setCreatePaypal, setEditPaypal, setPaypal} from "../../../store/sharedUIElements/donate";
 import {deleteRequest} from "../../../utils/deleteRequest";
 import {getRequest} from "../../../utils/getRequest";
+import {Button} from "antd";
+import DeleteConfirmPopup from "../../SharedElements/DeleteConfirmPopup";
 
 const Paypal = () => {
     const dispatch = useDispatch();
@@ -12,7 +14,6 @@ const Paypal = () => {
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveEntryButton);
     const deleteEntryButton = useSelector(state => state.i18n.buttons.deleteButton);
 
     const handlePaypalEditClick = (count) => {
@@ -34,16 +35,18 @@ const Paypal = () => {
     }
 
     return (
-        <div className="paypal-container">
+        <div className="donate-page--paypal-container">
+            <p className="donate-page--method-name">PayPal</p>
             {paypal?.counts?.map(count =>
                 <React.Fragment key={count._id}><p key={count.email}>
                     {count.country}: {count.email}</p>
                     {isLoggedIn && <>
-                        <button onClick={() => handlePaypalEditClick(count)}>{editButton}</button>
-                        <button onClick={() => handlePaypalDelete(count._id)}>{deleteEntryButton}</button>
+                        <Button style={{margin: "5px"}} onClick={() => handlePaypalEditClick(count)}>{editButton}</Button>
+                        <DeleteConfirmPopup confirmDeleteHandler={() => handlePaypalDelete(count._id)}><Button style={{margin: "5px"}} danger>{deleteEntryButton}</Button></DeleteConfirmPopup>
                     </>}
                 </React.Fragment>)}
-            {isLoggedIn && <button onClick={() => dispatch(setCreatePaypal(true))}>{saveEntryButton}</button>}
+            <br/>
+            {isLoggedIn && <Button shape="circle" onClick={() => dispatch(setCreatePaypal(true))}>+</Button>}
         </div>
     )
 }

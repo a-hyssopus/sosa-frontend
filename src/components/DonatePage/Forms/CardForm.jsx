@@ -2,15 +2,12 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {
+    setBankName,
     setCount,
     setCurrency,
     setEmptyCardInfo,
     setLink,
-    setBankName,
-    setPerson,
-    setPrimaryColor,
-    setSecondaryColor,
-    setTextColor,
+    setPerson, setPrimaryColor, setSecondaryColor, setTextColor,
 } from "../../../store/sharedUIElements/donateInfoToUpdate";
 
 import {
@@ -30,18 +27,22 @@ import {setBanks, setCreateCard, setEditCard} from "../../../store/sharedUIEleme
 import {getRequest} from "../../../utils/getRequest";
 import {postRequest} from "../../../utils/postRequest";
 
-const CardForm = ({ toEdit, toCreate }) => {
+import "./style.scss"
+import {Button, Input} from "antd";
+import ColorPicker from "./ColorPicker";
+
+const CardForm = ({ toEdit }) => {
     const dispatch = useDispatch();
 
-    const bankName = useSelector(state =>  state.donateInfoToUpdate.card.bankName);
-    const primaryColor = useSelector(state =>  state.donateInfoToUpdate.card.primaryColor);
-    const secondaryColor = useSelector(state =>  state.donateInfoToUpdate.card.secondaryColor);
-    const textColor = useSelector(state =>  state.donateInfoToUpdate.card.textColor);
-    const link = useSelector(state =>  state.donateInfoToUpdate.card.link);
-    const count = useSelector(state =>  state.donateInfoToUpdate.card.count);
-    const person = useSelector(state =>  state.donateInfoToUpdate.card.person);
-    const currency = useSelector(state =>  state.donateInfoToUpdate.card.currency);
-    const id = useSelector(state =>  state.donateInfoToUpdate.card.id);
+    const bankName = useSelector(state => state.donateInfoToUpdate.card.bankName);
+    const primaryColor = useSelector(state => state.donateInfoToUpdate.card.primaryColor);
+    const secondaryColor = useSelector(state => state.donateInfoToUpdate.card.secondaryColor);
+    const textColor = useSelector(state => state.donateInfoToUpdate.card.textColor);
+    const link = useSelector(state => state.donateInfoToUpdate.card.link);
+    const count = useSelector(state => state.donateInfoToUpdate.card.count);
+    const person = useSelector(state => state.donateInfoToUpdate.card.person);
+    const currency = useSelector(state => state.donateInfoToUpdate.card.currency);
+    const id = useSelector(state => state.donateInfoToUpdate.card.id);
 
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
     const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
@@ -98,7 +99,7 @@ const CardForm = ({ toEdit, toCreate }) => {
             .then(res => {
                 dispatch(setEditCard(false))
                 dispatch(setBanks(res.banks))
-                dispatch(  setEmptyCardInfo())
+                dispatch(setEmptyCardInfo())
             })
     }
 
@@ -127,28 +128,47 @@ const CardForm = ({ toEdit, toCreate }) => {
     }
 
     return (
-        <div>
-            <p>{attentionText}</p>
-            <label>{bankNameLabel}</label>
-            <input type="text" value={bankName} onChange={event => dispatch(setBankName(event.target.value))} autoFocus/>
-            <label>{primaryColorLabel}</label>
-            <input type="text" value={primaryColor} onChange={event => dispatch(setPrimaryColor(event.target.value))}/>
-            <label>{secondaryColorLabel}</label>
-            <input type="text" value={secondaryColor}
-                   onChange={event => dispatch(setSecondaryColor(event.target.value))}/>
-            <label>{textColorLabel}</label>
-            <input type="text" value={textColor} onChange={event => dispatch(setTextColor(event.target.value))}/>
-            <label>{linkLabel}</label>
-            <input type="text" value={link} onChange={event => dispatch(setLink(event.target.value))}/>
-            <label>{cardHolderLabel}</label>
-            <input type="text" value={count} onChange={event => dispatch(setCount(event.target.value))}/>
-            <label>{cardNumberLabel}</label>
-            <input type="text" value={person} onChange={event => dispatch(setPerson(event.target.value))}/>
-            <label>{cardCurrencyLabel}</label>
-            <input type="text" value={currency} onChange={event => dispatch(setCurrency(event.target.value))}/>
-            {toEdit && <button onClick={handleSaveEditButton}>{saveEntryButton}</button>}
-            {toCreate && <button onClick={handleSaveCreateButton}>{saveEntryButton}</button>}
-            <button onClick={handleCancelButton}>{cancelButton}</button>
+        <div className="donate-page--card-form">
+            <p style={{width: "50%"}}><span style={{color: "red"}}>*</span> {attentionText}</p>
+            <div className="donate-page--card-form--form">
+                <div className="label-input-container">
+                    <label>{bankNameLabel} <span style={{color: "red"}}> *</span> </label>
+                    <Input type="text" value={bankName} onChange={event => dispatch(setBankName(event.target.value))}
+                           autoFocus/>
+                </div>
+                <div className="label-input-container">
+                    <label>{primaryColorLabel}</label>
+                    <ColorPicker color={primaryColor} setColor={color => dispatch(setPrimaryColor(color))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{secondaryColorLabel}</label>
+                    <ColorPicker color={secondaryColor} setColor={color => dispatch(setSecondaryColor(color))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{textColorLabel}</label>
+                    <ColorPicker color={textColor} setColor={color => dispatch(setTextColor(color))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{linkLabel}</label>
+                    <Input type="text" value={link} onChange={event => dispatch(setLink(event.target.value))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{cardHolderLabel}<span style={{color: "red"}}>*</span> </label>
+                    <Input type="text" value={person} onChange={event => dispatch(setPerson(event.target.value))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{cardNumberLabel}<span style={{color: "red"}}>*</span> </label>
+                    <Input type="text" value={count} onChange={event => dispatch(setCount(event.target.value))}/>
+                </div>
+                <div className="label-input-container">
+                    <label>{cardCurrencyLabel}<span style={{color: "red"}}>*</span> </label>
+                    <Input type="text" value={currency} onChange={event => dispatch(setCurrency(event.target.value))}/>
+                </div>
+            </div>
+            <div className="donate-page--buttons-container">
+                <Button onClick={handleCancelButton}>{cancelButton}</Button>
+                {<Button type="primary" onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>}
+            </div>
         </div>
     )
 }

@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   right: 35px;
-  top: 5px;
+  top: 10px;
   &--active {
     font-weight: bold;
   }
@@ -20,11 +20,11 @@
 }
 
 .logo {
-  width: 250px;
+  width: 200px;
 }
 
 .header {
-  margin: 35px;
+  margin: 10px 35px 15px 35px;
   font-size: 30px;
   display: flex;
   flex-direction: row;
@@ -37,4 +37,8 @@
   }
 }
 
-
+@media(max-width: 1024px) {
+  .logo {
+    width: 150px;
+  }
+}

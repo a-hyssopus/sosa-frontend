@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {
-    setSaveEntryButton,
+    setCancelButton,
     setDeleteButton,
     setDonateButton,
     setEditButton,
     setNavigationButtons,
     setSaveButton,
-    setSterilizationText, setCancelButton
+    setSaveEntryButton,
+    setSterilizationText
 } from "../../store/i18n/i18n"
 
 import instagram from "../../assets/instagramWhite.png"
@@ -46,9 +47,9 @@ const Navbar = () => {
 
     return (
         <div className="navigation-container">
-            <TwoColouredButton primaryColor="#F4F8FB"
-                               secondaryColor="#F4F8FB80"
-                               textColor="#303030"
+            <TwoColouredButton primaryColor={{r: 244, g: 248, b: 251, a: 1}}
+                               secondaryColor={{r: 244, g: 248, b: 251, a: 0.5}}
+                               textColor={{r: 48, g: 48, b: 48, a: 1}}
                                linkTo={"/donate"}
                                text={donateButton}
                                src={heart}/>

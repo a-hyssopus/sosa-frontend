@@ -10,6 +10,7 @@ import {dateFormat} from "../../utils/dateFormat";
 import moment from "moment";
 import {setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n/i18n";
 import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
+import {Button} from "antd";
 
 const Report = () => {
     const dispatch = useDispatch();
@@ -65,9 +66,9 @@ const Report = () => {
             {periodLabel}: {report.period?.length && report.period?.map(date => moment(date).format(dateFormat))}
             <p>{text}</p>
             {report?.images?.length && report?.images?.map(image => <img key={image.uid} src={image?.url}/>)}
-            <button onClick={handleEdit}>{editButton}</button>
+            <Button onClick={handleEdit}>{editButton}</Button>
             <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
-                <button>{deleteButton}</button>
+                <Button>{deleteButton}</Button>
             </DeleteConfirmPopup>
         </>
     );

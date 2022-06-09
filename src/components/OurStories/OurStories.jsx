@@ -6,13 +6,15 @@ import {getRequest} from "../../utils/getRequest";
 import TextEditor from "./TextEditor";
 import StoryCard from "./Card";
 
+import "./style.scss"
+import {Button} from "antd";
+
 const OurStories = () => {
     const dispatch = useDispatch();
 
     const stories = useSelector(state => state.ourStories.stories);
 
-    const activeLanguage = useSelector((state) => state.i18n.activeLanguage)
-    const saveEntryButton = useSelector((state) => state.i18n.buttons.saveEntryButton)
+    const activeLanguage = useSelector((state) => state.i18n.activeLanguage);
     const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode);
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
@@ -20,15 +22,15 @@ const OurStories = () => {
         getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStories(res)))
     }, [activeLanguage])
-    // }, [activeLanguage, isCreatePostMode])
 
     const handleSaveEntryButtonClick = () => {
         dispatch(setCreatePostMode(true));
     }
 
     const readStoriesLayout = () => (
-        <>
-            {isLoggedIn && <button onClick={handleSaveEntryButtonClick}>{saveEntryButton}</button>}
+        <div className="stories-container">
+            <div className="stories-container--cards">
+            {isLoggedIn && <Button size="large" onClick={handleSaveEntryButtonClick} shape="circle">+</Button>}
             {stories.length && (
                 stories.map(el => (el[activeLanguage] && <StoryCard
                     date={el.date}
@@ -36,13 +38,14 @@ const OurStories = () => {
                     id={el._id}
                     title={el?.[activeLanguage]?.title}
                     text={el?.[activeLanguage]?.text}/>)))}
-        </>
+            </div>
+        </div>
     )
 
     return (
-        <div>
+        <>
             {isCreatePostMode ? <TextEditor/> : readStoriesLayout()}
-        </div>)
+        </>)
 }
 
 export default OurStories;

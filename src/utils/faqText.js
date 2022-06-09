@@ -1,8 +1,6 @@
 export const faqDescriptionText = {
-    en: "This part of the site is devoted to answers to frequently asked questions from both those who financially support the organization and volunteers.\n" +
-        "So, if you want to become a volunteer and do not know where to start, this section will help you navigate.",
-    ro: "Această parte a site-ului este dedicată răspunsurilor la întrebările frecvente atât de la cei care susțin financiar organizația, cât și de la voluntari.\n" +
-        "Deci, dacă vreți să deveniți voluntar și nu știți de unde să începeți, această secțiune vă va ajuta să navigați.",
+    en: "This part of the site is devoted to answers to frequently asked questions from both those who financially support the organization and volunteers. So, if you want to become a volunteer and do not know where to start, this section will help you navigate.",
+    ro: "Această parte a site-ului este dedicată răspunsurilor la întrebările frecvente atât de la cei care susțin financiar organizația, cât și de la voluntari. Deci, dacă vreți să deveniți voluntar și nu știți de unde să începeți, această secțiune vă va ajuta să navigați.",
     ru: "Эта часть сайта посвящена ответам на часто задаваемые вопросы как от тех, кто финансово поддерживает организацию, так и от волонтёров.\n" +
         "Так, если Вы хотите стать волонтёром и не знаете, с чего начать, данный раздел поможет Вам сориентироваться."
 }
@@ -19,7 +17,7 @@ export const listText = {
             question: "What is the system for issuing money for sterilizations? What is the maximum amount one person can receive?",
             answer: "The organization announces the giveaway in a Facebook group (circle with an f in the navigation bar). Volunteers in the comments write about how many cats or dogs they plan to sterilize, whether these animals are pregnant at the moment and their city. Then the group reserves the amount necessary for the operation.\n" +
                 "The group requires confirmation from the veterinarian (photo after the operation) with a record of the waste, signature and seal.\n" +
-                "Whenever possible, SOSA pays money directly to the veterinarian to avoid money theft by unscrupulous people. Otherwise, the volunteer pays for the sterilization from their own funds, after which the group returns them.\n" +
+                "Whenever possible, SOSA pays money directly to the veterinarian to avoid money theft by unscrupulous people. Otherwise, the volunteer pays for the sterilization from their own funds, after which the group returns them.\n\n" +
                 "The maximum amount for sterilization of a cat or cat is 300 lei.\n" +
                 "The maximum amount for sterilization of a dog or male is 450 lei."
         },
