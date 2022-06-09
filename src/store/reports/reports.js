@@ -8,7 +8,8 @@ const initialState = {
         sterilized: {
             cats: 0,
             dogs: 0
-        }
+        },
+        money: 0
     },
     isEditReportMode: false,
     isCreateReportMode: false,

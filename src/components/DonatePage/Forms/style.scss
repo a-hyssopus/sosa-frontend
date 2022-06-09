@@ -1,5 +1,4 @@
 .donate-page {
-
   &--card-form {
     display: flex;
     flex-direction: column;
@@ -61,13 +60,7 @@
   width: 100%;
   margin: 20px auto;
 
-  label {
-    display: table-cell;
-    text-align: left;
-    margin: 10px;
-  }
-
-  input {
+  label, input {
     display: table-cell;
     text-align: left;
     margin: 10px;

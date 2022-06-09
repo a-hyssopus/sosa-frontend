@@ -7,7 +7,10 @@ import {
     setCurrency,
     setEmptyCardInfo,
     setLink,
-    setPerson, setPrimaryColor, setSecondaryColor, setTextColor,
+    setPerson,
+    setPrimaryColor,
+    setSecondaryColor,
+    setTextColor,
 } from "../../../store/sharedUIElements/donateInfoToUpdate";
 
 import {
@@ -31,7 +34,7 @@ import "./style.scss"
 import {Button, Input} from "antd";
 import ColorPicker from "./ColorPicker";
 
-const CardForm = ({ toEdit }) => {
+const CardForm = ({toEdit}) => {
     const dispatch = useDispatch();
 
     const bankName = useSelector(state => state.donateInfoToUpdate.card.bankName);
@@ -167,7 +170,8 @@ const CardForm = ({ toEdit }) => {
             </div>
             <div className="donate-page--buttons-container">
                 <Button onClick={handleCancelButton}>{cancelButton}</Button>
-                {<Button type="primary" onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>}
+                {<Button type="primary"
+                         onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>}
             </div>
         </div>
     )

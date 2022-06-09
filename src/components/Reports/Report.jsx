@@ -1,19 +1,25 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 
-import Editor from "./Editor";
 import {getRequest} from "../../utils/getRequest";
 import {setEditReportMode, setReport, setReports} from "../../store/reports/reports";
 import {deleteRequest} from "../../utils/deleteRequest";
-import {dateFormat} from "../../utils/dateFormat";
-import moment from "moment";
-import {setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n/i18n";
-import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
+import {setAnimalsLabel, setCatsLabel, setDogsLabel, setMoneyLabel, setPeriodLabel} from "../../store/i18n/i18n";
+
+import Editor from "./Editor";
+
 import {Button} from "antd";
+import moment from "moment";
+import {dateFormat} from "../../utils/dateFormat";
+import CustomImage from "./Image";
+import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
+import Spinner from "../SharedElements/Spinner";
 
 const Report = () => {
     const dispatch = useDispatch();
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const report = useSelector(state => state.reports.report);
     const isEditReportMode = useSelector(state => state.reports.isEditReportMode);
@@ -21,6 +27,8 @@ const Report = () => {
     const catsLabel = useSelector(state => state.i18n.reports["cats-label"]);
     const dogsLabel = useSelector(state => state.i18n.reports["dogs-label"]);
     const periodLabel = useSelector(state => state.i18n.reports["period-label"]);
+    const moneyLabel = useSelector(state => state.i18n.reports["money-label"]);
+    const animalsLabel = useSelector(state => state.i18n.reports["animals-label"]);
 
     const editButton = useSelector(state => state.i18n.buttons.editButton);
     const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
@@ -33,7 +41,8 @@ const Report = () => {
 
     useEffect(() => {
         getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => dispatch(setReport(res)));
+            .then(res => dispatch(setReport(res)))
+            .then(() => setIsLoading(false))
     }, [isEditReportMode]);
 
     useEffect(() => {
@@ -42,12 +51,12 @@ const Report = () => {
                 dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
                 dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
                 dispatch(setPeriodLabel(res[activeLanguage].reports["period-label"]))
+                dispatch(setMoneyLabel(res[activeLanguage].reports["money-label"]))
+                dispatch(setAnimalsLabel(res[activeLanguage].reports["animals-label"]))
             })
     }, [activeLanguage])
 
     const handleEdit = () => {
-        // getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
-        //     .then(() => dispatch(setEditReportMode(true)))
         dispatch(setEditReportMode(true))
     };
 
@@ -57,26 +66,41 @@ const Report = () => {
                 .then(res => dispatch(setReports(res))));
     };
 
-
     const readReportLayout = () => (
-        <>
-            <h1>{title}</h1>
-            {catsLabel}: {cats}
-            {dogsLabel}: {dogs}
-            {periodLabel}: {report.period?.length && report.period?.map(date => moment(date).format(dateFormat))}
-            <p>{text}</p>
-            {report?.images?.length && report?.images?.map(image => <img key={image.uid} src={image?.url}/>)}
-            <Button onClick={handleEdit}>{editButton}</Button>
-            <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
-                <Button>{deleteButton}</Button>
-            </DeleteConfirmPopup>
-        </>
+        <div className="report-container--parent">
+            {isLoading ? <Spinner/> : (
+                <>
+                    <h1>{title}</h1>
+                    <div className="report-container">
+                        <div className="report-container--info">
+                            <p><span>{periodLabel}</span>: {moment(report?.period?.[0]).format(dateFormat)} — {moment(report?.period?.[1]).format(dateFormat)}</p>
+                            <p><span>{animalsLabel}</span>:</p>
+                            <ul>
+                                <li>{catsLabel} — {cats}</li>
+                                <li>{dogsLabel} — {dogs}</li>
+                            </ul>
+                            <p><span>{moneyLabel}</span>: {report.money} $</p>
+                        </div>
+                        <div className="report-container--info">
+                            <p>{text}</p>
+                        </div>
+                    </div>
+                    <CustomImage/>
+                    <div className="report-container--buttons">
+                        <Button onClick={handleEdit}>{editButton}</Button>
+                        <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
+                            <Button danger>{deleteButton}</Button>
+                        </DeleteConfirmPopup>
+                    </div>
+                </>)
+            }
+        </div>
     );
 
     return (
-        <div>
+        <>
             {isEditReportMode ? <Editor toEdit/> : readReportLayout()}
-        </div>
+        </>
     )
 }
 

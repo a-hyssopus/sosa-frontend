@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {
     setCancelButton,
@@ -16,20 +16,21 @@ import facebook from "../../assets/facebook-logo.png"
 import heart from "../../assets/heart.png"
 
 import "./style.scss";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {getRequest} from "../../utils/getRequest";
 import TwoColouredButton from "../SharedElements/TwoColouredButton";
 
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+
     const navbarValues = useSelector(state => state.i18n.navbar)
     const activeLanguage = useSelector(state => state.i18n.activeLanguage)
     const donateButton = useSelector(state => state.i18n.buttons.donateButton)
-    const dispatch = useDispatch()
 
     const routes = ["home", "our-stories", "faq", "reports", "about"];
     const facebookPageURL = "https://www.facebook.com/sosanimalsmd/";
     const instagramPageURL = "https://www.instagram.com/sosanimals.md/";
-    const [activeTab, setActiveTab] = useState("Home");
 
     useEffect(() => {
         getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
@@ -45,6 +46,8 @@ const Navbar = () => {
             })
     }, [activeLanguage])
 
+    console.log(routes.indexOf(location.pathname))
+
     return (
         <div className="navigation-container">
             <TwoColouredButton primaryColor={{r: 244, g: 248, b: 251, a: 1}}
@@ -54,10 +57,9 @@ const Navbar = () => {
                                text={donateButton}
                                src={heart}/>
             <ul>
-                {navbarValues.map((element, index) => <li key={element}><Link to={`/${routes[index]}`}
-                                                                              className={element === activeTab ? "navigation-tab--active" : ""}
-                                                                              onClick={() => setActiveTab(element)}>{element}</Link>
-                    {/*TODO fix style bug on changing language*/}
+                {navbarValues.map((element, index) => <li key={element}>
+                    <Link to={`/${routes[index]}`}
+                          className={index === routes.indexOf(location.pathname.slice(1)) ? "navigation-tab--active" : ""}>{element}</Link>
                 </li>)}
             </ul>
             <div className="navigation-icons">

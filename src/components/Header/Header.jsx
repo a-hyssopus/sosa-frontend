@@ -6,10 +6,12 @@ import {Link} from "react-router-dom";
 
 import "./style.scss"
 import logo from "../../assets/logo.png"
-import {useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const Header = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    const activeLanguage = useSelector(state => state.i18n.activeLanguage)
 
     const languages = ['Ro', 'En', 'Ru'];
 
@@ -30,7 +32,7 @@ const Header = () => {
                     {languages.map(language => (
                         <li key={language}><Button
                             onClick={() => setUILanguage(language.toLowerCase())}
-                            // className={language === activeLanguage ? "language-buttons--active" : ""}
+                            className={language.toLowerCase() === activeLanguage ? "language-buttons--active" : ""}
                             // TODO change CSS class logic
                             type="default">{language}</Button></li>
                     ))}

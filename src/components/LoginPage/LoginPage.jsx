@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Cookies from 'js-cookie';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 import {getRequest} from "../../utils/getRequest";
 import {
@@ -13,6 +14,9 @@ import {
     setUsernameText
 } from "../../store/i18n/i18n"
 import {setIsLoggedIn} from "../../store/login/login";
+import {Button, Input} from "antd";
+
+import "./style.scss"
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -45,6 +49,8 @@ const LoginPage = () => {
     }, [activeLanguage]);
 
     const handleLogin = () => {
+        console.log({password, username})
+
         fetch('http://localhost:3001/users/login', {
             method: 'POST',
             'credentials': 'include',
@@ -88,18 +94,25 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="login-page-container">
+        <div className="login-page--container">
             {!isLoggedIn && (<>
-                <label>{usernameText}</label>
-                <input type="text" onChange={(event) => setUsername(event.target.value)}/>
-                <label>{passwordText}</label>
-                <input type="password" onChange={(event) => setPassword(event.target.value)}/>
-                <button onClick={handleLogin}>{loginText}</button>
+                <div className="login-page--container--input-container">
+                    <label>{usernameText}</label>
+                    <Input type="text"
+                           autoFocus
+                           onChange={event => setUsername(event.target.value)}
+                    />
+                </div>
+                <div className="login-page--container--input-container">
+                    <label>{passwordText}</label>
+                    <Input.Password iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} onChange={event => setPassword(event.target.value)}/>
+                </div>
+                <Button type="primary" onClick={handleLogin}>{loginText}</Button>
                 <p>{loginResult}</p>
             </>)
             }
             {isLoggedIn && (
-                <button onClick={handleLogOut}>{logoutText}</button>
+                <Button type="primary" size="large" onClick={handleLogOut}>{logoutText}</Button>
             )}
         </div>
     )

@@ -15,6 +15,8 @@ import Report from "./components/Reports/Report";
 import AboutUs from "./components/AboutUs/AboutUs";
 import FAQ from "./components/FAQ/FAQ";
 
+// TODO wrap App in another container ???
+
 const App = () => (
     <div className='App'>
         <Header/>

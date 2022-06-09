@@ -8,6 +8,15 @@
   height: 100vh;
 }
 
+.App-wrapper {
+  height: 100vh;
+
+  &--fade {
+    background-color: #303030;
+    opacity: 80%;
+  }
+}
+
 .App {
   height: 100vh;
   overflow: auto;
@@ -29,4 +38,20 @@
     }
   }
 }
+
+
+.ant-card {
+  &-body {
+    height: 150px;
+  }
+
+  &-meta-title {
+    font-weight: bold;
+    font-size: 20px;
+    white-space: pre-wrap;
+  }
+}
+
+
+
 

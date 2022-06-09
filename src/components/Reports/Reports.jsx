@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setCreateReportMode, setReport, setReports} from "../../store/reports/reports";
 import ReportCard from "./Card";
@@ -7,9 +7,12 @@ import Editor from "./Editor";
 import {Button} from "antd";
 
 import "./style.scss"
+import Spinner from "../SharedElements/Spinner";
 
 const Reports = () => {
     const dispatch = useDispatch();
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const reports = useSelector((state) => state.reports.reports);
     const isCreateReportMode = useSelector(state => state.reports.isCreateReportMode);
@@ -20,6 +23,7 @@ const Reports = () => {
     useEffect(() => {
         getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setReports(res)))
+            .then(() => setIsLoading(false))
     }, [activeLanguage])
 
     const handleSaveEntryButtonClick = () => {
@@ -35,7 +39,8 @@ const Reports = () => {
     };
 
     const readReportsLayout = () => (
-        <div className="reports-container">
+        <div className={isLoading ? "reports-container reports-container--spinner" : "reports-container"}>
+            {isLoading ? <Spinner/> :
             <div className="reports-container--cards">
                 {isLoggedIn && <Button size="large" shape="circle" onClick={handleSaveEntryButtonClick}>+</Button>}
                 {reports.length && (
@@ -45,7 +50,7 @@ const Reports = () => {
                         src={report?.images[0]?.url}
                         title={report[activeLanguage].title}/>))
                 )}
-            </div>
+            </div>}
         </div>
     )
 

@@ -41,7 +41,9 @@ const initialState = {
     reports: {
         "cats-label": "",
         "dogs-label": "",
-        "period-label": ""
+        "period-label": "",
+        "money-label": "",
+        "animals-label": ""
     },
     login: {
         "username-text": "",
@@ -138,13 +140,16 @@ export const i18nSlice = createSlice({
             state.donate.personFormLabels["number-label"] = payload;
         },
         setCatsLabel: (state, {payload}) => {
-          state.reports["cats-label"] = payload;
+            state.reports["cats-label"] = payload;
         },
         setDogsLabel: (state, {payload}) => {
-          state.reports["dogs-label"] = payload;
+            state.reports["dogs-label"] = payload;
+        },
+        setMoneyLabel: (state, {payload}) => {
+            state.reports["money-label"] = payload;
         },
         setPeriodLabel: (state, {payload}) => {
-          state.reports["period-label"] = payload;
+            state.reports["period-label"] = payload;
         },
         setUsernameText: (state, {payload}) => {
             state.login["username-text"] = payload;
@@ -163,6 +168,9 @@ export const i18nSlice = createSlice({
         },
         setLogoutText: (state, {payload}) => {
             state.login["logout-text"] = payload;
+        },
+        setAnimalsLabel: (state, {payload}) => {
+            state.reports["animals-label"] = payload;
         },
         setDeleteConfirmLabel: (state, {payload}) => {
             state.deleteConfirm.confirm = payload;
@@ -206,6 +214,8 @@ export const {
     setPersonNumberLabel,
     setCatsLabel,
     setDogsLabel,
+    setMoneyLabel,
+    setAnimalsLabel,
     setPeriodLabel,
     setUsernameText,
     setPasswordText,

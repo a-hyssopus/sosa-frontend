@@ -44,7 +44,7 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
                     hoverable
                     onClick={handleReportOnClick}
                     style={{width: 300}}
-                    cover={<img src={src}/>}
+                    cover={<img src={src} style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}/>}
                 >
                     <Meta title={title}/>
                 </Card>

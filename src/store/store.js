@@ -1,4 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
+
 import i18nReducer from "./i18n/i18n.js";
 import sterilizationCounterReducer from "./sharedUIElements/sterilizationCounter";
 import donateReducer from "./sharedUIElements/donate";
@@ -7,6 +8,7 @@ import donateInfoToUpdateReducer from "./sharedUIElements/donateInfoToUpdate";
 import reportsReducer from "./reports/reports";
 import loginReducer from "./login/login";
 import aboutUsReducer from "./aboutUs/aboutUs";
+import backgroundFadeReducer from "./backgroundFade/backgroundFade";
 
 export const store = configureStore({
     reducer: {
@@ -18,6 +20,7 @@ export const store = configureStore({
         login: loginReducer,
         reports: reportsReducer,
         aboutUs: aboutUsReducer,
+        backgroundFade: backgroundFadeReducer
     }
 })
 
