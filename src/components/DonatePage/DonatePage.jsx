@@ -50,7 +50,7 @@ const DonatePage = () => {
     }, [error])
 
     useEffect(() => {
-        getRequest(process.env.REACT_APP_BACKEND_URL/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`process.env.REACT_APP_BACKEND_URL/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setCardsText(res[activeLanguage].donate.cards))
                 dispatch(setInPersonText(res[activeLanguage].donate.payInPerson))

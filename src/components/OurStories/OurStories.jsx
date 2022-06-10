@@ -19,7 +19,7 @@ const OurStories = () => {
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     useEffect(() => {
-        getRequest('process.env.REACT_APP_BACKEND_URL/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStories(res)))
     }, [activeLanguage])
 
