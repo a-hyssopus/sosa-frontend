@@ -28,6 +28,9 @@
 
 @media(max-width: 1024px) {
   .main-page-counter {
+    justify-content: center;
+    margin-inline: 0;
+
     &-text {
       font-size: 25px;
     }

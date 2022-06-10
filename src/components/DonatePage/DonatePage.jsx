@@ -11,7 +11,6 @@ import CardForm from "./Forms/CardForm";
 import PayPalForm from "./Forms/PayPalForm";
 import PersonForm from "./Forms/PersonForm";
 import ErrorWrapper from "../SharedElements/ErrorWrapper";
-import {errorHandler} from "../../utils/errorHandler";
 
 
 const DonatePage = () => {
@@ -33,24 +32,25 @@ const DonatePage = () => {
     useEffect(() => {
         getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details')
             .then(res => {
-                errorHandler(res, [dispatch(setBanks(res.banks)),
-                    dispatch(setPaypal(res["PayPal"])),
-                    dispatch(setInPerson(res.inPerson))])
-                // if (res) {
-                //     dispatch(setBanks(res.banks))
-                //     dispatch(setPaypal(res["PayPal"]))
-                //     dispatch(setInPerson(res.inPerson))
-                // } else {
-                //     const err = new Error("Something went wrong!");
-                //     err.response = res;
-                //     throw err;
-                // }
+                // errorHandler(res, [
+                // dispatch(setBanks(res.banks))
+                // dispatch(setPaypal(res["PayPal"]))
+                // dispatch(setInPerson(res.inPerson))
+                if (res) {
+                    dispatch(setBanks(res.banks))
+                    dispatch(setPaypal(res["PayPal"]))
+                    dispatch(setInPerson(res.inPerson))
+                } else {
+                    const err = new Error("Something went wrong!");
+                    err.response = res;
+                    throw err;
+                }
             })
             .catch(() => setError(true))
     }, [error])
 
     useEffect(() => {
-        getRequest(`process.env.REACT_APP_BACKEND_URL/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setCardsText(res[activeLanguage].donate.cards))
                 dispatch(setInPersonText(res[activeLanguage].donate.payInPerson))
@@ -60,7 +60,8 @@ const DonatePage = () => {
     return (
         <>
             {error && <ErrorWrapper/>}
-            {!error && !(isEditCard || isCreateCard || isEditPaypal || isCreatePaypal || isEditPerson || isCreatePerson) && <DonatePageInfo/>}
+            {!error && !(isEditCard || isCreateCard || isEditPaypal || isCreatePaypal || isEditPerson || isCreatePerson) &&
+                <DonatePageInfo/>}
             {isEditCard && isLoggedIn && <CardForm toEdit/>}
             {isCreateCard && isLoggedIn && <CardForm toCreate/>}
             {isEditPaypal && isLoggedIn && <PayPalForm toEdit/>}

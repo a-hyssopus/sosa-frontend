@@ -31,7 +31,7 @@ const Content = () => {
                 </div>
                 <div className="main-page-content-carousel-container"><CustomCarousel/></div>
             </div>
-            <div className="main-page-content-text main-page-content-text--background"/>
+            {/*<div className="main-page-content-text main-page-content-text--background"/>*/}
         </>
     )
 }
