@@ -103,7 +103,8 @@ const LoginPage = () => {
                 </div>
                 <div className="login-page--container--input-container">
                     <label>{passwordText}</label>
-                    <Input.Password iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} onChange={event => setPassword(event.target.value)}/>
+                    <Input.Password iconRender={(visible) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+                                    onChange={event => setPassword(event.target.value)}/>
                 </div>
                 <Button type="primary" onClick={handleLogin}>{loginText}</Button>
                 <p>{loginResult}</p>
