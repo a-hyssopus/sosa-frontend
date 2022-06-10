@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import Cookies from 'js-cookie';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
+
 
 import {getRequest} from "../../utils/getRequest";
 import {
@@ -49,8 +50,6 @@ const LoginPage = () => {
     }, [activeLanguage]);
 
     const handleLogin = () => {
-        console.log(process.env.REACT_APP_BACKEND_URL + '/users/login');
-
         fetch(process.env.REACT_APP_BACKEND_URL + '/users/login', {
             method: 'POST',
             'credentials': 'include',
@@ -61,19 +60,20 @@ const LoginPage = () => {
             },
             body: JSON.stringify({username, password})
         })
-            .then(() => {
-                const isLoggedInCookie = Cookies.get('isLoggedIn');
-                console.log(isLoggedInCookie);
-                if (isLoggedInCookie) {
-                    setLoginResult(successLoginMessage);
-                    dispatch(setIsLoggedIn(true)); // do I need it?
-                    setTimeout(() => {
-                        history('/home')
-                    }, 2000)
-                } else {
-                    setLoginResult(failLoginMessage)
+            .then((res) => {
+                    if (res.status === 200) {
+                        Cookies.set('isLoggedInCookie', true, {expires: 365})
+                        setLoginResult(successLoginMessage);
+                        dispatch(setIsLoggedIn(true)); // do I need it?
+                        setTimeout(() => {
+                            history('/home')
+                        }, 2000)
+                    } else {
+                        setLoginResult(failLoginMessage)
+                    }
                 }
-            })
+            )
+            .catch(() => setLoginResult(failLoginMessage))
     }
 
     const handleLogOut = () => {
@@ -88,6 +88,7 @@ const LoginPage = () => {
         })
             .then(() => {
                 dispatch(setIsLoggedIn(false))
+                Cookies.remove('isLoggedInCookie')
                 setTimeout(() => {
                     history('/home')
                 }, 2000)
