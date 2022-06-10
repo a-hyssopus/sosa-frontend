@@ -49,6 +49,8 @@ const LoginPage = () => {
     }, [activeLanguage]);
 
     const handleLogin = () => {
+        console.log(process.env.REACT_APP_BACKEND_URL + '/users/login');
+
         fetch(process.env.REACT_APP_BACKEND_URL + '/users/login', {
             method: 'POST',
             'credentials': 'include',
@@ -61,6 +63,7 @@ const LoginPage = () => {
         })
             .then(() => {
                 const isLoggedInCookie = Cookies.get('isLoggedIn');
+                console.log(isLoggedInCookie);
                 if (isLoggedInCookie) {
                     setLoginResult(successLoginMessage);
                     dispatch(setIsLoggedIn(true)); // do I need it?
