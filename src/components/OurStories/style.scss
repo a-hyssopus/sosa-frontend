@@ -38,7 +38,7 @@
   font-size: 1.3rem;
   margin: 35px;
 
-  ul>li {
+  ul > li {
     list-style-type: disc;
     margin-left: 15px;
   }
@@ -79,18 +79,6 @@
     margin-block: 16px;
   }
 }
-//
-//.ant-card {
-//  &-body {
-//    height: 150px;
-//  }
-//
-//  &-meta-title {
-//    font-weight: bold;
-//    font-size: 20px;
-//    white-space: pre-wrap;
-//  }
-//}
 
 .text-editor {
   &-container {
@@ -132,4 +120,36 @@
 
 .ql-container {
   height: 600px;
+}
+
+@media(max-width: 768px) {
+  .stories-container {
+    width: 100%;
+
+    &--cards {
+      justify-content: center;
+    }
+  }
+}
+
+@media(max-width: 426px) {
+  .story-container {
+    width: 90%;
+
+    blockquote {
+      margin: 10px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    span {
+      width: 100%;
+    }
+
+    &--parent {
+      width: 100%;
+    }
+  }
 }

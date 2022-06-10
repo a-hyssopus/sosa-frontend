@@ -114,7 +114,7 @@
   p {
     margin-block: 4px;
 
-    &>span {
+    & > span {
       font-weight: 800;
     }
   }
@@ -172,4 +172,8 @@
   }
 }
 
-
+@media(max-width: 768px) {
+  .reports-container--cards {
+    justify-content: center;
+  }
+}

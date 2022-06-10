@@ -51,8 +51,10 @@ const StoryCard = ({ title, text, id, date }) => {
                 <Card
                     hoverable
                     onClick={handleStoryOnClick}
-                    style={{width: 300}}
-                    cover={src && src.length && <img src={src[0]} style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}/>}
+                    // style={{width: 300}}
+                    cover={src && src.length && <img src={src[0]} className="ant-card--image"
+                                                     // style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}
+                    />}
                 >
                     <Meta title={title} style={{fontWeight: "700"}} description={formattedDate}/>
                 </Card>

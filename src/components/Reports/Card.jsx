@@ -43,8 +43,11 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
                 <Card
                     hoverable
                     onClick={handleReportOnClick}
-                    style={{width: 300}}
-                    cover={<img src={src} style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}/>}
+                    // style={{width: 300}}
+                    cover={<img src={src}
+                                className="ant-card--image"
+                                // style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}
+                    />}
                 >
                     <Meta title={title}/>
                 </Card>

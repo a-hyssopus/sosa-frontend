@@ -18,7 +18,7 @@
 }
 
 .App {
-  height: 100vh;
+  height: 97vh;
 
   & > .link {
     margin: 25px;
@@ -57,6 +57,15 @@
   margin-top: 50px;
 }
 
+@media(max-width: 768px) {
+  .ant-card-bordered {
+    width: 400px;
+  }
 
-
+  .ant-card--image {
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+}
 

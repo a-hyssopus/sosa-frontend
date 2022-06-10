@@ -85,7 +85,7 @@
 
       & > li {
         margin-inline: 18px;
-      font-size: 22px;
+        font-size: 22px;
       }
     }
   }
@@ -98,7 +98,7 @@
     justify-content: center;
 
     > ul {
-      flex-direction: column;
+      //flex-direction: column;
       align-items: center;
       justify-content: center;
       padding-left: 0;
@@ -112,7 +112,7 @@
 
     .navigation-icons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       margin-right: 0;
 
       & > li {
@@ -124,6 +124,19 @@
         margin-inline: 10px;
         margin-bottom: 10px;
       }
+    }
+  }
+}
+
+@media(max-width: 426px) {
+  .navigation-container {
+
+    > ul {
+      flex-direction: column;
+    }
+
+    .navigation-icons {
+      flex-direction: column;
     }
   }
 }
