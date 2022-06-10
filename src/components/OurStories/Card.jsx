@@ -28,20 +28,20 @@ const StoryCard = ({ title, text, id, date }) => {
     const src = text.match(/(?<=\<img src=")(.*?)(?="\>)/);
 
     const handleStoryOnClick = () => {
-        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStory(res)))
     }
 
     const handleEdit = () => {
-        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStory(res)))
             .then(() => dispatch(setEditMode(true)))
             .then(() => history(`/our-stories/${id}`));
     }
 
     const handleDelete = () => {
-        deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
-            .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+        deleteRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
+            .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setStories(res))));
     }
 

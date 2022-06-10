@@ -46,19 +46,19 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
 
     const saveButtonHandler = () => {
         if (isEditPostMode) {
-            postRequest(`http://localhost:3001/blog-posts/${id}`, JSON.stringify({
+            postRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}`, JSON.stringify({
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}
             }), 'PATCH')
-                .then(() => getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`))
+                .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`))
                 .then(res => dispatch(setStory(res)))
                 .then(() => dispatch(setEditMode(false)));
         }
 
         if (isCreatePostMode) {
-            postRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": storyToAddLanguage})}`, JSON.stringify({
+            postRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts?${new URLSearchParams({"lang": storyToAddLanguage})}`, JSON.stringify({
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}, date: new Date().toISOString()
             }), 'POST')
-                .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`))
+                .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`))
                 .then(res => dispatch(setStories(res)))
                 .then(() => dispatch(setCreatePostMode(false)));
         }

@@ -47,7 +47,7 @@ const Editor = ({toEdit, toCreate}) => {
     const id = report._id;
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
                 dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
@@ -72,8 +72,8 @@ const Editor = ({toEdit, toCreate}) => {
                 period: report.period
             })
 
-            postRequest(`http://localhost:3001/reports/${id}`, dataEdit, 'PATCH')
-                .then(() => getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`))
+            postRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}`, dataEdit, 'PATCH')
+                .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`))
                 .then(res => dispatch(setReport(res)))
                 .then(() => dispatch(setEditReportMode(false)))
         }
@@ -86,8 +86,8 @@ const Editor = ({toEdit, toCreate}) => {
                 [reportToAddLanguage]: {title, text}
             })
 
-            postRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`, dataCreate, 'POST')
-                .then(() => getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`))
+            postRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`, dataCreate, 'POST')
+                .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`))
                 .then(res => dispatch(setReports(res)))
                 .then(() => dispatch(setCreateReportMode(false)));
         }

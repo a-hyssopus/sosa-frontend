@@ -21,19 +21,19 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     const handleReportOnClick = () => {
-        getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setReport(res)))
     }
 
     const handleEdit = () => {
-        getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(() => dispatch(setEditReportMode(true)))
             .then(() => history(`/reports/${id}`));
     }
 
     const confirmDeleteHandler = () => {
-        deleteRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
-            .then(() => getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`)
+        deleteRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
+            .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setReports(res))));
     }
 

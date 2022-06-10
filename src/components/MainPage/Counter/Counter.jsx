@@ -34,14 +34,14 @@ const Counter = () => {
     }, []);
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setSterilizationText(res[activeLanguage]["sterilization-text"]))
             })
     }, [activeLanguage]);
 
     const saveCounterHandler = () => {
-        postRequest(`http://localhost:3001/shared-ui-elements/${documentId}`,
+        postRequest(`${process.env.REACT_APP_BACKEND_URL}/shared-ui-elements/${documentId}`,
             JSON.stringify({"sterilization-counter": sterilizationCounter}),
             'PATCH')
             .then(() => dispatch(setIsEditCounter(false)))

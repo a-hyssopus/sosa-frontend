@@ -21,7 +21,7 @@ const Reports = () => {
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setReports(res)))
             .then(() => setIsLoading(false))
     }, [activeLanguage])

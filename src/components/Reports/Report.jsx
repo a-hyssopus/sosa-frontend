@@ -40,13 +40,13 @@ const Report = () => {
     const {sterilized: {cats, dogs} = ""} = report;
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setReport(res)))
             .then(() => setIsLoading(false))
     }, [isEditReportMode]);
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
                 dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
@@ -61,8 +61,8 @@ const Report = () => {
     };
 
     const confirmDeleteHandler = () => {
-        deleteRequest(`http://localhost:3001/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
-            .then(() => getRequest(`http://localhost:3001/reports?${new URLSearchParams({"lang": activeLanguage})}`)
+        deleteRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
+            .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setReports(res))));
     };
 

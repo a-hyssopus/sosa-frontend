@@ -27,7 +27,7 @@ const Paypal = () => {
     }
 
     const handlePaypalDelete = (id) => {
-        deleteRequest(`http://localhost:3001/payment-details/paypal/${id}`, JSON.stringify({}))
+        deleteRequest(`${process.env.REACT_APP_BACKEND_URL}/payment-details/paypal/${id}`, JSON.stringify({}))
             .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setPaypal(res.PayPal))

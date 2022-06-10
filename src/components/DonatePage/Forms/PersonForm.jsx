@@ -22,7 +22,7 @@ const PersonForm = ({toEdit, toCreate}) => {
     const nubmerLabel = useSelector(state => state.i18n.donate.personFormLabels["number-label"]);
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setPersonNameLabel(res[activeLanguage].donate["person-form-labels"]["person-label"]))
                 dispatch(setPersonNumberLabel(res[activeLanguage].donate["person-form-labels"]["number-label"]))
@@ -41,7 +41,7 @@ const PersonForm = ({toEdit, toCreate}) => {
             "mobile-number": personNumber
         }
 
-        postRequest(`http://localhost:3001/payment-details/person/${id}`, JSON.stringify(data), 'PATCH')
+        postRequest(`${process.env.REACT_APP_BACKEND_URL}/payment-details/person/${id}`, JSON.stringify(data), 'PATCH')
             .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setInPerson(res.inPerson))

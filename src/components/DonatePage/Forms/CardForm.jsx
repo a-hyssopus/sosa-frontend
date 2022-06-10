@@ -62,7 +62,7 @@ const CardForm = ({toEdit}) => {
     const attentionText = useSelector(state => state.i18n.donate?.cardFormInfo["attention-text"])
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setBankNamei18n(res[activeLanguage].donate["card-form-labels"]["bank-name"]))
                 dispatch(setPrimaryColori18n(res[activeLanguage].donate["card-form-labels"]["primary-color"]))

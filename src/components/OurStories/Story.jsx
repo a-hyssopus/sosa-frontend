@@ -32,19 +32,19 @@ const Story = () => {
     const formattedDate = date?.slice(0, 10);
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStory(res)));
     }, [activeLanguage]);
 
     const handleEdit = () => {
-        getRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setStory(res)))
             .then(() => dispatch(setEditMode(true)))
     }
 
     const handleDelete = () => {
-        deleteRequest(`http://localhost:3001/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
-            .then(() => getRequest(`http://localhost:3001/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
+        deleteRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
+            .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts?${new URLSearchParams({"lang": activeLanguage})}`)
                 .then(res => dispatch(setStories(res))))
             .then(() => history('/our-stories'))
     }

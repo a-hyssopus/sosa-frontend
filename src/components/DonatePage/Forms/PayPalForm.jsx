@@ -23,7 +23,7 @@ const PayPalForm = ({toEdit, toCreate}) => {
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setPaypalEmailLabel(res[activeLanguage].donate["paypal-form-labels"]["email-label"]))
                 dispatch(setPaypalCountryLabel(res[activeLanguage].donate["paypal-form-labels"]["country-label"]))
@@ -33,7 +33,7 @@ const PayPalForm = ({toEdit, toCreate}) => {
     const handleSaveEditButton = () => {
         const data = {email, country};
 
-        postRequest(`http://localhost:3001/payment-details/paypal/${id}`, JSON.stringify(data), 'PATCH')
+        postRequest(`${process.env.REACT_APP_BACKEND_URL}/payment-details/paypal/${id}`, JSON.stringify(data), 'PATCH')
             .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setEditPaypal(false))
@@ -45,7 +45,7 @@ const PayPalForm = ({toEdit, toCreate}) => {
     const handleSaveCreateButton = () => {
         const data = {email, country};
 
-        postRequest(`http://localhost:3001/payment-details/paypal`, JSON.stringify(data), 'POST')
+        postRequest(`${process.env.REACT_APP_BACKEND_URL}/payment-details/paypal`, JSON.stringify(data), 'POST')
             .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setPaypal(res.PayPal))

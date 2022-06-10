@@ -33,7 +33,7 @@ const Navbar = () => {
     const instagramPageURL = "https://www.instagram.com/sosanimals.md/";
 
     useEffect(() => {
-        getRequest(`http://localhost:3001/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
+        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => {
                 dispatch(setNavigationButtons(res[activeLanguage].navbar))
                 dispatch(setDonateButton(res[activeLanguage]["donate-button"]))
