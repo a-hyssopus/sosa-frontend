@@ -49,8 +49,6 @@ const LoginPage = () => {
     }, [activeLanguage]);
 
     const handleLogin = () => {
-        console.log({password, username})
-
         fetch(process.env.REACT_APP_BACKEND_URL + '/users/login', {
             method: 'POST',
             'credentials': 'include',
