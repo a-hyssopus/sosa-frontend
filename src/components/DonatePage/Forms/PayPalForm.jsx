@@ -34,7 +34,7 @@ const PayPalForm = ({toEdit, toCreate}) => {
         const data = {email, country};
 
         postRequest(`http://localhost:3001/payment-details/paypal/${id}`, JSON.stringify(data), 'PATCH')
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setEditPaypal(false))
                 dispatch(setPaypal(res.PayPal))
@@ -46,7 +46,7 @@ const PayPalForm = ({toEdit, toCreate}) => {
         const data = {email, country};
 
         postRequest(`http://localhost:3001/payment-details/paypal`, JSON.stringify(data), 'POST')
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setPaypal(res.PayPal))
                 dispatch(setCreatePaypal(false))

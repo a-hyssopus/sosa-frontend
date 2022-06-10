@@ -1,8 +1,7 @@
-import React, {Suspense} from 'react'
+import React from 'react'
 import {setActiveLanguage} from "../../store/i18n/i18n"
 import {Button} from "antd";
 import {Link} from "react-router-dom";
-
 
 import "./style.scss"
 import logo from "../../assets/logo.png"
@@ -21,24 +20,21 @@ const Header = () => {
     }
 
     return (
-        <Suspense fallback='...is loading'>
-            <div className="header">
-                <div className="logo-text">
-                    <Link to="/">
-                        <img className="logo" src={logo} alt="SOSA Logo"/>
-                    </Link>
-                </div>
-                <ul className="language-buttons">
-                    {languages.map(language => (
-                        <li key={language}><Button
-                            onClick={() => setUILanguage(language.toLowerCase())}
-                            className={language.toLowerCase() === activeLanguage ? "language-buttons--active" : ""}
-                            // TODO change CSS class logic
-                            type="default">{language}</Button></li>
-                    ))}
-                </ul>
+        <div className="header">
+            <div className="logo-text">
+                <Link to="/home">
+                    <img className="logo" src={logo} alt="SOSA Logo"/>
+                </Link>
             </div>
-        </Suspense>
+            <ul className="language-buttons">
+                {languages.map(language => (
+                    <li key={language}><Button
+                        onClick={() => setUILanguage(language.toLowerCase())}
+                        className={language.toLowerCase() === activeLanguage ? "language-buttons--active" : ""}
+                        type="default">{language}</Button></li>
+                ))}
+            </ul>
+        </div>
     )
 }
 

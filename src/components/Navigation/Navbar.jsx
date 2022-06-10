@@ -4,7 +4,7 @@ import {
     setCancelButton,
     setDeleteButton,
     setDonateButton,
-    setEditButton,
+    setEditButton, setErrorMessage,
     setNavigationButtons,
     setSaveButton,
     setSaveEntryButton,
@@ -43,10 +43,9 @@ const Navbar = () => {
                 dispatch(setDeleteButton(res[activeLanguage]["delete-button"]))
                 dispatch(setSaveEntryButton(res[activeLanguage]["add-post-button"]))
                 dispatch(setSterilizationText(res[activeLanguage]["sterilization-text"]))
+                dispatch(setErrorMessage(res[activeLanguage]["error-message"]))
             })
     }, [activeLanguage])
-
-    console.log(routes.indexOf(location.pathname))
 
     return (
         <div className="navigation-container">

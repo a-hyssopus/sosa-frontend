@@ -52,11 +52,11 @@ const Cards = () => {
     }
 
     const handleCardDelete = (bank, card) => {
-        deleteRequest('http://localhost:3001/payment-details', JSON.stringify({
+        deleteRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details', JSON.stringify({
             name: bank.name,
             id: card._id
         }))
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setBanks(res.banks))
             })

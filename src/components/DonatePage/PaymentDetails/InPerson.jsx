@@ -27,7 +27,7 @@ const InPerson = () => {
 
     const handlePersonDelete = (id) => {
         deleteRequest(`http://localhost:3001/payment-details/person/:${id}`, JSON.stringify({}))
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setInPerson(res.inPerson))
             })

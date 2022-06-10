@@ -51,7 +51,7 @@ const LoginPage = () => {
     const handleLogin = () => {
         console.log({password, username})
 
-        fetch('http://localhost:3001/users/login', {
+        fetch(process.env.REACT_APP_BACKEND_URL + '/users/login', {
             method: 'POST',
             'credentials': 'include',
             headers: {
@@ -76,7 +76,7 @@ const LoginPage = () => {
     }
 
     const handleLogOut = () => {
-        fetch('http://localhost:3001/users/logout', {
+        fetch(process.env.REACT_APP_BACKEND_URL + '/users/logout', {
             method: 'POST',
             'credentials': 'include',
             headers: {

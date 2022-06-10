@@ -5,6 +5,7 @@ const initialState = {
     navbar: [],
     heroMessage: "",
     sterilizationText: "",
+    errorMessage: "",
     buttons: {
         donateButton: "",
         saveButton: "",
@@ -72,6 +73,9 @@ export const i18nSlice = createSlice({
         },
         setHeroMessage: (state, {payload}) => {
             state.heroMessage = payload;
+        },
+        setErrorMessage: (state, {payload}) => {
+            state.errorMessage = payload;
         },
         setSterilizationText: (state, {payload}) => {
             state.sterilizationText = payload;
@@ -191,6 +195,7 @@ export const {
     setNavigationButtons,
     setDonateButton,
     setHeroMessage,
+    setErrorMessage,
     setSterilizationText,
     setSaveButton,
     setEditButton,

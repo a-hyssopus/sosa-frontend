@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import './App.scss'
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navigation/Navbar";
-import {Link, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes, Navigate} from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import OurStories from "./components/OurStories/OurStories";
 import Story from "./components/OurStories/Story";
@@ -14,8 +14,7 @@ import Reports from "./components/Reports/Reports";
 import Report from "./components/Reports/Report";
 import AboutUs from "./components/AboutUs/AboutUs";
 import FAQ from "./components/FAQ/FAQ";
-
-// TODO wrap App in another container ???
+import Page404 from "./components/Page404/Page404";
 
 const App = () => (
     <div className='App'>
@@ -31,7 +30,8 @@ const App = () => (
             <Route exact path={"/reports/:id"} element={<Report/>}/>
             <Route exact path={"/login"} element={<LoginPage/>}/>
             <Route exact path={"/home"} element={<MainPage/>}/>
-            <Route exact path={"/"} element={<MainPage/>}/>
+            <Route exact path={"/"} element={<Navigate replace to="/home"/>}/>
+            <Route path="*" element={<Page404/>}/>
         </Routes>
         <div className="link" >
             <Link to={"/login"}>Log In</Link>

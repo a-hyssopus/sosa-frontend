@@ -42,7 +42,7 @@ const PersonForm = ({toEdit, toCreate}) => {
         }
 
         postRequest(`http://localhost:3001/payment-details/person/${id}`, JSON.stringify(data), 'PATCH')
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setInPerson(res.inPerson))
                 dispatch(setEditPerson(false))
@@ -56,8 +56,8 @@ const PersonForm = ({toEdit, toCreate}) => {
             "mobile-number": personNumber
         }
 
-        postRequest('http://localhost:3001/payment-details/person', JSON.stringify(data), 'POST')
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+        postRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details/person', JSON.stringify(data), 'POST')
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setInPerson(res.inPerson))
                 dispatch(setCreatePerson(false))

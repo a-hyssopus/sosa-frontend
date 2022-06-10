@@ -26,7 +26,7 @@ const Counter = () => {
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
     useEffect(() => {
-        getRequest('http://localhost:3001/shared-ui-elements')
+        getRequest(process.env.REACT_APP_BACKEND_URL + '/shared-ui-elements')
             .then(res => {
                 dispatch(setSterilizationCounter(res["sterilization-counter"]))
                 dispatch(setDocumentId(res._id))
@@ -48,7 +48,7 @@ const Counter = () => {
     };
 
     const counterCancelHandler = () => {
-        getRequest('http://localhost:3001/shared-ui-elements')
+        getRequest(process.env.REACT_APP_BACKEND_URL + '/shared-ui-elements')
             .then(res => {
                 dispatch(setIsEditCounter(false))
                 dispatch(setSterilizationCounter(res["sterilization-counter"]))

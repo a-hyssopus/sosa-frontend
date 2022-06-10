@@ -97,8 +97,8 @@ const CardForm = ({toEdit}) => {
             id
         }
 
-        postRequest('http://localhost:3001/payment-details', JSON.stringify(data), 'PATCH')
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+        postRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details', JSON.stringify(data), 'PATCH')
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setEditCard(false))
                 dispatch(setBanks(res.banks))
@@ -121,8 +121,8 @@ const CardForm = ({toEdit}) => {
             currency
         }
 
-        postRequest('http://localhost:3001/payment-details', JSON.stringify(data), 'POST')
-            .then(() => getRequest('http://localhost:3001/payment-details'))
+        postRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details', JSON.stringify(data), 'POST')
+            .then(() => getRequest(process.env.REACT_APP_BACKEND_URL + '/payment-details'))
             .then(res => {
                 dispatch(setBanks(res.banks))
                 dispatch(setCreateCard(false))
