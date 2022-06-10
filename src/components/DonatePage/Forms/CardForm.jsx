@@ -132,7 +132,7 @@ const CardForm = ({toEdit}) => {
 
     return (
         <div className="donate-page--card-form">
-            <p style={{width: "50%"}}><span style={{color: "red"}}>*</span> {attentionText}</p>
+            <p><span style={{color: "red"}}>*</span> {attentionText}</p>
             <div className="donate-page--card-form--form">
                 <div className="label-input-container">
                     <label>{bankNameLabel} <span style={{color: "red"}}> *</span> </label>

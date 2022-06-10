@@ -55,7 +55,6 @@
       }
     }
 
-
     &--inputs {
       display: table-row;
       width: 100%;
@@ -110,6 +109,10 @@
   width: 60%;
   justify-content: space-between;
   font-size: 18px;
+
+  .ant-image {
+    width: 200px;
+  }
 
   p {
     margin-block: 4px;
@@ -175,5 +178,47 @@
 @media(max-width: 768px) {
   .reports-container--cards {
     justify-content: center;
+  }
+
+  .report-container {
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+
+    &--images-container {
+      width: 100%;
+      align-items: center;
+
+      .ant-image {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    &--parent img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    &--info {
+      width: 90%;
+    }
+  }
+}
+
+@media(max-width: 426px) {
+  .reports-container--form-container {
+    width: 100%;
+  }
+
+  .reports-container--form-container--form {
+    width: 85%;
+  }
+
+  .reports-container--form-container--title-input, .reports-container--form-container textarea.ant-input, .reports-container--form-container .ant-upload-picture-card-wrapper {
+    width: calc(85% + 20px);
   }
 }

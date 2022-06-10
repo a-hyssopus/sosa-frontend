@@ -23,8 +23,11 @@ const Reports = () => {
     useEffect(() => {
         getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`)
             .then(res => dispatch(setReports(res)))
-            .then(() => setIsLoading(false))
-    }, [activeLanguage])
+            .then(() => setIsLoading(false));
+        return () => {
+            dispatch(setReports([]));
+        }
+    }, [activeLanguage]);
 
     const handleSaveEntryButtonClick = () => {
         dispatch(setReport({
@@ -41,16 +44,16 @@ const Reports = () => {
     const readReportsLayout = () => (
         <div className={isLoading ? "reports-container reports-container--spinner" : "reports-container"}>
             {isLoading ? <Spinner/> :
-            <div className="reports-container--cards">
-                {isLoggedIn && <Button size="large" shape="circle" onClick={handleSaveEntryButtonClick}>+</Button>}
-                {reports.length && (
-                    reports.map(report => (report[activeLanguage] && <ReportCard
-                        key={report._id}
-                        id={report._id}
-                        src={report?.images[0]?.url}
-                        title={report[activeLanguage].title}/>))
-                )}
-            </div>}
+                <div className="reports-container--cards">
+                    {isLoggedIn && <Button size="large" shape="circle" onClick={handleSaveEntryButtonClick}>+</Button>}
+                    {reports.length && (
+                        reports.map(report => (report[activeLanguage] && <ReportCard
+                            key={report._id}
+                            id={report._id}
+                            src={report?.images[0]?.url}
+                            title={report[activeLanguage].title}/>))
+                    )}
+                </div>}
         </div>
     )
 

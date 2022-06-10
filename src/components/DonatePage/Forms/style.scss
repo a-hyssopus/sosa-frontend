@@ -12,6 +12,7 @@
 
     > p {
       margin-bottom: 50px;
+      width: 50%;
     }
   }
 
@@ -64,6 +65,25 @@
     display: table-cell;
     text-align: left;
     margin: 10px;
+  }
+}
+
+@media(max-width: 769px) {
+  .donate-page--card-form {
+    &--form {
+      width: 80%;
+    }
+
+    > p {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+
+  .ant-btn-circle {
+    width: 20px;
+    align-self: center;
+    margin-bottom: 15px;
   }
 }
 

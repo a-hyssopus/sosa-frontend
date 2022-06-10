@@ -123,16 +123,6 @@
 }
 
 @media(max-width: 768px) {
-  .stories-container {
-    width: 100%;
-
-    &--cards {
-      justify-content: center;
-    }
-  }
-}
-
-@media(max-width: 426px) {
   .story-container {
     width: 90%;
 
@@ -152,4 +142,13 @@
       width: 100%;
     }
   }
+
+  .stories-container {
+    width: 100%;
+
+    &--cards {
+      justify-content: center;
+    }
+  }
 }
+

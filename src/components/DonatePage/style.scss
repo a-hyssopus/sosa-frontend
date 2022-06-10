@@ -19,6 +19,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 40px;
 
     p {
       margin: 5px;
@@ -41,5 +42,50 @@
 
   &--in-person-container {
     width: 100%;
+  }
+}
+
+@media(max-width: 769px) {
+  .donate-page {
+    &-container {
+      width: 100%;
+      font-size: 18px;
+      flex-direction: column;
+    }
+
+    &--cards-container {
+      align-items: center;
+    }
+
+    &--paypal-container, &--in-person-container {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      width: 60%;
+    }
+
+    &--banks-buttons {
+      width: calc(100% - 60px);
+      align-items: center;
+    }
+  }
+
+  .donate-cards-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+}
+
+@media(max-width: 400px) {
+  .donate-page {
+    &--paypal-container, &--in-person-container {
+      width: 80%;
+    }
+  }
+
+
+  .donate-cards-container {
+    width: 80%;
   }
 }

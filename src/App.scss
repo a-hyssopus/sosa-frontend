@@ -8,6 +8,12 @@
   height: 100vh;
 }
 
+.ant-card--image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
 .App-wrapper {
   height: 100vh;
 
@@ -42,6 +48,11 @@
 .ant-card {
   &-body {
     height: 150px;
+    max-width: 300px;
+  }
+
+  &-meta {
+    width: 100%;
   }
 
   &-meta-title {
@@ -63,9 +74,40 @@
   }
 
   .ant-card--image {
-    max-width: 400px;
-    max-height: 400px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
+  }
+}
+
+@media(max-width: 376px) {
+  .ant-card-bordered {
+    width: 300px;
+  }
+
+  .ant-card {
+    &-body {
+      height: 100px;
+    }
+  }
+
+
+  .ant-card--image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .App > .link {
+    margin: 25px;
+
+    a {
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      background-color: white;
+      text-align: right;
+    }
   }
 }
 

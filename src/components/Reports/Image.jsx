@@ -16,7 +16,7 @@ const CustomImage = () => {
                         visible: false,
                     }}
                            key={image.url}
-                           width={200}
+                           // width={200}
                            src={image?.url}
                            onClick={() => {
                                setVisible(true)
