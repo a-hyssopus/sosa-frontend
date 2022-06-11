@@ -14,8 +14,6 @@ import LanguageDropdown from "../SharedElements/LanguageDropdown";
 import {Button, Input} from "antd";
 
 const TextEditor = ({title = '', text = '', date = ''}) => {
-    // TODO remove props and use Redux
-
     const dispatch = useDispatch();
     const [richTextValue, setRichTextValue] = useState(text);
     const [titleValue, setTitleValue] = useState(title);
@@ -28,7 +26,7 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
 
-    const [storyToAddLanguage, setStoryToAddLanguage] = useState(languagesAbbreviation[0]);
+    const [storyToAddLanguage, setStoryToAddLanguage] = useState(activeLanguage);
 
     const id = story._id;
 
@@ -46,6 +44,7 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
 
     const saveButtonHandler = () => {
         if (isEditPostMode) {
+            console.log(storyToAddLanguage);
             postRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}`, JSON.stringify({
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}
             }), 'PATCH')

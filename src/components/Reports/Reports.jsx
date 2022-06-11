@@ -46,13 +46,13 @@ const Reports = () => {
             {isLoading ? <Spinner/> :
                 <div className="reports-container--cards">
                     {isLoggedIn && <Button size="large" shape="circle" onClick={handleSaveEntryButtonClick}>+</Button>}
-                    {reports.length && (
+                    {reports.length ? (
                         reports.map(report => (report[activeLanguage] && <ReportCard
                             key={report._id}
                             id={report._id}
                             src={report?.images[0]?.url}
                             title={report[activeLanguage].title}/>))
-                    )}
+                    ) : null}
                 </div>}
         </div>
     )

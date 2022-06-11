@@ -8,7 +8,6 @@ import donateInfoToUpdateReducer from "./sharedUIElements/donateInfoToUpdate";
 import reportsReducer from "./reports/reports";
 import loginReducer from "./login/login";
 import aboutUsReducer from "./aboutUs/aboutUs";
-import backgroundFadeReducer from "./backgroundFade/backgroundFade";
 
 export const store = configureStore({
     reducer: {
@@ -20,7 +19,6 @@ export const store = configureStore({
         login: loginReducer,
         reports: reportsReducer,
         aboutUs: aboutUsReducer,
-        backgroundFade: backgroundFadeReducer
     }
 })
 

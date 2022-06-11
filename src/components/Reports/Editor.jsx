@@ -104,7 +104,7 @@ const Editor = ({toEdit, toCreate}) => {
             <div className="reports-container--form-container--title-input">
                 <Input type="text"
                        placeholder="Title"
-                       value={toEdit ? report[activeLanguage]?.title : title}
+                       value={toEdit ? report[reportToAddLanguage]?.title : title}
                        autoFocus
                        onChange={event => toEdit ? dispatch(setReportTitle({
                            language: reportToAddLanguage,
