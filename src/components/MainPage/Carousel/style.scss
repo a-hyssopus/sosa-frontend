@@ -7,15 +7,16 @@
     object-fit: cover;
     height: 575px;
     opacity: 0;
-    transition: all 0.4s linear;
+    transition: all 0.3s linear;
 
     &-active {
       opacity: 100%;
+      visibility: visible;
     }
 
     &-background {
       opacity: 100%;
-      background: rgb(211, 211, 211);
+      background: rgb(232, 232, 232);
     }
   }
 }
