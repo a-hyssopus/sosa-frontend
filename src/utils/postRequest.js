@@ -3,7 +3,6 @@ export async function postRequest(url = '', data = {}, method = '') { // fits fo
         method,
         'credentials': 'include',
         headers: {
-            // 'Cross-Domain': true,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },

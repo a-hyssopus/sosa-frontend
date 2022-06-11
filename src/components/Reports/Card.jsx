@@ -8,9 +8,10 @@ import {setEditReportMode, setReport, setReports} from "../../store/reports/repo
 import {Button, Card} from "antd";
 import {deleteRequest} from "../../utils/deleteRequest";
 import DeleteConfirmPopup from "../SharedElements/DeleteConfirmPopup";
+
 const {Meta} = Card;
 
-const ReportCard = ({ title = '', src = '', id = '' }) => {
+const ReportCard = ({title = '', src = '', id = ''}) => {
     const dispatch = useDispatch();
     const history = useNavigate();
 
@@ -43,10 +44,8 @@ const ReportCard = ({ title = '', src = '', id = '' }) => {
                 <Card
                     hoverable
                     onClick={handleReportOnClick}
-                    // style={{width: 300}}
                     cover={<img src={src}
                                 className="ant-card--image"
-                                // style={{maxWidth: "300px", minHeight: "300px", maxHeight: "260px",  objectFit: "cover"}}
                     />}
                 >
                     <Meta title={title}/>

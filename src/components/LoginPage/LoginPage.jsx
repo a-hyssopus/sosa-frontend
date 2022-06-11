@@ -64,10 +64,10 @@ const LoginPage = () => {
                     if (res.status === 200) {
                         Cookies.set('isLoggedInCookie', true, {expires: 365})
                         setLoginResult(successLoginMessage);
-                        dispatch(setIsLoggedIn(true)); // do I need it?
+                        dispatch(setIsLoggedIn(true));
                         setTimeout(() => {
                             history('/home')
-                        }, 2000)
+                        }, 1500)
                     } else {
                         setLoginResult(failLoginMessage)
                     }
@@ -89,9 +89,6 @@ const LoginPage = () => {
             .then(() => {
                 dispatch(setIsLoggedIn(false))
                 Cookies.remove('isLoggedInCookie')
-                setTimeout(() => {
-                    history('/home')
-                }, 2000)
             })
     }
 
