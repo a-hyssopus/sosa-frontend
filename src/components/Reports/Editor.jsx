@@ -47,8 +47,7 @@ const Editor = ({toEdit, toCreate}) => {
     const id = report._id;
 
     const handleLanguageChange = language => {
-        if (!reportToAddLanguage[language]) {
-            console.log(language)
+        if (!report[language]) {
             dispatch(setNewReportLanguage(language))
         }
         setReportToAddLanguage(language);
