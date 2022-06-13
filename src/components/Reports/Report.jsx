@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import {getRequest} from "../../utils/getRequest";
 import {setEditReportMode, setReport, setReports} from "../../store/reports/reports";
@@ -18,7 +18,7 @@ import Spinner from "../SharedElements/Spinner";
 
 const Report = () => {
     const dispatch = useDispatch();
-
+    const history = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
 
     const report = useSelector(state => state.reports.report);
@@ -51,8 +51,12 @@ const Report = () => {
 
     const confirmDeleteHandler = () => {
         deleteRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`, JSON.stringify({}))
-            .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`)
-                .then(res => dispatch(setReports(res))));
+            .then(() => {
+                getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`)
+                    .then(res => {
+                        dispatch(setReports(res))
+                    }).then(() => history(`/reports`))
+            });
     };
 
     const readReportLayout = () => (
