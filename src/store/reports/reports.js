@@ -28,6 +28,9 @@ export const reportsSlice = createSlice({
         setReportTitle: (state, {payload}) => {
             state.report[payload.language].title = payload.title;
         },
+        setNewReportLanguage: (state, {payload}) => {
+            state.report[payload] = {text:'', title: ''}
+        },
         setReportText: (state, {payload}) => {
             state.report[payload.language].text = payload.text;
         },
@@ -62,6 +65,7 @@ export const {
     setCreateReportMode,
     setReportText,
     setReportTitle,
+    setNewReportLanguage,
     setCats,
     setDogs,
     setPeriod,

@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import ReportDatePicker from "./DatePicker"
 import {getRequest} from "../../utils/getRequest";
-import {setAnimalsLabel, setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n/i18n";
 import {postRequest} from "../../utils/postRequest";
 import {
     setCats,
     setCreateReportMode,
     setDogs,
     setEditReportMode,
+    setNewReportLanguage,
     setReport,
     setReports,
     setReportText,
@@ -46,8 +46,12 @@ const Editor = ({toEdit, toCreate}) => {
 
     const id = report._id;
 
-    const handleLanguageChange = value => {
-        setReportToAddLanguage(value);
+    const handleLanguageChange = language => {
+        if (!reportToAddLanguage[language]) {
+            console.log(language)
+            dispatch(setNewReportLanguage(language))
+        }
+        setReportToAddLanguage(language);
     }
 
     const saveButtonHandler = () => {
