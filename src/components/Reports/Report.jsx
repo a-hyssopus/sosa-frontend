@@ -45,17 +45,6 @@ const Report = () => {
             .then(() => setIsLoading(false))
     }, [isEditReportMode]);
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
-                dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
-                dispatch(setPeriodLabel(res[activeLanguage].reports["period-label"]))
-                dispatch(setMoneyLabel(res[activeLanguage].reports["money-label"]))
-                dispatch(setAnimalsLabel(res[activeLanguage].reports["animals-label"]))
-            })
-    }, [activeLanguage])
-
     const handleEdit = () => {
         dispatch(setEditReportMode(true))
     };

@@ -61,21 +61,6 @@ const CardForm = ({toEdit}) => {
     const cardCurrencyLabel = useSelector(state => state.i18n.donate?.cardFormLabels["card-currency"])
     const attentionText = useSelector(state => state.i18n.donate?.cardFormInfo["attention-text"])
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setBankNamei18n(res[activeLanguage].donate["card-form-labels"]["bank-name"]))
-                dispatch(setPrimaryColori18n(res[activeLanguage].donate["card-form-labels"]["primary-color"]))
-                dispatch(setSecondaryColori18n(res[activeLanguage].donate["card-form-labels"]["secondary-color"]))
-                dispatch(setTextColori18n(res[activeLanguage].donate["card-form-labels"]["text-color"]))
-                dispatch(setLinki18n(res[activeLanguage].donate["card-form-labels"].link))
-                dispatch(setCardHolder(res[activeLanguage].donate["card-form-labels"]["card-holder"]))
-                dispatch(setCardNumber(res[activeLanguage].donate["card-form-labels"]["card-number"]))
-                dispatch(setCardCurrency(res[activeLanguage].donate["card-form-labels"]["card-currency"]))
-                dispatch(setAttentionText(res[activeLanguage].donate["card-form-info"]["attention-text"]))
-            })
-    }, [activeLanguage])
-
     const handleCancelButton = () => {
         dispatch(setEditCard(false));
         dispatch(setCreateCard(false))

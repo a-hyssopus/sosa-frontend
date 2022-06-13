@@ -46,16 +46,6 @@ const Editor = ({toEdit, toCreate}) => {
 
     const id = report._id;
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
-                dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
-                dispatch(setPeriodLabel(res[activeLanguage].reports["period-label"]))
-                dispatch(setAnimalsLabel(res[activeLanguage].reports["animals-label"]))
-            });
-    }, [activeLanguage])
-
     const handleLanguageChange = value => {
         setReportToAddLanguage(value);
     }
@@ -133,7 +123,7 @@ const Editor = ({toEdit, toCreate}) => {
                     <ReportDatePicker/>
                 </div>
             </div>
-            <TextArea value={toEdit ? report[activeLanguage]?.text : text}
+            <TextArea value={toEdit ? report[reportToAddLanguage]?.text : text}
                       rows="5"
                       placeholder="Description"
                       onChange={event => toEdit ? dispatch(setReportText({

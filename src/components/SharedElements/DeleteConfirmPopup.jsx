@@ -12,15 +12,6 @@ const DeleteConfirmPopup = (props) => {
     const cancelLabel = useSelector(state => state.i18n.deleteConfirm.cancel);
     const popupTitleLabel = useSelector(state => state.i18n.deleteConfirm["popup-title"]);
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setDeleteCancelLabel(res[activeLanguage]["delete-confirm"].cancel));
-                dispatch(setDeleteConfirmLabel(res[activeLanguage]["delete-confirm"].confirm));
-                dispatch(setDeleteTitleLabel(res[activeLanguage]["delete-confirm"]["popup-title"]));
-            })
-    })
-
     const confirm = (id = '', bank = '') => {
         message.success(confirmLabel);
         props.confirmDeleteHandler(id, bank);

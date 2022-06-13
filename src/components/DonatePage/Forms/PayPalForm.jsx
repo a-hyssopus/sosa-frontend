@@ -22,14 +22,6 @@ const PayPalForm = ({toEdit, toCreate}) => {
     const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setPaypalEmailLabel(res[activeLanguage].donate["paypal-form-labels"]["email-label"]))
-                dispatch(setPaypalCountryLabel(res[activeLanguage].donate["paypal-form-labels"]["country-label"]))
-            })
-    }, [activeLanguage])
-
     const handleSaveEditButton = () => {
         const data = {email, country};
 

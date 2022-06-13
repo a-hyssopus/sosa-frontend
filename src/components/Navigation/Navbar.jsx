@@ -32,21 +32,6 @@ const Navbar = () => {
     const facebookPageURL = "https://www.facebook.com/sosanimalsmd/";
     const instagramPageURL = "https://www.instagram.com/sosanimals.md/";
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setNavigationButtons(res[activeLanguage].navbar))
-                dispatch(setDonateButton(res[activeLanguage]["donate-button"]))
-                dispatch(setSaveButton(res[activeLanguage]["save-button"]))
-                dispatch(setEditButton(res[activeLanguage]["edit-button"]))
-                dispatch(setCancelButton(res[activeLanguage]["cancel-button"]))
-                dispatch(setDeleteButton(res[activeLanguage]["delete-button"]))
-                dispatch(setSaveEntryButton(res[activeLanguage]["add-post-button"]))
-                dispatch(setSterilizationText(res[activeLanguage]["sterilization-text"]))
-                dispatch(setErrorMessage(res[activeLanguage]["error-message"]))
-            })
-    }, [activeLanguage])
-
     return (
         <div className="navigation-container">
             <TwoColouredButton primaryColor={{r: 244, g: 248, b: 251, a: 1}}

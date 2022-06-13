@@ -21,14 +21,6 @@ const PersonForm = ({toEdit, toCreate}) => {
     const nameLabel = useSelector(state => state.i18n.donate.personFormLabels["person-label"]);
     const nubmerLabel = useSelector(state => state.i18n.donate.personFormLabels["number-label"]);
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setPersonNameLabel(res[activeLanguage].donate["person-form-labels"]["person-label"]))
-                dispatch(setPersonNumberLabel(res[activeLanguage].donate["person-form-labels"]["number-label"]))
-            })
-    }, [activeLanguage])
-
     const handleCancelButton = () => {
         dispatch(setEditPerson(false));
         dispatch(setCreatePerson(false))

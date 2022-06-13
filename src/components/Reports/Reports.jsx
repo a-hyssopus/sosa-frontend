@@ -8,6 +8,7 @@ import {Button} from "antd";
 
 import "./style.scss"
 import Spinner from "../SharedElements/Spinner";
+import {setAnimalsLabel, setCatsLabel, setDogsLabel, setPeriodLabel} from "../../store/i18n/i18n";
 
 const Reports = () => {
     const dispatch = useDispatch();

@@ -37,18 +37,6 @@ const LoginPage = () => {
     const [password, setPassword] = useState('')
     const [loginResult, setLoginResult] = useState('');
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setUsernameText(res[activeLanguage].login["username-text"]))
-                dispatch(setPasswordText(res[activeLanguage].login["password-text"]))
-                dispatch(setLoginText(res[activeLanguage].login["login-text"]))
-                dispatch(setLogoutText(res[activeLanguage].login["logout-text"]))
-                dispatch(setSuccessLoginMessage(res[activeLanguage].login["success-login-message"]))
-                dispatch(setFailLoginMessage(res[activeLanguage].login["fail-login-message"]))
-            })
-    }, [activeLanguage]);
-
     const handleLogin = () => {
         fetch(process.env.REACT_APP_BACKEND_URL + '/users/login', {
             method: 'POST',
@@ -64,8 +52,8 @@ const LoginPage = () => {
                     if (res.status === 200) {
                         Cookies.set('isLoggedInCookie', true, {expires: 365})
                         setLoginResult(successLoginMessage);
-                        dispatch(setIsLoggedIn(true));
                         setTimeout(() => {
+                            dispatch(setIsLoggedIn(true));
                             history('/home')
                         }, 1500)
                     } else {

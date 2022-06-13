@@ -11,13 +11,6 @@ const Content = () => {
     const heroMessage = useSelector(state => state.i18n.heroMessage)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getRequest(`${process.env.REACT_APP_BACKEND_URL}/i18n?${new URLSearchParams({"lang": activeLanguage})}`)
-            .then(res => {
-                dispatch(setHeroMessage(res[activeLanguage]["hero-message"]))
-            })
-    }, [activeLanguage]);
-
     const firstSentence = heroMessage.substring(0, heroMessage.indexOf('.'));
     const secondSentence = heroMessage.substring(heroMessage.indexOf('.')+1)
 
