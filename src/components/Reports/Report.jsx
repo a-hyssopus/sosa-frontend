@@ -30,6 +30,7 @@ const Report = () => {
     const moneyLabel = useSelector(state => state.i18n.reports["money-label"]);
     const animalsLabel = useSelector(state => state.i18n.reports["animals-label"]);
 
+    const isLoggedIn = useSelector(state => state.login.isLoggedIn);
     const editButton = useSelector(state => state.i18n.buttons.editButton);
     const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
 
@@ -79,12 +80,12 @@ const Report = () => {
                         </div>
                     </div>
                     <CustomImage/>
-                    <div className="report-container--buttons">
+                    {isLoggedIn && <div className="report-container--buttons">
                         <Button onClick={handleEdit}>{editButton}</Button>
                         <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
                             <Button danger>{deleteButton}</Button>
                         </DeleteConfirmPopup>
-                    </div>
+                    </div>}
                 </>)
             }
         </div>
