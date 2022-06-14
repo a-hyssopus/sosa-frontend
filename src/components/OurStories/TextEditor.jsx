@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 
 import ReactQuill from 'react-quill';
 import {formats, modules} from "../../utils/textEditorConfig";
-import {languagesAbbreviation} from "../../utils/languages";
 
 import {postRequest} from "../../utils/postRequest";
 import {setCreatePostMode, setEditMode, setStories, setStory} from "../../store/ourStories/ourStories";
@@ -25,6 +24,7 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
     const saveButton = useSelector(state => state.i18n.buttons.saveButton);
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
+    const titlePlaceholder = useSelector(state => state.i18n.reports["title-placeholder"]);
 
     const [storyToAddLanguage, setStoryToAddLanguage] = useState(activeLanguage);
 
@@ -72,7 +72,7 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
         <div className="text-editor-container">
             <div className="text-editor-container--inputs">
                 <Input type="text"
-                       placeholder="Title"
+                       placeholder={titlePlaceholder}
                        value={titleValue}
                        autoFocus
                        onChange={handleTitleValueChange}/>

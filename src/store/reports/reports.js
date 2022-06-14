@@ -54,6 +54,9 @@ export const reportsSlice = createSlice({
         },
         setCreateReportMode: (state, {payload}) => {
             state.isCreateReportMode = payload;
+        },
+        setMoney: (state, {payload}) => {
+            state.money = payload;
         }
     },
 })
@@ -71,6 +74,7 @@ export const {
     setPeriod,
     setReportImages,
     deleteReportImage,
+    setMoney
 } = reportsSlice.actions
 
 export default reportsSlice.reducer

@@ -7,6 +7,7 @@ const UploadForm = () => {
     const dispatch = useDispatch();
 
     const images = useSelector(state => state.reports.report.images);
+    const uploadPlaceholder = useSelector(state => state.i18n.reports["upload-placeholder"]);
 
     const onPreview = async (file) => {
         let src = file.url;
@@ -49,7 +50,7 @@ const UploadForm = () => {
             onRemove={onRemoveHandler}
             beforeUpload={beforeUploadHandler}
         >
-            {'+ Upload'}
+            {`+ ${uploadPlaceholder}`}
         </Upload>
     );
 }

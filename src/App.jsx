@@ -44,7 +44,14 @@ import {
     setPrimaryColori18n, setSaveButton, setSaveEntryButton,
     setSecondaryColori18n, setSterilizationText, setSuccessLoginMessage,
     setTextColori18n,
-    setUsernameText
+    setUsernameText,
+    setTitlePlaceholder,
+    setDescriptionPlaceholder,
+    setStartDate,
+    setEndDate,
+    setUploadPlaceholder,
+    setNo,
+    setYes
 } from "./store/i18n/i18n";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -94,12 +101,20 @@ const App = () => {
                 dispatch(setInPersonText(res[activeLanguage].donate.payInPerson))
                 dispatch(setDeleteCancelLabel(res[activeLanguage]["delete-confirm"].cancel));
                 dispatch(setDeleteConfirmLabel(res[activeLanguage]["delete-confirm"].confirm));
+                dispatch(setYes(res[activeLanguage]["delete-confirm"].yes));
+                dispatch(setNo(res[activeLanguage]["delete-confirm"].no));
                 dispatch(setDeleteTitleLabel(res[activeLanguage]["delete-confirm"]["popup-title"]));
                 dispatch(setHeroMessage(res[activeLanguage]["hero-message"]))
                 dispatch(setCatsLabel(res[activeLanguage].reports["cats-label"]))
                 dispatch(setDogsLabel(res[activeLanguage].reports["dogs-label"]))
                 dispatch(setPeriodLabel(res[activeLanguage].reports["period-label"]))
                 dispatch(setAnimalsLabel(res[activeLanguage].reports["animals-label"]))
+                dispatch(setMoneyLabel(res[activeLanguage].reports["money-label"]))
+                dispatch(setTitlePlaceholder(res[activeLanguage].reports["title-placeholder"]))
+                dispatch(setDescriptionPlaceholder(res[activeLanguage].reports["description-placeholder"]))
+                dispatch(setStartDate(res[activeLanguage].reports["start-date"]))
+                dispatch(setEndDate(res[activeLanguage].reports["end-date"]))
+                dispatch(setUploadPlaceholder(res[activeLanguage].reports["upload"]))
             });
     }, [activeLanguage])
 

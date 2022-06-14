@@ -13,7 +13,8 @@ import {
     setReport,
     setReports,
     setReportText,
-    setReportTitle
+    setReportTitle,
+    setMoney
 } from "../../store/reports/reports";
 import LanguageDropdown from "../SharedElements/LanguageDropdown";
 import UploadForm from "./UploadForm";
@@ -23,7 +24,7 @@ import "./style.scss"
 
 const {TextArea} = Input;
 
-const Editor = ({toEdit, toCreate}) => {
+const Editor = ({toEdit}) => {
     const dispatch = useDispatch();
 
     const report = useSelector(state => state.reports.report);
@@ -33,6 +34,10 @@ const Editor = ({toEdit, toCreate}) => {
     const catsLabel = useSelector(state => state.i18n.reports["cats-label"]);
     const dogsLabel = useSelector(state => state.i18n.reports["dogs-label"]);
     const periodLabel = useSelector(state => state.i18n.reports["period-label"]);
+    const moneyLabel = useSelector(state => state.i18n.reports["money-label"]);
+    const titlePlaceholder = useSelector(state => state.i18n.reports["title-placeholder"]);
+    const descriptionPlaceholder = useSelector(state => state.i18n.reports["description-placeholder"]);
+
 
     const saveButton = useSelector(state => state.i18n.buttons.saveButton);
     const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
@@ -42,6 +47,7 @@ const Editor = ({toEdit, toCreate}) => {
     const [text, setText] = useState('');
     const [cats, setCatsLocal] = useState(0);
     const [dogs, setDogsLocal] = useState(0);
+    const [money, setMoneyLocal] = useState(0);
     const [reportToAddLanguage, setReportToAddLanguage] = useState(activeLanguage);
 
     const id = report._id;
@@ -62,7 +68,8 @@ const Editor = ({toEdit, toCreate}) => {
                 },
                 images: report.images,
                 sterilized: {cats: report?.sterilized?.cats, dogs: report?.sterilized?.dogs},
-                period: report.period
+                period: report.period,
+                money: report.money
             })
 
             postRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}`, dataEdit, 'PATCH')
@@ -76,7 +83,8 @@ const Editor = ({toEdit, toCreate}) => {
                 images: report.images,
                 period: report.period,
                 sterilized: {cats, dogs},
-                [reportToAddLanguage]: {title, text}
+                [reportToAddLanguage]: {title, text},
+                money
             })
 
             postRequest(`${process.env.REACT_APP_BACKEND_URL}/reports?${new URLSearchParams({"lang": activeLanguage})}`, dataCreate, 'POST')
@@ -96,7 +104,7 @@ const Editor = ({toEdit, toCreate}) => {
         <div className="reports-container--form-container">
             <div className="reports-container--form-container--title-input">
                 <Input type="text"
-                       placeholder="Title"
+                       placeholder={titlePlaceholder}
                        value={toEdit ? report[reportToAddLanguage]?.title : title}
                        autoFocus
                        onChange={event => toEdit ? dispatch(setReportTitle({
@@ -122,13 +130,21 @@ const Editor = ({toEdit, toCreate}) => {
                            onChange={event => toEdit ? dispatch(setDogs(event.target.value)) : setDogsLocal(event.target.value)}/>
                 </div>
                 <div className="reports-container--form-container--inputs">
+                    <label>{moneyLabel}</label>
+                    <Input
+                        type="number"
+                        min="0"
+                        value={toEdit ? report.money : money}
+                        onChange={event => toEdit ? dispatch(setMoney(event.target.value)) : setMoneyLocal(event.target.value)}/>
+                </div>
+                <div className="reports-container--form-container--inputs">
                     <label>{periodLabel}</label>
                     <ReportDatePicker/>
                 </div>
             </div>
             <TextArea value={toEdit ? report[reportToAddLanguage]?.text : text}
                       rows="5"
-                      placeholder="Description"
+                      placeholder={descriptionPlaceholder}
                       onChange={event => toEdit ? dispatch(setReportText({
                           language: reportToAddLanguage,
                           text: event.target.value

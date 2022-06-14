@@ -1,8 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {message, Popconfirm} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
-import {getRequest} from "../../utils/getRequest";
-import {setDeleteCancelLabel, setDeleteConfirmLabel, setDeleteTitleLabel} from "../../store/i18n/i18n";
 
 const DeleteConfirmPopup = (props) => {
     const dispatch = useDispatch();
@@ -10,6 +8,8 @@ const DeleteConfirmPopup = (props) => {
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
     const confirmLabel = useSelector(state => state.i18n.deleteConfirm.confirm);
     const cancelLabel = useSelector(state => state.i18n.deleteConfirm.cancel);
+    const yesLabel = useSelector(state => state.i18n.deleteConfirm.yes);
+    const noLabel = useSelector(state => state.i18n.deleteConfirm.no);
     const popupTitleLabel = useSelector(state => state.i18n.deleteConfirm["popup-title"]);
 
     const confirm = (id = '', bank = '') => {
@@ -26,8 +26,8 @@ const DeleteConfirmPopup = (props) => {
             title={popupTitleLabel}
             onConfirm={confirm}
             onCancel={cancel}
-            okText="Yes"
-            cancelText="No">
+            okText={yesLabel}
+            cancelText={noLabel}>
             {props.children}
         </Popconfirm>
     )

@@ -44,7 +44,12 @@ const initialState = {
         "dogs-label": "",
         "period-label": "",
         "money-label": "",
-        "animals-label": ""
+        "animals-label": "",
+        "title-placeholder": "",
+        "description-placeholder": "",
+        "start-date": "",
+        "end-date": "",
+        "upload-placeholder": ""
     },
     login: {
         "username-text": "",
@@ -57,7 +62,9 @@ const initialState = {
     deleteConfirm: {
         confirm: '',
         cancel: '',
-        "popup-title": ''
+        "popup-title": '',
+        yes: "",
+        no: ""
     }
 }
 
@@ -152,6 +159,21 @@ export const i18nSlice = createSlice({
         setMoneyLabel: (state, {payload}) => {
             state.reports["money-label"] = payload;
         },
+        setTitlePlaceholder: (state, {payload}) => {
+            state.reports["title-placeholder"] = payload;
+        },
+        setDescriptionPlaceholder: (state, {payload}) => {
+            state.reports["description-placeholder"] = payload;
+        },
+        setStartDate: (state, {payload}) => {
+            state.reports["start-date"] = payload;
+        },
+        setEndDate: (state, {payload}) => {
+            state.reports["end-date"] = payload;
+        },
+        setUploadPlaceholder: (state, {payload}) => {
+            state.reports["upload-placeholder"] = payload;
+        },
         setPeriodLabel: (state, {payload}) => {
             state.reports["period-label"] = payload;
         },
@@ -185,6 +207,12 @@ export const i18nSlice = createSlice({
         setDeleteTitleLabel: (state, {payload}) => {
             state.deleteConfirm["popup-title"] = payload;
         },
+        setYes: (state, {payload}) => {
+            state.deleteConfirm.yes = payload;
+        },
+        setNo: (state, {payload}) => {
+            state.deleteConfirm.no = payload;
+        }
     },
 })
 
@@ -230,5 +258,12 @@ export const {
     setLogoutText,
     setDeleteCancelLabel,
     setDeleteConfirmLabel,
-    setDeleteTitleLabel
+    setDeleteTitleLabel,
+    setTitlePlaceholder,
+    setDescriptionPlaceholder,
+    setStartDate,
+    setEndDate,
+    setUploadPlaceholder,
+    setYes,
+    setNo
 } = i18nSlice.actions
