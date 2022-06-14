@@ -71,7 +71,7 @@ const Editor = ({toEdit}) => {
                 period: report.period,
                 money: report.money
             })
-
+            console.log(dataEdit)
             postRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}`, dataEdit, 'PATCH')
                 .then(() => getRequest(`${process.env.REACT_APP_BACKEND_URL}/reports/${id}?${new URLSearchParams({"lang": activeLanguage})}`))
                 .then(res => dispatch(setReport(res)))

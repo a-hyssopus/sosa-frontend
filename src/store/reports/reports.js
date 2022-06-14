@@ -56,7 +56,7 @@ export const reportsSlice = createSlice({
             state.isCreateReportMode = payload;
         },
         setMoney: (state, {payload}) => {
-            state.money = payload;
+            state.report.money = payload;
         }
     },
 })
