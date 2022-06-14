@@ -44,7 +44,6 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
 
     const saveButtonHandler = () => {
         if (isEditPostMode) {
-            console.log(storyToAddLanguage);
             postRequest(`${process.env.REACT_APP_BACKEND_URL}/blog-posts/${id}`, JSON.stringify({
                 [storyToAddLanguage]: {title: titleValue, text: richTextValue}
             }), 'PATCH')
