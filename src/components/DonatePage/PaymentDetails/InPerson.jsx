@@ -11,8 +11,8 @@ const InPerson = () => {
     const dispatch = useDispatch();
 
     const inPersonText = useSelector(state => state.i18n.donate.inPersonText);
-    const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const deleteEntryButton = useSelector(state => state.i18n.buttons.deleteButton);
+    const edit = useSelector(state => state.i18n.buttons.edit);
+    const deleteEntryButton = useSelector(state => state.i18n.buttons.delete);
 
     const inPerson = useSelector(state => state.donate.inPerson);
 
@@ -40,7 +40,7 @@ const InPerson = () => {
                 <React.Fragment key={person._id}>
                     <p key={person["mobile-number"]}>{person.person}, {person["mobile-number"]}</p>
                     {isLoggedIn && <>
-                        <Button style={{margin: "5px"}} onClick={() => handlePersonEditClick(person)}>{editButton}</Button>
+                        <Button style={{margin: "5px"}} onClick={() => handlePersonEditClick(person)}>{edit}</Button>
                         <DeleteConfirmPopup confirmDeleteHandler={() => handlePersonDelete(person._id)}><Button style={{margin: "5px"}} danger>{deleteEntryButton}</Button></DeleteConfirmPopup>
                     </>}
                 </React.Fragment>)}

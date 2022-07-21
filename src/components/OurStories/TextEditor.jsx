@@ -21,8 +21,8 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
     const isEditPostMode = useSelector(state => state.ourStories.isEditPostMode)
     const isCreatePostMode = useSelector(state => state.ourStories.isCreatePostMode)
 
-    const saveButton = useSelector(state => state.i18n.buttons.saveButton);
-    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
+    const save = useSelector(state => state.i18n.buttons.save);
+    const cancel = useSelector(state => state.i18n.buttons.cancel);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
     const titlePlaceholder = useSelector(state => state.i18n.reports["title-placeholder"]);
 
@@ -83,8 +83,8 @@ const TextEditor = ({title = '', text = '', date = ''}) => {
                         value={richTextValue}
                         onChange={handleRichEditorOnChange}/>
             <div className="text-editor--buttons">
-                <Button onClick={cancelButtonHandler}>{cancelButton}</Button>
-                <Button type="primary" onClick={saveButtonHandler}>{saveButton}</Button>
+                <Button onClick={cancelButtonHandler}>{cancel}</Button>
+                <Button type="primary" onClick={saveButtonHandler}>{save}</Button>
             </div>
         </div>)
 }

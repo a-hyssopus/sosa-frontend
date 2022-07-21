@@ -18,8 +18,8 @@ const Story = () => {
     const story = useSelector(state => state.ourStories.story);
     const isEditPostMode = useSelector(state => state.ourStories.isEditPostMode);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
-    const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
+    const edit = useSelector(state => state.i18n.buttons.edit);
+    const deleteButton = useSelector(state => state.i18n.buttons.delete);
 
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
@@ -56,7 +56,7 @@ const Story = () => {
                 <Markup content={text}/>
                 <p style={{fontStyle: "italic"}}>{formattedDate}</p>
                 {isLoggedIn && <div className="story-container--buttons">
-                    <Button onClick={handleEdit}>{editButton}</Button>
+                    <Button onClick={handleEdit}>{edit}</Button>
                     <DeleteConfirmPopup confirmDeleteHandler={handleDelete}><Button
                         danger>{deleteButton}</Button></DeleteConfirmPopup>
                 </div>}

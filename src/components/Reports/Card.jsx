@@ -15,8 +15,8 @@ const ReportCard = ({title = '', src = '', id = ''}) => {
     const dispatch = useDispatch();
     const history = useNavigate();
 
-    const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
+    const edit = useSelector(state => state.i18n.buttons.edit);
+    const deleteButton = useSelector(state => state.i18n.buttons.delete);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
 
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
@@ -52,7 +52,7 @@ const ReportCard = ({title = '', src = '', id = ''}) => {
                 </Card>
             </Link>
             {isLoggedIn && <>
-                <Button onClick={handleEdit}>{editButton}</Button>
+                <Button onClick={handleEdit}>{edit}</Button>
                 <DeleteConfirmPopup confirmDeleteHandler={confirmDeleteHandler}>
                     <Button danger>{deleteButton}</Button>
                 </DeleteConfirmPopup>

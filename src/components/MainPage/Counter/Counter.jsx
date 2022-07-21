@@ -20,8 +20,8 @@ const Counter = () => {
     const documentId = useSelector(state => state.sterilizationCounter.documentId);
     const sterilizationText = useSelector(state => state.i18n.sterilizationText);
 
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
-    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
+    const create = useSelector(state => state.i18n.buttons.save);
+    const cancel = useSelector(state => state.i18n.buttons.cancel);
 
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
@@ -57,8 +57,8 @@ const Counter = () => {
         <>
             <InputNumber value={sterilizationCounter}
                    onChange={value => dispatch(setSterilizationCounter(value))}/>
-            <Button onClick={saveCounterHandler}>{saveEntryButton}</Button>
-            <Button onClick={counterCancelHandler}>{cancelButton}</Button>
+            <Button onClick={saveCounterHandler}>{create}</Button>
+            <Button onClick={counterCancelHandler}>{cancel}</Button>
         </>
     )
 

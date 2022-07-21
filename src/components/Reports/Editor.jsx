@@ -39,8 +39,8 @@ const Editor = ({toEdit}) => {
     const descriptionPlaceholder = useSelector(state => state.i18n.reports["description-placeholder"]);
 
 
-    const saveButton = useSelector(state => state.i18n.buttons.saveButton);
-    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
+    const save = useSelector(state => state.i18n.buttons.save);
+    const cancel = useSelector(state => state.i18n.buttons.cancel);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
 
     const [title, setTitle] = useState('');
@@ -150,8 +150,8 @@ const Editor = ({toEdit}) => {
                       })) : setText(event.target.value)}/>
             <UploadForm/>
             <div className="reports-container--buttons-container">
-                <Button onClick={cancelButtonHandler}>{cancelButton}</Button>
-                <Button type="primary" onClick={saveButtonHandler}>{saveButton}</Button>
+                <Button onClick={cancelButtonHandler}>{cancel}</Button>
+                <Button type="primary" onClick={saveButtonHandler}>{save}</Button>
             </div>
         </div>
     )

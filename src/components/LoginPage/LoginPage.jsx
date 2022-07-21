@@ -42,7 +42,6 @@ const LoginPage = () => {
             method: 'POST',
             'credentials': 'include',
             headers: {
-                // 'Cross-Domain': true,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
@@ -50,7 +49,7 @@ const LoginPage = () => {
         })
             .then((res) => {
                     if (res.status === 200) {
-                        Cookies.set('isLoggedInCookie', true, {expires: 365})
+                        Cookies.set('isLoggedInCookie', true, {expires: 7})
                         setLoginResult(successLoginMessage);
                         setTimeout(() => {
                             dispatch(setIsLoggedIn(true));

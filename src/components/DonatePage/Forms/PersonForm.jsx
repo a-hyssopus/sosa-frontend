@@ -11,8 +11,8 @@ const PersonForm = ({toEdit, toCreate}) => {
     const dispatch = useDispatch();
 
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
-    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
+    const create = useSelector(state => state.i18n.buttons.save);
+    const cancel = useSelector(state => state.i18n.buttons.cancel);
 
     const personName = useSelector(state => state.donateInfoToUpdate.person.name);
     const personNumber = useSelector(state => state.donateInfoToUpdate.person.number);
@@ -72,9 +72,9 @@ const PersonForm = ({toEdit, toCreate}) => {
                 </div>
             </div>
             <div className="donate-page--buttons-container">
-                <Button onClick={handleCancelButton}>{cancelButton}</Button>
+                <Button onClick={handleCancelButton}>{cancel}</Button>
                 {<Button type="primary"
-                         onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>}
+                         onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{create}</Button>}
             </div>
         </div>
     )

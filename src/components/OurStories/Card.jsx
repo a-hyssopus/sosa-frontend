@@ -16,8 +16,8 @@ const {Meta} = Card;
 
 const StoryCard = ({ title, text, id, date }) => {
     const dispatch = useDispatch();
-    const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const deleteButton = useSelector(state => state.i18n.buttons.deleteButton);
+    const edit = useSelector(state => state.i18n.buttons.edit);
+    const deleteButton = useSelector(state => state.i18n.buttons.delete);
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
@@ -60,7 +60,7 @@ const StoryCard = ({ title, text, id, date }) => {
                 </Card>
             </Link>
             {isLoggedIn && <>
-                <Button onClick={handleEdit}>{editButton}</Button>
+                <Button onClick={handleEdit}>{edit}</Button>
                 <DeleteConfirmPopup confirmDeleteHandler={handleDelete}><Button danger>{deleteButton}</Button></DeleteConfirmPopup>
             </>}
         </div>

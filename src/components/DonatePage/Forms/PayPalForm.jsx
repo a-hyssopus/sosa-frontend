@@ -19,8 +19,8 @@ const PayPalForm = ({toEdit, toCreate}) => {
     const countryLabel = useSelector(state => state.i18n.donate.paypalFormLabels["country-label"])
 
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
-    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
+    const create = useSelector(state => state.i18n.buttons.save);
+    const cancel = useSelector(state => state.i18n.buttons.cancel);
 
     const handleSaveEditButton = () => {
         const data = {email, country};
@@ -66,9 +66,9 @@ const PayPalForm = ({toEdit, toCreate}) => {
                 </div>
             </div>
             <div className="donate-page--buttons-container">
-                <Button onClick={handleCancelButton}>{cancelButton}</Button>
+                <Button onClick={handleCancelButton}>{cancel}</Button>
                 <Button type="primary"
-                        onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>
+                        onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{create}</Button>
             </div>
         </div>
     )

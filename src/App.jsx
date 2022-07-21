@@ -137,7 +137,7 @@ const App = () => {
             <div className="link">
                 <Link to={"/login"}>Log In</Link>
             </div>
-            {/*TODO change i18n for login*/}
+            /*TODO change i18n for login*/
         </div>
     )
 }

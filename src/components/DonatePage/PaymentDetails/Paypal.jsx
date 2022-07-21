@@ -13,8 +13,8 @@ const Paypal = () => {
     const paypal = useSelector(state => state.donate.PayPal);
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
-    const editButton = useSelector(state => state.i18n.buttons.editButton);
-    const deleteEntryButton = useSelector(state => state.i18n.buttons.deleteButton);
+    const edit = useSelector(state => state.i18n.buttons.edit);
+    const deleteEntryButton = useSelector(state => state.i18n.buttons.delete);
 
     const handlePaypalEditClick = (count) => {
         const {email, country, _id} = count;
@@ -41,7 +41,7 @@ const Paypal = () => {
                 <React.Fragment key={count._id}><p key={count.email}>
                     {count.country}: {count.email}</p>
                     {isLoggedIn && <>
-                        <Button style={{margin: "5px"}} onClick={() => handlePaypalEditClick(count)}>{editButton}</Button>
+                        <Button style={{margin: "5px"}} onClick={() => handlePaypalEditClick(count)}>{edit}</Button>
                         <DeleteConfirmPopup confirmDeleteHandler={() => handlePaypalDelete(count._id)}><Button style={{margin: "5px"}} danger>{deleteEntryButton}</Button></DeleteConfirmPopup>
                     </>}
                 </React.Fragment>)}

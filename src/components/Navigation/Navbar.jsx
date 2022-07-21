@@ -26,7 +26,7 @@ const Navbar = () => {
 
     const navbarValues = useSelector(state => state.i18n.navbar)
     const activeLanguage = useSelector(state => state.i18n.activeLanguage)
-    const donateButton = useSelector(state => state.i18n.buttons.donateButton)
+    const donate = useSelector(state => state.i18n.buttons.donate)
 
     const routes = ["home", "our-stories", "faq", "reports", "about"];
     const facebookPageURL = "https://www.facebook.com/sosanimalsmd/";
@@ -38,7 +38,7 @@ const Navbar = () => {
                                secondaryColor={{r: 244, g: 248, b: 251, a: 0.5}}
                                textColor={{r: 48, g: 48, b: 48, a: 1}}
                                linkTo={"/donate"}
-                               text={donateButton}
+                               text={donate}
                                src={heart}/>
             <ul>
                 {navbarValues.map((element, index) => <li key={element}>

@@ -23,8 +23,8 @@ const Cards = () => {
 
     const banks = useSelector(state => state.donate.banks);
     const cardsText = useSelector(state => state.i18n.donate.cardsText);
-    const deleteEntryButton = useSelector(state => state.i18n.buttons.deleteButton);
-    const editButton = useSelector(state => state.i18n.buttons.editButton);
+    const deleteEntryButton = useSelector(state => state.i18n.buttons.delete);
+    const edit = useSelector(state => state.i18n.buttons.edit);
 
     const isLoggedIn = useSelector(state => state.login.isLoggedIn);
 
@@ -69,7 +69,7 @@ const Cards = () => {
                 <React.Fragment key={card._id}>
                     <p>{bank.name} ({card.currency}): {card.count} - {card.person}</p>
                     {isLoggedIn && <>
-                        <Button style={{margin: "5px"}} onClick={() => handleCardEditClick(bank, card)}>{editButton}</Button>
+                        <Button style={{margin: "5px"}} onClick={() => handleCardEditClick(bank, card)}>{edit}</Button>
                         <DeleteConfirmPopup confirmDeleteHandler={() => handleCardDelete(bank, card)}><Button  style={{margin: "5px"}} danger>{deleteEntryButton}</Button></DeleteConfirmPopup>
                     </>}
                 </React.Fragment>

@@ -7,12 +7,12 @@ const initialState = {
     sterilizationText: "",
     errorMessage: "",
     buttons: {
-        donateButton: "",
-        saveButton: "",
-        editButton: "",
-        deleteButton: "",
-        saveEntryButton: "", // TODO rename to addEntryButton
-        cancelButton: "",
+        donate: "",
+        save: "",
+        edit: "",
+        delete: "",
+        create: "",
+        cancel: "",
     },
     donate: {
         cardsText: "",
@@ -88,22 +88,22 @@ export const i18nSlice = createSlice({
             state.sterilizationText = payload;
         },
         setDonateButton: (state, {payload}) => {
-            state.buttons.donateButton = payload;
+            state.buttons.donate = payload;
         },
         setSaveButton: (state, {payload}) => {
-            state.buttons.saveButton = payload;
+            state.buttons.save = payload;
         },
         setEditButton: (state, {payload}) => {
-            state.buttons.editButton = payload;
+            state.buttons.edit = payload;
         },
         setDeleteButton: (state, {payload}) => {
-            state.buttons.deleteButton = payload;
+            state.buttons.delete = payload;
         },
         setCancelButton: (state, {payload}) => {
-            state.buttons.cancelButton = payload;
+            state.buttons.cancel = payload;
         },
         setSaveEntryButton: (state, {payload}) => {
-            state.buttons.saveEntryButton = payload;
+            state.buttons.create = payload;
         },
         setCardsText: (state, {payload}) => {
             state.donate.cardsText = payload;

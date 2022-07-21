@@ -48,8 +48,8 @@ const CardForm = ({toEdit}) => {
     const id = useSelector(state => state.donateInfoToUpdate.card.id);
 
     const activeLanguage = useSelector(state => state.i18n.activeLanguage);
-    const saveEntryButton = useSelector(state => state.i18n.buttons.saveButton);
-    const cancelButton = useSelector(state => state.i18n.buttons.cancelButton);
+    const create = useSelector(state => state.i18n.buttons.save);
+    const cancel = useSelector(state => state.i18n.buttons.cancel);
 
     const bankNameLabel = useSelector(state => state.i18n.donate?.cardFormLabels["bank-name"])
     const primaryColorLabel = useSelector(state => state.i18n.donate?.cardFormLabels["primary-color"])
@@ -154,9 +154,9 @@ const CardForm = ({toEdit}) => {
                 </div>
             </div>
             <div className="donate-page--buttons-container">
-                <Button onClick={handleCancelButton}>{cancelButton}</Button>
+                <Button onClick={handleCancelButton}>{cancel}</Button>
                 {<Button type="primary"
-                         onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{saveEntryButton}</Button>}
+                         onClick={toEdit ? handleSaveEditButton : handleSaveCreateButton}>{create}</Button>}
             </div>
         </div>
     )
